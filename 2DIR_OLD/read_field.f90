@@ -32,26 +32,13 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
     CALL h5open_f(ERROR_FLAG)
     ! Open the hdf5 file
     CALL h5fopen_f(filename, H5F_ACC_RDONLY_F, file_id, ERROR_FLAG)
-    IF (ERRORFLAG /= 0) THEN
-        WRITE(*,*) 'Error opening file ', filename
-        STOP
-    END IF
-
     ! Read the value of the dot product ***
     ! Set dataset name
     WRITE(dataset_name, '(A, I0)') 'dot_', ioh
     ! Open the existing dataset
     CALL h5dopen_f(file_id, dataset_name, dataset_id, ERROR_FLAG)
-    IF (ERRORFLAG /= 0) THEN
-        WRITE(*,*) 'Error opening dataset ', dataset_name
-        STOP
-    END IF
     ! Read the dataset
     CALL h5dread_f(dataset_id, H5T_NATIVE_REAL, etmp, dot_dims, ERROR_FLAG)
-    IF (ERRORFLAG /= 0) THEN
-        WRITE(*,*) 'Error reading dataset ', dataset_name
-        STOP
-    END IF
     ! Close the dataset
     CALL h5dclose_f(dataset_id, ERROR_FLAG)
 
@@ -60,16 +47,8 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
     WRITE(dataset_name, '(A, I0)') 'eoh_', ioh
     ! Open the existing dataset
     CALL h5dopen_f(file_id, dataset_name, dataset_id, ERROR_FLAG)
-    IF (ERRORFLAG /= 0) THEN
-        WRITE(*,*) 'Error opening dataset ', dataset_name
-        STOP
-    END IF
     ! Read the dataset
     CALL h5dread_f(dataset_id, H5T_NATIVE_REAL, eoh_tmp, eoh_dims, ERROR_FLAG)
-    IF (ERRORFLAG /= 0) THEN
-        WRITE(*,*) 'Error reading dataset ', dataset_name
-        STOP
-    END IF
     ! Close the dataset
     CALL h5dclose_f(dataset_id, ERROR_FLAG)
 
@@ -77,6 +56,7 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
     CALL h5fclose_f(file_id, ERROR_FLAG)
     ! Close the library
     CALL h5close_f(ERROR_FLAG)
+    CALL EXIT(0)
 
 ! II. Calculate the field parameters ******************************************
     DO k=1, ntimes
