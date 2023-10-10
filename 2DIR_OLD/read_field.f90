@@ -45,7 +45,7 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
 
     ! Read the value of the unit vector eoh_tmp ***
     ! Set dataset name
-    WRITE(dataset_name, '(A, I0)') 'dot_', ioh
+    WRITE(dataset_name, '(A, I0)') 'eoh_', ioh
     ! Open the existing dataset
     CALL h5dopen_f(file_id, dataset_name, dataset_id, ERROR_FLAG)
     ! Read the dataset
