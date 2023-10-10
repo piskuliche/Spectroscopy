@@ -27,6 +27,9 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
 
     CHARACTER(len=20) :: dataset_name
 
+    dot_dims = (/ntimes/)
+    eoh_dims = (/3, ntimes/)
+
 !I. Read the field file *******************************************************
     ! Open the hdf5 library
     CALL h5open_f(ERROR_FLAG)
