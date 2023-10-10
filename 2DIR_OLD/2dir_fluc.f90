@@ -38,7 +38,7 @@
   write(6,*) ' Allocated arrays'
 
   ! set the number of OpenMP threads
-  call omp_set_num_threads(20)
+  call omp_set_num_threads(1)
 
   ! Loop over the waiting times
   do iTw = 1, nTw
