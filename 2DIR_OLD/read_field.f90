@@ -11,7 +11,7 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
     DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: mu01, mu12
     DOUBLE PRECISION, DIMENSION(ntimes,3), INTENT(OUT) :: eoh
 
-    INTEGER :: ioh, j, k
+    INTEGER :: j, k
     REAL, DIMENSION(2000) :: etmp
     REAL, DIMENSION(ntimes, 3) :: eoh_tmp
     DOUBLE PRECISION ::  muprime, x01tmp, x12tmp
