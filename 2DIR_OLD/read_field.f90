@@ -60,16 +60,16 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
 
 ! II. Calculate the field parameters ******************************************
     DO k=1, ntimes
-        w01(k) = c0 + c1*etmp + c2*etmp**2
+        w01(k) = c0 + c1*etmp(k) + c2*etmp(k)**2
         w01avg = w01avg + w01(k)
         w01sqavg = w01sqavg + w01(k)**2
 
-        w12(k) = c3 + c4*etmp + c5*etmp**2     
+        w12(k) = c3 + c4*etmp(k) + c5*etmp(k)**2     
         w12avg = w12avg + w12(k)
         w12sqavg = w12sqavg + w12(k)**2
 
         ! convert unit vector to transition dipole moment
-        muprime = b0 + b1*etmp + b2*etmp**2
+        muprime = b0 + b1*etmp(k) + b2*etmp(k)**2
 
         x01tmp = d0 + d1*w01(k)     
         mu01(k) = muprime*x01tmp
