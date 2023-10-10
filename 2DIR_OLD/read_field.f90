@@ -56,7 +56,6 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
     CALL h5fclose_f(file_id, ERROR_FLAG)
     ! Close the library
     CALL h5close_f(ERROR_FLAG)
-    CALL EXIT(0)
 
 ! II. Calculate the field parameters ******************************************
     DO k=1, ntimes
