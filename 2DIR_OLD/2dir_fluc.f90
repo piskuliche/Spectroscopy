@@ -9,10 +9,12 @@
   use constants
 
   implicit none
-  integer :: ioh, iTw
+  integer, parameter :: nperchunk = 1000
+  integer :: ioh, iTw, chunk, nchunks, iper
   double precision :: tstart, tend, read_time, tcf_time, ta, tb
-  double precision, allocatable, dimension(:) :: w01, w12, mu01, mu12
-  double precision, allocatable, dimension(:,:) :: eOH , dH
+  double precision, allocatable, dimension(:,:) :: w01, w12, mu01, mu12
+  double precision, allocatable, dimension(:, :,:) :: eOH
+  double precision, allocatable, dimension(:,:) :: dH
   double complex, allocatable, dimension(:,:) :: tcf_rp, tcf_np, tcf_rp_tot, tcf_np_tot
   double complex, allocatable, dimension(:,:,:) :: tcfH_rp, tcfH_np, tcfH_rp_tot, tcfH_np_tot
 
@@ -21,7 +23,7 @@
   write(6,*) ' Read in input parameters'
 
   ! Allocate arrays for calculation of the spectra
-  allocate(w01(ntimes)); allocate(mu01(ntimes)); allocate(w12(ntimes)); allocate(mu12(ntimes)); allocate(eOH(ntimes,3))
+  allocate(w01(nperchunk,ntimes)); allocate(mu01(nperchunk,ntimes)); allocate(w12(nperchunk,ntimes)); allocate(mu12(nperchunk,ntimes)); allocate(eOH(nperchunk,ntimes,3))
   allocate(tcf_rp(0:ncorr,0:ncorr)); allocate(tcf_rp_tot(0:ncorr,0:ncorr))
   allocate(tcf_np(0:ncorr,0:ncorr)); allocate(tcf_np_tot(0:ncorr,0:ncorr))
 
@@ -40,6 +42,9 @@
   ! set the number of OpenMP threads
   call omp_set_num_threads(1)
 
+  nchunks = ceiling(noh/nperchunk)
+
+
   ! Loop over the waiting times
   do iTw = 1, nTw
 
@@ -57,25 +62,21 @@
      ! Loop over the OH groups
      call cpu_time(tstart)
 
+   
+
+   DO chunk=1, nchunks
+      DO iper=1, nperchunk
+        ioh = (chunk-1)*nperchunk + iper
+        if(ioh > noh) exit
+        call read_field(ioh, w01(iper,:), w12(iper,:), mu01(iper,:), mu12(iper,:), eOH(iper,:,:))
+      END DO 
+
 !$omp parallel do private(ioh,ta,tb,w01,w12,mu01,mu12,eOH,tcf_rp,tcf_np) &
 !$omp reduction(+:read_time,tcf_time,tcf_rp_tot,tcf_np_tot)
-     do ioh = 1, noh
-
-        ! Read in the field file for OH number ioh
-        call cpu_time(ta)
-        
-        call read_field(ioh, w01, w12, mu01, mu12, eOH)
-        write(6,*) ' Read field, ioh = ',ioh
-        call flush(6)
-        
-        call cpu_time(tb)
-        read_time = read_time + tb - ta
-        
-        ! Calculate the 2D-IR spectra TCF for the OH number ioh 
-        call cpu_time(ta)
+     do ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
         
         if(flag_fluc) then
-           call calc_tcf_fluc(ioh, iTw, w01, w12, mu01, mu12, eOH, dH, tcf_rp, tcf_np, tcfH_rp, tcfH_np)
+           call calc_tcf_fluc(ioh, iTw, w01(ioh,:), w12(ioh,:), mu01(ioh,:), mu12(ioh,:), eOH(ioh,:,:), dH, tcf_rp, tcf_np, tcfH_rp, tcfH_np)
            
            ! Add TCF to the total TCF
            tcf_rp_tot = tcf_rp_tot + tcf_rp
@@ -83,7 +84,7 @@
            tcfH_rp_tot = tcfH_rp_tot + tcfH_rp
            tcfH_np_tot = tcfH_np_tot + tcfH_np
         else
-           call calc_tcf(ioh, iTw, w01, w12, mu01, mu12, eOH, tcf_rp, tcf_np)
+           call calc_tcf(ioh, iTw, w01(ioh,:), w12(ioh,:), mu01(ioh,:), mu12(ioh,:), eOH(ioh,:,:), tcf_rp, tcf_np)
            
            ! Add TCF to the total TCF
            tcf_rp_tot = tcf_rp_tot + tcf_rp
@@ -98,6 +99,7 @@
         
      enddo  ! end loop over OH groups
 !$omp end parallel do
+   END DO ! end loop over chunks
 
      write(6,*) ' Finished TCF calc'
      call flush(6)
