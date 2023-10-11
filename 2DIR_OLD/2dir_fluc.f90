@@ -75,7 +75,7 @@
       END DO 
       WRITE(*,*) "t", w01(1,1)
 
-!$omp parallel do private(ioh,ta,tb,w01,w12,mu01,mu12,eOH,tcf_rp,tcf_np) &
+!$omp parallel do firstprivate(ioh,ta,tb,w01,w12,mu01,mu12,eOH,tcf_rp,tcf_np) &
 !$omp reduction(+:read_time,tcf_time,tcf_rp_tot,tcf_np_tot)
      do ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
       iper = ioh - (chunk-1)*nperchunk
