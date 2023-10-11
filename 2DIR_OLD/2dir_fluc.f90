@@ -98,7 +98,7 @@
         call cpu_time(tb)
         tcf_time = tcf_time + tb - ta     
         
-        write(6,'(A,I4,A,F10.2,A)') ' ioh = ',ioh,iper' time = ',tb-ta,' s'
+        write(6,'(A,I4,A,F10.2,A)') ' ioh = ',ioh,' time = ',tb-ta,' s'
         call flush(6)
         
      enddo  ! end loop over OH groups
