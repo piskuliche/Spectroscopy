@@ -43,7 +43,7 @@
   ! set the number of OpenMP threads
   call omp_set_num_threads(1)
 
-  nchunks = ceiling(noh/nperchunk)
+  nchunks = ceiling(real(noh)/real(nperchunk))
 
 
   ! Loop over the waiting times
