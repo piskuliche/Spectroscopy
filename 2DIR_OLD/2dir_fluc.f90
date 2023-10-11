@@ -77,7 +77,8 @@
      do ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
         
         if(flag_fluc) then
-           call calc_tcf_fluc(ioh, iTw, w01(ioh,:), w12(ioh,:), mu01(ioh,:), mu12(ioh,:), eOH(ioh,:,:), dH, tcf_rp, tcf_np, tcfH_rp, tcfH_np)
+           call calc_tcf_fluc(ioh, iTw, w01(ioh,:), w12(ioh,:), mu01(ioh,:), mu12(ioh,:), eOH(ioh,:,:), &
+                  & dH, tcf_rp, tcf_np, tcfH_rp, tcfH_np)
            
            ! Add TCF to the total TCF
            tcf_rp_tot = tcf_rp_tot + tcf_rp
