@@ -66,6 +66,7 @@
    
 
    DO chunk=1, nchunks
+      w01 = 0.0; w12 = 0.0; mu01 = 0.0; mu12 = 0.0; eOH = 0.0
       DO iper=1, nperchunk
         ioh = (chunk-1)*nperchunk + iper
         if(ioh > noh) exit
@@ -75,9 +76,10 @@
 !$omp parallel do private(ioh,ta,tb,w01,w12,mu01,mu12,eOH,tcf_rp,tcf_np) &
 !$omp reduction(+:read_time,tcf_time,tcf_rp_tot,tcf_np_tot)
      do ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
+      iper = ioh - (chunk-1)*nperchunk
         
         if(flag_fluc) then
-           call calc_tcf_fluc(ioh, iTw, w01(ioh,:), w12(ioh,:), mu01(ioh,:), mu12(ioh,:), eOH(ioh,:,:), &
+           call calc_tcf_fluc(ioh, iTw, w01(iper,:), w12(iper,:), mu01(iper,:), mu12(iper,:), eOH(iper,:,:), &
                   & dH, tcf_rp, tcf_np, tcfH_rp, tcfH_np)
            
            ! Add TCF to the total TCF
@@ -86,7 +88,7 @@
            tcfH_rp_tot = tcfH_rp_tot + tcfH_rp
            tcfH_np_tot = tcfH_np_tot + tcfH_np
         else
-           call calc_tcf(ioh, iTw, w01(ioh,:), w12(ioh,:), mu01(ioh,:), mu12(ioh,:), eOH(ioh,:,:), tcf_rp, tcf_np)
+           call calc_tcf(ioh, iTw, w01(iper,:), w12(iper,:), mu01(iper,:), mu12(iper,:), eOH(iper,:,:), tcf_rp, tcf_np)
            
            ! Add TCF to the total TCF
            tcf_rp_tot = tcf_rp_tot + tcf_rp
