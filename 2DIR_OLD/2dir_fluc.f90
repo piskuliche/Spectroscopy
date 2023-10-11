@@ -71,6 +71,7 @@
         ioh = (chunk-1)*nperchunk + iper
         if(ioh > noh) exit
         call read_field(ioh, w01(iper,:), w12(iper,:), mu01(iper,:), mu12(iper,:), eOH(iper,:,:))
+        WRITE(*,*) eOH(iper,1,1)
       END DO 
 
 !$omp parallel do private(ioh,ta,tb,w01,w12,mu01,mu12,eOH,tcf_rp,tcf_np) &
