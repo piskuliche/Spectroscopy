@@ -78,7 +78,7 @@
 !$omp reduction(+:read_time,tcf_time,tcf_rp_tot,tcf_np_tot)
      do ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
       iper = ioh - (chunk-1)*nperchunk
-      WRITE(*,*) iper
+      WRITE(*,*) iper, w01(iper,:)
         
         if(flag_fluc) then
            call calc_tcf_fluc(ioh, iTw, w01(iper,:), w12(iper,:), mu01(iper,:), mu12(iper,:), eOH(iper,:,:), &
