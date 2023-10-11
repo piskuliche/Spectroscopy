@@ -23,7 +23,8 @@
   write(6,*) ' Read in input parameters'
 
   ! Allocate arrays for calculation of the spectra
-  allocate(w01(nperchunk,ntimes)); allocate(mu01(nperchunk,ntimes)); allocate(w12(nperchunk,ntimes)); allocate(mu12(nperchunk,ntimes)); allocate(eOH(nperchunk,ntimes,3))
+  allocate(w01(nperchunk,ntimes)); allocate(mu01(nperchunk,ntimes)); allocate(w12(nperchunk,ntimes))
+   allocate(mu12(nperchunk,ntimes)); allocate(eOH(nperchunk,ntimes,3))
   allocate(tcf_rp(0:ncorr,0:ncorr)); allocate(tcf_rp_tot(0:ncorr,0:ncorr))
   allocate(tcf_np(0:ncorr,0:ncorr)); allocate(tcf_np_tot(0:ncorr,0:ncorr))
 
