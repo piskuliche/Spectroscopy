@@ -21,7 +21,6 @@
      
      ! First calculate the running integral of the 01 and 12 frequencies to use in the phases
 
-      WRITE(*,*) "w", mu01(1), mu12(1), w01(1), w12(1), eOH(1,1)
      phase01 = 0d0; phase12 = 0d0
      do k = 1, ntimes
         phase01(k) = phase01(k-1) + w01(k)
