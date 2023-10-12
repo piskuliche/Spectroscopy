@@ -3,6 +3,7 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
     USE map_data
     USE freq_data
     USE HDF5
+    USE ieee_arithmetic, ONLY: ieee_is_finite
 
     IMPLICIT NONE
 
