@@ -64,7 +64,7 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
     DO k=1, ntimes
       
         w01(k) = c0 + c1*etmp(k) + c2*etmp(k)**2
-        WRITE(*,*) w01(k)
+        WRITE(*,*) w01(k), w01avg
         w01avg = w01avg + w01(k)
         w01sqavg = w01sqavg + w01(k)**2
 
