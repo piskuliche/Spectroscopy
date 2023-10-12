@@ -67,6 +67,7 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
         w01(k) = c0 + c1*etmp(k) + c2*etmp(k)**2
         WRITE(*,*) w01(k), w01avg
         IF (.NOT. ieee_is_finite(w01(k))) THEN
+         WRITE(6,*) ioh, k
          STOP 'w01 is not finite'
         ENDIF
         w01avg = w01avg + w01(k)
