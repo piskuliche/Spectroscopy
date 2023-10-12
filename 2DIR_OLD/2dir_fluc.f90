@@ -72,7 +72,7 @@
         if(ioh > noh) exit
         call read_field(ioh, w01(iper,:), w12(iper,:), mu01(iper,:), mu12(iper,:), eOH(iper,:,:))
       END DO 
-      WRITE(*,*) "t", w01(1,1)
+      WRITE(*,*) "t", w01(1,1), w01avg
 
 !$omp parallel do private(ioh,ta,tb,tcf_rp,tcf_np) &
 !$omp shared(w01,w12,mu01,mu12,eOH) &
