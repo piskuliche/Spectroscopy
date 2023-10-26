@@ -15,7 +15,9 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
     INTEGER :: j, k
     REAL, DIMENSION(ntimes) :: etmp
     REAL, DIMENSION(ntimes, 3) :: eoh_tmp
-    DOUBLE PRECISION ::  muprime, x01tmp
+    DOUBLE PRECISION ::  muprime, x01tmp, mutmp, xtmp
+    DOUBLE PRECISION :: alpha, apara, aperp
+    DOUBLE PRECISION :: axx, ayy, azz, axy, ayz, azx
 
     ! HDF5 Variables
     CHARACTER(len=8), PARAMETER :: filename = 'field.h5'
@@ -80,21 +82,21 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
         xtmp = d0+d1*w01(k)
         mutmp = b0 + b1*etmp(k) + b2*etmp(k)**2
 
-        mu(k,:) = e(k,:)*mutmp*xtmp
+        mu(k,:) = eOH(k,:)*mutmp*xtmp
 
-        alpha = xtmp*(a0 + a1*etmp)
+        alpha = xtmp*(a0 + a1*etmp(k))
 
         ! This next section should be enclosed in a function
 
         apara = 3d0/(1d0 + 2d0/c15) * alpha
         aperp = 3d0/(2d0 + c15) * alpha
 
-        axx = aperp + (apara - aperp)*e(k,1)*e(k,1)
-        ayy = aperp + (apara - aperp)*e(k,2)*e(k,2)
-        azz = aperp + (apara - aperp)*e(k,3)*e(k,3)
-        axy = (aperp - apara)*e(k,1)*e(k,2)
-        ayz = (aperp - apara)*e(k,2)*e(k,3)
-        azx = (aperp - apara)*e(k,3)*e(k,1)
+        axx = aperp + (apara - aperp)*eOH(k,1)*eOH(k,1)
+        ayy = aperp + (apara - aperp)*eOH(k,2)*eOH(k,2)
+        azz = aperp + (apara - aperp)*eOH(k,3)*eOH(k,3)
+        axy = (aperp - apara)*eOH(k,1)*eOH(k,2)
+        ayz = (aperp - apara)*eOH(k,2)*eOH(k,3)
+        azx = (aperp - apara)*eOH(k,3)*eOH(k,1)
 
         ! Final polarizabilities
         a_ss(k) = xtmp*(axx + 2.0d0*axy + ayy)
