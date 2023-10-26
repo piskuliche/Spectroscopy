@@ -17,7 +17,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     IMPLICIT NONE
     INCLUDE 'fftw3.f'
 
-    DOUBLE COMPLEX, DIMENSION(0:ncorr), INTENT(IN) :: tcf_tot
+    DOUBLE COMPLEX, DIMENSION(0:ncorr), INTENT(INOUT) :: tcf_tot
 
     INTEGER :: i, p, nt
     INTEGER*8 :: plan
