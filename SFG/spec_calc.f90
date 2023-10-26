@@ -22,8 +22,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     INTEGER :: i, p, nt
     INTEGER*8 :: plan
 
-    DOUBLE PRECISION :: wpsec, ti, pi
-    DOUBLE COMPLEX, DIMENSION(0:ncorr) :: tcf_tot
+    DOUBLE PRECISION :: w_spec, ti, pi
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: input, sfg_spec
 
     pi = 4.0d0*datan(1.0d0)
@@ -46,7 +45,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
 
     ! III. Initialize Fourier Transform
     ! ...A: Calculate time domain grid for freq resolution
-    p = int(dlog(2.0*pi/(dt*w_resol))/dlog(2.0))
+    p = int(dlog(2.0*pi/(dt*w_resol))/dlog(2.0d0))
     nt = 2**p
     WRITE(6,*) ' Time Grid power, 2^ = ',p
     WRITE(6,*) ' Time Grid Size      = ',nt
