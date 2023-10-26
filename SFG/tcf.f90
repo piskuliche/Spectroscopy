@@ -8,7 +8,7 @@ SUBROUTINE Calc_TCF(w, mu, a_ij, z0, tcf)
     DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: mu
     DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: a_ij
     DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: z0
-    DOUBLE COMPLEX,   DIMENSION(0:corr),    INTENT(OUT) :: tcf
+    DOUBLE COMPLEX,   DIMENSION(0:ncorr),    INTENT(OUT) :: tcf
 
     INTEGER :: ilag
     INTEGER :: k, m
