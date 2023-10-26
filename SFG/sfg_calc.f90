@@ -43,7 +43,7 @@ PROGRAM SFG_CALC
 ! *********************************************************************
     DO chunk=1, nchunks
 
-        w01 = 0.0; mu01 = 0.0; eOH = 0.0
+        w01 = 0.0; mu = 0.0; eOH = 0.0
         DO iper=1, nperchunk
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
@@ -73,7 +73,7 @@ PROGRAM SFG_CALC
 ! *********************************************************************
 
     DEALLOCATE(w01)
-    DEALLOCATE(mu01)
+    DEALLOCATE(mu)
     DEALLOCATE(z0)
     DEALLOCATE(a_ss); DEALLOCATE(a_sp); DEALLOCATE(a_pp)
 
