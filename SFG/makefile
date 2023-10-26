@@ -5,8 +5,10 @@ FLFLAGS = -lm -I/cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.
 %.o: %.f90
         $(FC) $(FCFLAGS) -c $<
 
-PROGRAM = 2dir_fluc_serial
-OBJECTS = data_mods.f90 2dir_fluc.f90 read_input.f90 read_field.f90 read_eners.f90 tcf.f90 spec_calc.f90
+PROGRAM = sfg_calc
+OBJECTS = data_mods.f90 sfg_calc.f90 read_input.f90 read_field.f90 tcf.f90 spec_calc.f90
 
 $(PROGRAM): $(OBJECTS)
         $(FC) $(FCFLAGS) $(FLFLAGS) $(OBJECTS) -o  $(PROGRAM)
+
+
