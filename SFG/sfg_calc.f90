@@ -28,6 +28,7 @@ PROGRAM SFG_CALC
 ! *********************************************************************
     CALL Read_Input
     
+    WRITE(*,*) nperchunk, ntimes, nchunks
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
     ALLOCATE(z0(nperchunk,ntimes))
