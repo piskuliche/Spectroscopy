@@ -82,6 +82,7 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
     DO k=1,ntimes
         ! Calculate distance from center of slab
         z0(k) = z0_tmp(k) - z_c
+        eOH(k,:) = eoh_tmp(k,:)
         
         ! Covert to freq
         w01(k) = c0 + c1*etmp(k) + c2*etmp(k)**2
