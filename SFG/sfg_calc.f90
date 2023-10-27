@@ -49,6 +49,7 @@ PROGRAM SFG_CALC
             IF (ioh > noh) EXIT
             CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:), &
                          a_ss(iper,:), a_sp(iper,:), a_pp(iper,:), z0(iper,:))
+            WRITE(*,*) w01(iper,1) 
         END DO 
 
         DO ioh=1, noh

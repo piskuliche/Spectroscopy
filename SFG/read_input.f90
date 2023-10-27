@@ -60,5 +60,7 @@ SUBROUTINE Read_Input
     wmin = wmin/cmiperau
     wmax = wmax/cmiperau
     dw = (wmax - wmin)/real(nhist)
+    
+    CLOSE(10)
 
 END SUBROUTINE Read_Input
