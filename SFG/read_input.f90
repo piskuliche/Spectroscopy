@@ -49,6 +49,9 @@ SUBROUTINE Read_Input
     ! Convert freq. resolution to a.u.
     w_resol = w_resol/cmiperau
 
+    ! Convert map parameters to atomic units
+    c0 = c0/cmiperau; c1 = c1/cmiperau; c2 = c2/cmiperau
+
     ! Convert vib. relax time to a.u.
     T1 = T1/fsperau
 
