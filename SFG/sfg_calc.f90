@@ -62,6 +62,7 @@ PROGRAM SFG_CALC
             ! Some sort of histogramming?
             CALL Calc_TCF(w01(iper,:), mu(iper,:,:), a_ss(iper,:), z0(iper,:), tcf(:))
             tcf_tot = tcf_tot + tcf
+            WRITE(*,*) z0(iper, 1)
         ENDDO ! io
 
     ENDDO ! chunk
