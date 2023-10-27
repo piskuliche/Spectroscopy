@@ -10,7 +10,7 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
     INTEGER, INTENT(IN) :: ioh
     DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: w01
     DOUBLE PRECISION, DIMENSION(ntimes,3), INTENT(OUT) :: eoh, mu
-    DOUBLE PRECISION, DIMENSION(ntimes) :: a_ss, a_sp, a_pp, z0
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: a_ss, a_sp, a_pp, z0
 
     INTEGER :: j, k
     REAL, DIMENSION(ntimes) :: etmp, z0_tmp
