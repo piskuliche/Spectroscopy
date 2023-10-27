@@ -116,5 +116,6 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
 
     ENDDO
 
+    WRITE(*,*) z0(1)
 
 END SUBROUTINE read_field
