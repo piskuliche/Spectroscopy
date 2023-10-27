@@ -27,8 +27,6 @@ PROGRAM SFG_CALC
 !     Also allocate the relevant variables.
 ! *********************************************************************
     CALL Read_Input
-    
-    WRITE(*,*) nperchunk, ntimes, nchunks
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
     ALLOCATE(eOH(nperchunk,ntimes,3))
@@ -55,10 +53,12 @@ PROGRAM SFG_CALC
             IF (ioh > noh) EXIT
             CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:), &
                          a_ss(iper,:), a_sp(iper,:), a_pp(iper,:), z0(iper,:))
-            WRITE(*,*) w01(iper,1) 
         END DO 
 
-        DO ioh=1, noh
+        WRITE(*,*) 
+
+        DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
+            iper = ioh - (chunk-1)*nperchunk
             ! Some sort of histogramming?
             CALL Calc_TCF(w01(iper,:), mu(iper,:,:), a_ss(iper,:), z0(iper,:), tcf(:))
             tcf_tot = tcf_tot + tcf
