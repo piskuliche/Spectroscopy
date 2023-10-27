@@ -27,7 +27,7 @@ PROGRAM SFG_CALC
 !     Also allocate the relevant variables.
 ! *********************************************************************
     CALL Read_Input
-    WRITE(*,*) nperchunk, nchunks
+    
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
     ALLOCATE(z0(nperchunk,ntimes))
@@ -38,6 +38,8 @@ PROGRAM SFG_CALC
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
 
     tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0; tcf_time = 0.0d0
+
+    nchunks = ceiling(real(noh)/real(nperchunk))
 
 ! *********************************************************************
 !   II. Calculate TCFS
