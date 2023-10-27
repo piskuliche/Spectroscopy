@@ -61,14 +61,17 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ENDDO
     
     CALL dfftw_execute(plan)
-
+    
+    OPEN(22,file='sfg_spectrum.dat')
     ! IV. Write out the spectrum
     DO i=1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1)/dfloat(nt)
         IF (w_spec .ge. wmin .and. w_spec .le. wmax) THEN
-            WRITE(*,*) w_spec*cmiperau, DREAL(sfg_spec(i)), -DIMAG(sfg_spec(i))
+            WRITE(22,*) w_spec*cmiperau, DREAL(sfg_spec(i)), -DIMAG(sfg_spec(i))
         ENDIF
     ENDDO
+
+    CLOSE(22)
 
     ! V. Cleanup the calculations
 
