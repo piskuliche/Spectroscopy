@@ -31,6 +31,7 @@ PROGRAM SFG_CALC
     WRITE(*,*) nperchunk, ntimes, nchunks
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
+    ALLOCATE(eOH(nperchunk,ntimes,3))
     ALLOCATE(z0(nperchunk,ntimes))
     ALLOCATE(a_ss(nperchunk, ntimes))
     ALLOCATE(a_sp(nperchunk, ntimes))
