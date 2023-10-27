@@ -13,7 +13,7 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
     DOUBLE PRECISION, DIMENSION(ntimes) :: a_ss, a_sp, a_pp, z0
 
     INTEGER :: j, k
-    REAL, DIMENSION(ntimes) :: etmp
+    REAL, DIMENSION(ntimes) :: etmp, z0_tmp
     REAL, DIMENSION(ntimes, 3) :: eoh_tmp
     DOUBLE PRECISION ::  muprime, x01tmp, mutmp, xtmp
     DOUBLE PRECISION :: alpha, apara, aperp
@@ -61,6 +61,17 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
     ! Close the dataset
     CALL h5dclose_f(dataset_id, ERROR_FLAG)
 
+
+    ! Set dataset name
+    WRITE(dataset_name, '(A, I0)') 'z0_', ioh
+
+    ! Open the existing dataset
+    CALL h5dopen_f(file_id, dataset_name, dataset_id, ERROR_FLAG)
+    ! Read the dataset
+    CALL h5dread_f(dataset_id, H5T_NATIVE_REAL, z0_tmp, dot_dims, ERROR_FLAG)
+    ! Close the dataset
+    CALL h5dclose_f(dataset_id, ERROR_FLAG)
+
     ! Close the file
     CALL h5fclose_f(file_id, ERROR_FLAG)
     ! Close the library
@@ -70,7 +81,7 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
 
     DO k=1,ntimes
         ! Calculate distance from center of slab
-        z0(k) = z0(k) - z_c
+        z0(k) = z0_tmp(k) - z_c
         
         ! Covert to freq
         w01(k) = c0 + c1*etmp(k) + c2*etmp(k)**2
