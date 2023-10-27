@@ -97,6 +97,8 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
 
         mu(k,:) = eOH(k,:)*mutmp*xtmp
 
+        WRITE(*,*) "mu", mu(k,:)
+
         alpha = xtmp*(a0 + a1*etmp(k))
 
         ! This next section should be enclosed in a function
