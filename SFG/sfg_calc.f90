@@ -55,7 +55,7 @@ PROGRAM SFG_CALC
                          a_ss(iper,:), a_sp(iper,:), a_pp(iper,:), z0(iper,:))
         END DO 
 
-        WRITE(*,*) w01(1,1), mu(1,1,1), a_ss(1,1), z0(1,1), tcf(1)
+        WRITE(*,*) w01(1,1), mu(1,1,1), a_ss(1,1), z0(1,1)
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
             iper = ioh - (chunk-1)*nperchunk
