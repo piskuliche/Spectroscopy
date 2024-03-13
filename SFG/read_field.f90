@@ -1,4 +1,11 @@
 SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
+! This subroutine reads the field files and calculates various calculated quantities
+!   including the ss, sp, and pp components of the polarizability. 
+! 
+! This program requires the HDF5 library for reading.
+! 
+! Copyright, Zeke Piskulich, 2017
+! 
     USE time_data
     USE map_data
     USE freq_data
