@@ -4,6 +4,7 @@ PROGRAM SFG_CALC
 ! approach developed by Skinner and co-workers. 
 ! 
 ! 
+! Copyright, Zeke Piskulich, 2023.
 ! *********************************************************************
 
     USE map_data
