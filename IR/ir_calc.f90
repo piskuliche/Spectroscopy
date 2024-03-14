@@ -33,7 +33,7 @@ PROGRAM IR_CALC
     ALLOCATE(eOH(nperchunk,ntimes,3))
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
-    tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0
+    tcf_tot = dcmplx(0.0d0, 0.0d0)
 
     nchunks = ceiling(real(noh)/real(nperchunk))
 
