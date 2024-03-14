@@ -15,6 +15,7 @@ SUBROUTINE Spec_Calc()
     USE fluc_data
 
     IMPLICIT NONE
+    INCLUDE 'fftw3.f'
 
     INTEGER :: i, p, nt
     INTEGER*8 :: plan

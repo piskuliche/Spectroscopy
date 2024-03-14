@@ -21,7 +21,7 @@ PROGRAM Raman_Calc
     nchunks = ceiling(real(noh)/real(nperchunk))
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
-    ALLOCATE(eOH(nperchunk,ntimes,3)); ALLOCATE(alpha(nperchunk, ntimes))
+    ALLOCATE(eOH(nperchunk,ntimes,3))
 
     ALLOCATE(a_para(nperchunk, ntimes, 3)); ALLOCATE(a_perp(nperchunk, ntimes, 3))
 
@@ -71,6 +71,6 @@ PROGRAM Raman_Calc
 ! IV. Cleanup Calculation
 ! *********************************************************************
 
-DEALLOCATE(w01, mu, eOH, alpha, a_para, a_perp, axx, ayy, azz, axy, ayz, azx, tcf, vv_tcf_tot, vh_tcf_tot)
+DEALLOCATE(w01, mu, eOH,  a_para, a_perp, tcf, vv_tcf_tot, vh_tcf_tot)
 
 END PROGRAM Raman_Calc
