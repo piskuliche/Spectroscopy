@@ -17,6 +17,7 @@ PROGRAM IR_CALC
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: nperchunk = 1000
+    INTEGER :: chunk, iper, ioh, nchunks
 
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu, eOH
@@ -32,7 +33,7 @@ PROGRAM IR_CALC
     ALLOCATE(eOH(nperchunk,ntimes,3))
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
-    tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0; tcf_time = 0.0d0
+    tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0
 
     nchunks = ceiling(real(noh)/real(nperchunk))
 
@@ -43,7 +44,7 @@ PROGRAM IR_CALC
 
     DO chunk=1, nchunks
         w01 = 0.0; mu = 0.0; eOH = 0.0
-        DO iper, nperchunk
+        DO iper=1, nperchunk
             WRITE(*,*) iper
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
@@ -62,8 +63,8 @@ PROGRAM IR_CALC
 
     ! Normalize by the number of oh groups
     tcf_tot = tcf_tot/dcmplx(dfloat(noh),0d0)
-    w01avg = w01avg/dfloat(noh*ntimes)
-    w01sqavg = w01sqavg/dfloat(noh*ntimes)
+    w01_avg = w01_avg/dfloat(noh*ntimes)
+    w01_sq_avg = w01_sq_avg/dfloat(noh*ntimes)
 
 ! *********************************************************************
 ! III. Calculate the IR Spectra
