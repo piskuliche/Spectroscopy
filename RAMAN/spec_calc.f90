@@ -1,4 +1,4 @@
-SUBROUTINE Spec_Calc()
+SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
 ! ******************************************************************
 ! This subroutine calculates the Raman spectrum from the total TCF.  
 !                                                                  
@@ -14,6 +14,7 @@ SUBROUTINE Spec_Calc()
     USE constants
     USE fluc_data
     USE map_data
+    USE freq_data
 
     IMPLICIT NONE
     INCLUDE 'fftw3.f'
