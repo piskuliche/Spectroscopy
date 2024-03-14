@@ -32,16 +32,10 @@ SUBROUTINE Read_Input
     READ(10,*) b0, b1, b2 ! mu' map
     READ(10,*) 
     READ(10,*) d0, d1 ! x01 map
-    READ(10,*)
-    READ(10,*) a0, a1 ! alpha' map
-    READ(10,*) 
-    READ(10,*) c15 ! ratio Raman para/perp
     REAd(10,*)
     READ(10,*) T1 ! vib. relaxation time
     READ(10,*) 
     READ(10,*) flag_hist, nhist, wmin, wmax ! Calc freq_dist and spec dense, +params
-    READ(10,*)
-    READ(10,*) z_c ! center of slab. 
 
     ! Covert time step to atomic units
     dt = dt/fsperau
