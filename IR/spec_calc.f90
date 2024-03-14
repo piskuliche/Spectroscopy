@@ -1,13 +1,5 @@
 SUBROUTINE Spec_Calc(tcf_tot)
-! ******************************************************************
-! This subroutine calculates the SFG spectrum from the total TCF.  
-!                                                                  
-!  INPUTS:                                                          
-!   tcf_tot - The total TCF.    
-!                                    
-!  OUTPUTS:                                                         
-!   None.                                                          
-! *******************************************************************  
+
     USE time_data
     USE map_data
     USE hist_data
@@ -68,7 +60,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ! has been subtracted from the phase.
     OPEN(22, file='ir_spectra.dat')
     DO i=nt/2 + 1, nt
-        w_spec = (2d0*pi/dt)*dfloat(i-1)/dfloat(nt)
+        w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt)
         WRITE(22,*) w_spec*cmiperau, DREAL(ir_spectra(i))
     ENDDO
     DO i=1, nt/2
