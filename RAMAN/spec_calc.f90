@@ -13,6 +13,7 @@ SUBROUTINE Spec_Calc()
     USE hist_data
     USE constants
     USE fluc_data
+    USE map_data
 
     IMPLICIT NONE
     INCLUDE 'fftw3.f'
