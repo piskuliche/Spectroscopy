@@ -6,7 +6,12 @@ PROGRAM Raman_Calc
     USE hist_data
     
     IMPLICIT NONe
-    INTEGER :: k, ioh
+    INTEGER, PARAMETER :: nperchunk = 1000
+    INTEGER :: chunk, iper, ioh, nchunks
+
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu, eOH, a_para, a_perp
+    DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, vv_tcf_tot, vh_tcf_tot
 ! *********************************************************************
 ! I.  Read The Input File, and set the data for the calculations.
 !     Also ALLOCATE the relevant variables.
@@ -19,10 +24,6 @@ PROGRAM Raman_Calc
     ALLOCATE(eOH(nperchunk,ntimes,3)); ALLOCATE(alpha(nperchunk, ntimes))
 
     ALLOCATE(a_para(nperchunk, ntimes, 3)); ALLOCATE(a_perp(nperchunk, ntimes, 3))
-
-    ALLOCATE(axx(nperchunk, ntimes)); ALLOCATE(ayy(nperchunk, ntimes))
-    ALLOCATE(azz(nperchunk, ntimes)); ALLOCATE(axy(nperchunk, ntimes))
-    ALLOCATE(ayz(nperchunk, ntimes)); ALLOCATE(azx(nperchunk, ntimes))
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(vv_tcf_tot(0:ncorr)); ALLOCATE(vh_tcf_tot(0:ncorr))
     vv_tcf_tot = DCMPLX(0.0,0.0); vh_tcf_tot = DCMPLX(0.0,0.0)
@@ -38,7 +39,7 @@ PROGRAM Raman_Calc
             WRITE(*,*) iper
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
-            CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:), a_para(iper,:,:), a_perp(iper,:,:)
+            CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:), a_para(iper,:,:), a_perp(iper,:,:))
         END DO
 
         WRITE(*,*) w01(1,1), mu(1,1,1)
