@@ -11,6 +11,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     USE time_data
     USE map_data
     USE hist_data
+    USE freq_data
     USE constants
 
     IMPLICIT NONE
