@@ -12,13 +12,13 @@ SUBROUTINE Calc_TCF(w, mu, tcf)
     INTEGER :: ilag, k, m
 
     DOUBLE PRECISION :: count, dp, phase
-    DOUBLE PRECISION(3) :: mu0
+    DOUBLE PRECISION, DIMENSION(3) :: mu0
 
     tcf = DCMPLX(0.0d0, 0.0d0)
 
     DO k=1, ntimes-ncorr, nskip
         mu0(:) = mu(k,:)
-        coutn = count + 1d0
+        count = count + 1d0
         phase = -w(k)
 
         DO m = k, k + ncorr
