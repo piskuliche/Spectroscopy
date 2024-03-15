@@ -1,4 +1,3 @@
-
 SUBROUTINE Calc_TCF(w, mu, tcf)
 
     USE time_data
