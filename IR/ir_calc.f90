@@ -67,6 +67,7 @@ PROGRAM IR_CALC
                 CALL Hist_Calc(w01(iper,:), mu(iper,:,:), w01_dist(:), spec_dist(:))
                 wd_tot = wd_tot + w01_dist
                 sd_tot = sd_tot + spec_dist
+                WRITE(*,*) spec_dist(0), sd_tot(0)
                 ! Calculate the TCFS
                 CALL Calc_TCF(w01(iper,:), mu(iper,:,:), tcf(:))
                 tcf_tot = tcf_tot + tcf
@@ -82,7 +83,7 @@ PROGRAM IR_CALC
 ! III. Calculate the IR Spectra
 ! *********************************************************************
     CALL Hist_Print(wd_tot, sd_tot)
-    
+
     CALL Spec_Calc(tcf_tot)
 
 ! *********************************************************************

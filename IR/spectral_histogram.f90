@@ -18,7 +18,6 @@ SUBROUTINE Hist_Calc(w01, mu, spec_dist)
 
     DO k=1, ntimes
         mu_sq = DOT_PRODUCT(mu(k,:), mu(k,:))
-        WRITE(*,*) "sq", k, mu_sq
         iw = NINT ( (w01(k) - wmin)/dw )
 
         IF (iw >= 0 .and. iw <= nhist) THEN
@@ -31,6 +30,7 @@ SUBROUTINE Hist_Calc(w01, mu, spec_dist)
     ! Normalize the distributions
     w01_dist = w01_dist/count
     spec_dist = spec_dist/count
+    WRITE(*,*) spec_dist(0)
 
 END SUBROUTINE Hist_Calc
 
