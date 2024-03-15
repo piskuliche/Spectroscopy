@@ -21,6 +21,8 @@ PROGRAM IR_CALC
 
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu, eOH
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: w01_dist, spec_dist, wd_tot, sd_tot
+
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
 
 ! *********************************************************************
@@ -33,6 +35,12 @@ PROGRAM IR_CALC
     ALLOCATE(eOH(nperchunk,ntimes,3))
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
+
+    ALLOCATE(w01_dist(0:nhist)); ALLOCATE(spec_dist(0:nhist))
+    ALLOCATE(wd_tot(0:nhist)); ALLOCATE(sd_tot(0:nhist))
+
+    w01_dist = 0d0; spec_dist = 0d0; wd_tot = 0d0; sd_tot = 0d0
+
     tcf_tot = dcmplx(0.0d0, 0.0d0)
 
     nchunks = ceiling(real(noh)/real(nperchunk))
@@ -55,7 +63,11 @@ PROGRAM IR_CALC
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
                 iper = ioh - (chunk-1)*nperchunk
-                ! Some sort of histogramming?
+                ! Calculate the Spectral Density and Histogram
+                CALL Hist_Calc(w01(iper,:), mu(iper,:,:), w01_dist(:), spec_dist(:))
+                wd_tot = wd_tot + w01_dist
+                sd_tot = sd_tot + spec_dist
+                ! Calculate the TCFS
                 CALL Calc_TCF(w01(iper,:), mu(iper,:,:), tcf(:))
                 tcf_tot = tcf_tot + tcf
         ENDDO !
@@ -69,6 +81,8 @@ PROGRAM IR_CALC
 ! *********************************************************************
 ! III. Calculate the IR Spectra
 ! *********************************************************************
+    CALL Hist_Print(wd_tot, sd_tot)
+    
     CALL Spec_Calc(tcf_tot)
 
 ! *********************************************************************
