@@ -68,8 +68,8 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
 
     ! ... Pad TCF with zeros to get the frequency resolution.
     input = dcmplx(0.0d0,0.0d0)
-    DO i = 0, ncorr
-        input(i) = vv_tcf_tot(i)
+    DO i = 1, min(nt, ncorr)
+        input(i) = vv_tcf_tot(i-1)
     END DO
 
     CALL dfftw_execute(plan)
@@ -96,8 +96,8 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
 
     ! ... Pad TCF with zeros to get the frequency resolution.
     input = dcmplx(0.0d0,0.0d0)
-    DO i = 0, ncorr
-        input(i) = vh_tcf_tot(i)
+    DO i = 1, min(nt, ncorr)
+        input(i) = vh_tcf_tot(i-1)
     END DO
 
     CALL dfftw_execute(plan)
