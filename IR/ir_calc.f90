@@ -53,13 +53,10 @@ PROGRAM IR_CALC
     DO chunk=1, nchunks
         w01 = 0.0; mu = 0.0; eOH = 0.0
         DO iper=1, nperchunk
-            WRITE(*,*) iper
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
             CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:))
         END DO
-
-        WRITE(*,*) w01(1,1), mu(1,1,1)
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
                 iper = ioh - (chunk-1)*nperchunk
@@ -67,7 +64,6 @@ PROGRAM IR_CALC
                 CALL Hist_Calc(w01(iper,:), mu(iper,:,:), w01_dist(:), spec_dist(:))
                 wd_tot = wd_tot + w01_dist
                 sd_tot = sd_tot + spec_dist
-                WRITE(*,*) spec_dist(0), sd_tot(0)
                 ! Calculate the TCFS
                 CALL Calc_TCF(w01(iper,:), mu(iper,:,:), tcf(:))
                 tcf_tot = tcf_tot + tcf
