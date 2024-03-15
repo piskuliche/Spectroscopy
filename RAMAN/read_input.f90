@@ -55,7 +55,7 @@ SUBROUTINE Read_Input
 
     ! Convert x01 parameters
     d0 = d0/angperau
-    d1 = d1*cmiperau/angperau
+    d1 = d1/angperau
 
     ! Convert histogram parameters to a.u.
     wmin = wmin/cmiperau
