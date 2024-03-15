@@ -21,9 +21,9 @@ SUBROUTINE Calc_TCF(w, mu, tcf)
         phase = -w(k)
 
         DO m = k, k + ncorr
-            ilag = m - k + 1
+            ilag = m - k
             phase = phase + w(m)
-            dp = DOT_PRODUCT(mu0, mu(m+ilag,:))
+            dp = DOT_PRODUCT(mu0, mu(m,:))
             tcf(ilag) = tcf(ilag) + dp*DCMPLX(DCOS(phase*dt), DSIN(phase*ilag))
         END DO
     END DO
