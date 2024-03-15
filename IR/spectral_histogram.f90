@@ -1,4 +1,4 @@
-SUBROUTINE Hist_Calc(w01, mu, spec_dist)
+SUBROUTINE Hist_Calc(w01, mu, w01_dist, spec_dist)
     
     USE time_data
     USE hist_data
