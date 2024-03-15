@@ -8,17 +8,17 @@ SUBROUTINE Hist_Calc(w01, mu, spec_dist)
 
     INTEGER :: k, m, iw
 
-    DOUBLE PRECISION :: count, mu2
+    DOUBLE PRECISION :: count, mu_sq
     DOUBLE PRECISION, DIMENSION(ntimes,3) :: mu
     DOUBLE PRECISION, DIMENSION(ntimes) :: w01
     DOUBLE PRECISION, DIMENSION(0:nhist) :: w01_dist, spec_dist
 
     ! Zero the Arrays 
-    w01_ist = 0.0d0; spec_dist = 0.0d0
+    w01_dist = 0.0d0; spec_dist = 0.0d0
 
     DO k=1, ntimes
         mu_sq = DOT_PRODUCT(mu(k,:),mu(k,:))
-        iw = NINT ( (w(k) - wmin)/dw )
+        iw = NINT ( (w01(k) - wmin)/dw )
 
         IF (iw >= 0 .and. iw <= nhist) THEN
             count = count + 1d0
