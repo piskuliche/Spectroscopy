@@ -18,6 +18,7 @@ SUBROUTINE Hist_Calc(w01, mu, spec_dist)
 
     DO k=1, ntimes
         mu_sq = DOT_PRODUCT(mu(k,:), mu(k,:))
+        WRITE(*,*) "sq", k, mu_sq
         iw = NINT ( (w01(k) - wmin)/dw )
 
         IF (iw >= 0 .and. iw <= nhist) THEN
