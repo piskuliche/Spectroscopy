@@ -39,7 +39,7 @@ PROGRAM IR_CALC
     ALLOCATE(w01_dist(0:nhist)); ALLOCATE(spec_dist(0:nhist))
     ALLOCATE(wd_tot(0:nhist)); ALLOCATE(sd_tot(0:nhist))
 
-    w01_dist = 0d0; spec_dist = 0d0; wd_tot = 0d0; sd_tot = 0d0
+    w01_dist = 0.0d0; spec_dist = 0.0d0; wd_tot = 0.0d0; sd_tot = 0.0d0
 
     tcf_tot = dcmplx(0.0d0, 0.0d0)
 
