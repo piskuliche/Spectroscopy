@@ -30,6 +30,7 @@ SUBROUTINE Hist_Calc(w01, mu, spec_dist)
     ! Normalize the distributions
     w01_dist = w01_dist/count
     spec_dist = spec_dist/count
+    WRITE(*,*) count, SUM(spec_dist)
 
 END SUBROUTINE Hist_Calc
 
