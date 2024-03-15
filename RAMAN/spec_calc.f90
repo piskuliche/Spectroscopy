@@ -36,7 +36,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
         vh_tcf_tot(i) = vh_tcf_tot(i)*DCMPLX(DEXP(-0.5d0*ti/T1),0d0)
     END DO
     WRITE(6,*) ' Vibrational Relaxation Factor = ',DEXP(-0.5d0*dt/T1)
-    WRITE(6,*) '<w> = ',w01_avg
+    WRITE(6,*) '<w> = ',w01_avg*cmiperau
     ! ...B. The average frequency exp{-i*<w>*t}
     DO i = 0, ncorr
         ti = float(i)*dt
