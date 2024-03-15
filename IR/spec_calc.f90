@@ -49,8 +49,8 @@ SUBROUTINE Spec_Calc(tcf_tot)
 
     ! ...B. Pad TCF with zeros to get the frequency resolution.
     input = dcmplx(0.0d0,0.0d0)
-    DO i = 0, ncorr
-        input(i) = tcf_tot(i)
+    DO i = 1, min(nt, ncorr)
+        input(i) = tcf_tot(i-1)
     END DO
 
     CALL dfftw_execute(plan)
