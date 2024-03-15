@@ -6,7 +6,7 @@ FLFLAGS = -lm -I/cm/shared/apps/spack/cpu/opt/spack/linux-centos8-zen2/gcc-10.2.
 	$(FC) $(FCFLAGS) -c $<
 
 PROGRAM = ir_calc
-OBJECTS = data_mods.f90 ir_calc.f90 read_input.f90 read_field.f90 tcf.f90 spec_calc.f90
+OBJECTS = data_mods.f90 ir_calc.f90 read_input.f90 read_field.f90 tcf.f90 spec_calc.f90 spectral_histogram.f90
 
 $(PROGRAM): $(OBJECTS)
 	$(FC) $(FCFLAGS) $(FLFLAGS) $(OBJECTS) -o  $(PROGRAM)
