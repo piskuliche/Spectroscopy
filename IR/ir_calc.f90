@@ -64,7 +64,6 @@ PROGRAM IR_CALC
                 CALL Hist_Calc(w01(iper,:), mu(iper,:,:), w01_dist(:), spec_dist(:))
                 wd_tot = wd_tot + w01_dist
                 sd_tot = sd_tot + spec_dist
-                WRITE(*,*) "t", SUM(sd_tot), SUM(spec_dist)
                 ! Calculate the TCFS
                 CALL Calc_TCF(w01(iper,:), mu(iper,:,:), tcf(:))
                 tcf_tot = tcf_tot + tcf
