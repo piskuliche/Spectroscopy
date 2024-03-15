@@ -37,7 +37,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     END DO
 
     ! ...B. The average frequency exp{-i*<w>*t}
-    DO i = 1, ncorr
+    DO i = 0, ncorr
         ti = float(i)*dt
         vv_tcf_tot(i) = vv_tcf_tot(i)*DCMPLX(DEXP(ti*w01_avg), -DSIN(ti*w01_avg))
         vh_tcf_tot(i) = vh_tcf_tot(i)*DCMPLX(DEXP(ti*w01_avg), -DSIN(ti*w01_avg))

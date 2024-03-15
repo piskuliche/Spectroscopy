@@ -56,10 +56,10 @@ PROGRAM Raman_Calc
     END DO
 
     ! Normalize by the number of oh groups
-    vv_tcf_tot = vv_tcf_tot/dcmplx(dfloat(noh),0d0)
-    vh_tcf_tot = vh_tcf_tot/dcmplx(dfloat(noh),0d0)
-    w01_avg = w01_avg/dfloat(noh*ntimes)
-    w01_sq_avg = w01_sq_avg/dfloat(noh*ntimes)
+    vv_tcf_tot = vv_tcf_tot/DCMPLX(DFLOAT(noh),0d0)
+    vh_tcf_tot = vh_tcf_tot/DCMPLX(DFLOAT(noh),0d0)
+    w01_avg = w01_avg/DFLOAT(noh*ntimes)
+    w01_sq_avg = w01_sq_avg/DFLOAT(noh*ntimes)
 
 ! *********************************************************************
 ! III. Calculate the Raman Spectra
