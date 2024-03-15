@@ -66,5 +66,7 @@
   ! Convert frequency ranges
   w1min = w1min/cmiperau; w1max = w1max/cmiperau; w3min = w3min/cmiperau; w3max = w3max/cmiperau
 
+  close(10)
+
   End Subroutine read_input
 
