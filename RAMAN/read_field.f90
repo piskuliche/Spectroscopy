@@ -92,7 +92,7 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_para, a_perp)
 
         alpha(k) = xtmp * (a0 + a1*etmp(k))
         apara = 3d0/(1d0+2d0/c15)*alpha(k)
-        aperp = 1d0/(2d0+c15)*alpha(k)
+        aperp = 3d0/(2d0+c15)*alpha(k)
 
         ! Calculate the polarizability components
         a_para(k,:) = aperp+(apara-aperp)*eOH(k,:)**2
