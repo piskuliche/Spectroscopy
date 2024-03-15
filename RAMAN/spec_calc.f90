@@ -123,11 +123,11 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     OPEN(25, file='depol_spectrum.dat')
     DO i=nt/2 + 1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt) + w01_avg
-        WRITE(24,*) w_spec*cmiperau, DREAL(10d0*vh_spec(i))
+        WRITE(25,*) w_spec*cmiperau, DREAL(10d0*vh_spec(i))
     ENDDO
     DO i=1, nt/2
         w_spec = (2d0*pi/dt)*dfloat(i-1)/dfloat(nt) + w01_avg
-        WRITE(24,*) w_spec*cmiperau, DREAL(10d0*vh_spec(i))
+        WRITE(25,*) w_spec*cmiperau, DREAL(10d0*vh_spec(i))
     ENDDO
     CLOSE(25)
 
@@ -135,12 +135,13 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     OPEN(26, file='iso_spectrum.dat')
     DO i=nt/2 + 1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt) + w01_avg
-        WRITE(24,*) w_spec*cmiperau, DREAL(vv_spec(i) - 4d0/3d0*vh_spec(i))
+        WRITE(26,*) w_spec*cmiperau, DREAL(vv_spec(i) - 4d0/3d0*vh_spec(i))
     ENDDO
     DO i=1, nt/2
         w_spec = (2d0*pi/dt)*dfloat(i-1)/dfloat(nt) + w01_avg
-        WRITE(24,*) w_spec*cmiperau, DREAL(vv_spec(i) - 4d0/3d0*vh_spec(i))
+        WRITE(26,*) w_spec*cmiperau, DREAL(vv_spec(i) - 4d0/3d0*vh_spec(i))
     ENDDO
+    CLOSE(26)
 
 
     DEALLOCATE(input); DEALLOCATE(vv_spec); DEALLOCATE(vh_spec)
