@@ -18,7 +18,7 @@ SUBROUTINE Read_Input
 
     IMPLICIT NONE
 
-    OPEN(10, file='ir_spectra.in', status='old')
+    OPEN(10, file='raman_spectra.in', status='old')
 
     READ(10,*)
     READ(10,*) noh, ndigits ! # OH groups, # of digits in field file extensions
