@@ -25,7 +25,7 @@
   module freq_data
 
     implicit none
-    double precision :: w01avg, w12avg, w01sqavg, w12sqavg  ! avg freq and freq^2
+    double precision :: w01_avg, w12_avg, w01_sq_avg, w12_sq_avg  ! avg freq and freq^2
 
   end module freq_data
 
