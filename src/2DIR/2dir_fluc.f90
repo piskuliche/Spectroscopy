@@ -41,7 +41,7 @@
   write(6,*) ' Allocated arrays'
 
   ! set the number of OpenMP threads
-  call omp_set_num_threads(20)
+  !call omp_set_num_threads(20)
 
   nchunks = ceiling(real(noh)/real(nperchunk))
 
