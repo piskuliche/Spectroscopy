@@ -5,7 +5,10 @@ CONTAINS
 
     ! Here you can define procedures
 
-    SUBROUTINE Read_Empirical_Map(filename)
+    SUBROUTINE Read_Empirical_Map
+
+    USE map_data
+
 
     IMPLICIT NONE
 
