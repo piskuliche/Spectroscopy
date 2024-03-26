@@ -12,7 +12,6 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     USE time_data
     USE hist_data
     USE constants
-    USE fluc_data
     USE map_data
     USE freq_data
 
