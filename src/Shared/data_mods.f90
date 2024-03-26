@@ -34,16 +34,6 @@
 
   end module freq_data
 
-  module fluc_data
-
-    implicit none
-    logical :: flag_fluc
-    double precision :: Havg(5), dH2avg(5)     ! Avg energy, Avg energy fluctuation size
-    double precision :: dw01avg(5), dw01sqavg(5), dw12avg(5), dw12sqavg(5)    ! fluctuation avg freq and freq^2
-    double precision :: d2w01avg(5), d2w01sqavg(5), d2w12avg(5), d2w12sqavg(5)  ! fluctuation^2 avg freq and freq^2
-
-  end module fluc_data
-
 
   module constants
 
