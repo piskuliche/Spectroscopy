@@ -73,12 +73,12 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
          WRITE(6,*) ioh, k
          STOP 'w01 is not finite'
         ENDIF
-        w01avg = w01avg + w01(k)
-        w01sqavg = w01sqavg + w01(k)**2
+        w01_avg = w01_avg + w01(k)
+        w01_sq_avg = w01_sq_avg + w01(k)**2
 
         w12(k) = c3 + c4*etmp(k) + c5*etmp(k)**2     
-        w12avg = w12avg + w12(k)
-        w12sqavg = w12sqavg + w12(k)**2
+        w12_avg = w12_avg + w12(k)
+        w12_sq_avg = w12_sq_avg + w12(k)**2
 
         ! convert unit vector to transition dipole moment
         muprime = b0 + b1*etmp(k) + b2*etmp(k)**2
@@ -92,7 +92,7 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
         eoh(k,:) = eoh_tmp(k,:)
     END DO
     WRITE(6,*) "**************"
-    WRITE(6,*) 'w01avg tmp= ', w01avg
+    WRITE(6,*) 'w01_avg tmp= ', w01_avg
 
 
 END SUBROUTINE read_field
@@ -139,12 +139,12 @@ END SUBROUTINE read_field
      
      ! convert etmp to frequency
      w01(k) = c0 + c1*etmp + c2*etmp**2     
-     w01avg = w01avg + w01(k)
-     w01sqavg = w01sqavg + w01(k)**2
+     w01_avg = w01_avg + w01(k)
+     w01_sq_avg = w01_sq_avg + w01(k)**2
 
      w12(k) = c3 + c4*etmp + c5*etmp**2     
-     w12avg = w12avg + w12(k)
-     w12sqavg = w12sqavg + w12(k)**2
+     w12_avg = w12_avg + w12(k)
+     w12_sq_avg = w12_sq_avg + w12(k)**2
 
 
      ! calculate the fluctuation weighted averages
