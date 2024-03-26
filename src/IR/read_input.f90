@@ -30,6 +30,7 @@ SUBROUTINE Read_Input
     READ(10,*) 
     READ(10,*) flag_hist, nhist, wmin, wmax ! Calc freq_dist and spec dense, +params
 
+    CLOSE(10)
     ! Grab the Empriical Mapping Parameters
     CALL Read_Empirical_Map
 
@@ -44,6 +45,6 @@ SUBROUTINE Read_Input
     wmax = wmax/cmiperau
     dw = (wmax - wmin)/real(nhist)
     
-    CLOSE(10)
+
 
 END SUBROUTINE Read_Input

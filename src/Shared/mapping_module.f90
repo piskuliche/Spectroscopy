@@ -42,7 +42,7 @@ CONTAINS
     d0 = d0/angperau; d1 = d1*cmiperau/angperau
     d2 = d2/angperau; d3 = d3*cmiperau/angperau
 
-        
+    CLOSE(10)
     END SUBROUTINE Read_Empirical_Map
 
 END MODULE mapping
