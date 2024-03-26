@@ -15,7 +15,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     USE constants
 
     IMPLICIT NONE
-    INCLUDE 'fftw3.f'
+    INCLUDE '../Shared/fftw3.f'
 
     DOUBLE COMPLEX, DIMENSION(0:ncorr), INTENT(INOUT) :: tcf_tot
 

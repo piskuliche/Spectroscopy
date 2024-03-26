@@ -11,6 +11,7 @@ PROGRAM SFG_CALC
     USE time_data
     USE freq_data
     USE hist_data
+    USE input_module
 
     IMPLICIT NONE
 
