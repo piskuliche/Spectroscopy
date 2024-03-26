@@ -71,8 +71,8 @@ PROGRAM SFG_CALC
 
     ! normalize by the number of oh groups
     tcf_tot = tcf_tot/dcmplx(dfloat(noh),0d0)
-    w01avg = w01avg/dfloat(noh*ntimes)
-    w01sqavg = w01sqavg/dfloat(noh*ntimes)
+    w01_avg = w01_avg/dfloat(noh*ntimes)
+    w01_sq_avg = w01_sq_avg/dfloat(noh*ntimes)
 
 ! *********************************************************************
 ! III. Calculate the SFG Spectra

@@ -28,7 +28,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     pi = 4.0d0*datan(1.0d0)
 
     ! Write out the average frequency
-    write(6,*) ' <w> = ', w01avg*cmiperau
+    write(6,*) ' <w> = ', w01_avg*cmiperau
 
     ! I. Multiply the total TCF by the vib relaxation factor
     DO i=0, ncorr
