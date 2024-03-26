@@ -21,10 +21,10 @@
       pi = 4.0d0*datan(1.0d0)
       
       ! Write out the average frequencies
-      write(6,*) ' <w01>   = ',w01avg*cmiperau
-      write(6,*) ' <w12>   = ',w12avg*cmiperau
-      write(6,*) ' <w01^2> = ',w01sqavg*cmiperau**2
-      write(6,*) ' <w12^2> = ',w12sqavg*cmiperau**2
+      write(6,*) ' <w01>   = ',w01_avg*cmiperau
+      write(6,*) ' <w12>   = ',w12_avg*cmiperau
+      write(6,*) ' <w01^2> = ',w01_sq_avg*cmiperau**2
+      write(6,*) ' <w12^2> = ',w12_sq_avg*cmiperau**2
       
       ! Initialize parameters for Fourier Transform
       
@@ -136,10 +136,10 @@
       Hlab(1) = 'H'; Hlab(2) = 'KE'; Hlab(3) = 'LJ'; Hlab(4) = 'Co'; Hlab(5) = 'V'
       
       ! Write out the average frequencies
-      write(6,*) ' <w01>   = ',w01avg*cmiperau
-      write(6,*) ' <w12>   = ',w12avg*cmiperau
-      write(6,*) ' <w01^2> = ',w01sqavg*cmiperau**2
-      write(6,*) ' <w12^2> = ',w12sqavg*cmiperau**2
+      write(6,*) ' <w01>   = ',w01_avg*cmiperau
+      write(6,*) ' <w12>   = ',w12_avg*cmiperau
+      write(6,*) ' <w01^2> = ',w01_sq_avg*cmiperau**2
+      write(6,*) ' <w12^2> = ',w12_sq_avg*cmiperau**2
       
       ! Initialize parameters for Fourier Transform
       
