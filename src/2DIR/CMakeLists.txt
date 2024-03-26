@@ -2,5 +2,6 @@ add_executable(calc_2dir_spectrum 2dir_fluc.f90 data_mods.f90 read_input.f90 rea
 
 target_link_libraries(calc_2dir_spectrum
     fftw3
+    openmpf90
     ${HDF5_LIBRARIES}
 )
