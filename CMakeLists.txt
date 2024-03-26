@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(electric-field LANGUAGES Fortran)
+project(spectroscopy LANGUAGES Fortran)
 find_package(HDF5 REQUIRED COMPONENTS Fortran)
 find_package(FFTW )
 
