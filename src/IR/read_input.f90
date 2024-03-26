@@ -15,6 +15,7 @@ SUBROUTINE Read_Input
     USE map_data
     USE hist_data
     USE constants
+    USE mapping
 
     IMPLICIT NONE
 
@@ -27,31 +28,16 @@ SUBROUTINE Read_Input
     READ(10,*) 
     READ(10,*) w_resol ! freq resolution
     READ(10,*) 
-    READ(10,*) c0, c1, c2 ! frequency map
-    READ(10,*) 
-    READ(10,*) b0, b1, b2 ! mu' map
-    READ(10,*) 
-    READ(10,*) d0, d1 ! x01 map
-    REAd(10,*)
-    READ(10,*) T1 ! vib. relaxation time
-    READ(10,*) 
     READ(10,*) flag_hist, nhist, wmin, wmax ! Calc freq_dist and spec dense, +params
+
+    ! Grab the Empriical Mapping Parameters
+    CALL Read_Empirical_Map
 
     ! Covert time step to atomic units
     dt = dt/fsperau
 
     ! Convert freq. resolution to a.u.
     w_resol = w_resol/cmiperau
-
-    ! Convert map parameters to atomic units
-    c0 = c0/cmiperau; c1 = c1/cmiperau; c2 = c2/cmiperau
-
-    ! Convert vib. relax time to a.u.
-    T1 = T1/fsperau
-
-    ! Convert x01 parameters
-    d0 = d0/angperau
-    d1 = d1*cmiperau/angperau
 
     ! Convert histogram parameters to a.u.
     wmin = wmin/cmiperau
