@@ -8,7 +8,7 @@
       use constants
       
       implicit none
-      include 'fftw3.f'
+      include '../Shared/fftw3.f'
       integer :: i, j, ineg, jneg, k, k_rp, p, nt1, nt3, iTw
       integer*8 :: plan_rp, plan_np
       double precision :: w_spec1, w_spec3, ti, pi, fact1, fact3
