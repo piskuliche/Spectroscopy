@@ -93,8 +93,8 @@ SUBROUTINE read_field(ioh, w01, mu, eOH, a_ss, a_sp, a_pp, z0)
         
         ! Covert to freq
         w01(k) = c0 + c1*etmp(k) + c2*etmp(k)**2
-        w01avg = w01avg + w01(k)
-        w01sqavg = w01sqavg + w01(k)**2
+        w01_avg = w01_avg + w01(k)
+        w01_sq_avg = w01_sq_avg + w01(k)**2
         ! DO I NEED w2avg?
 
         ! Convert unit vector to transition dipole
