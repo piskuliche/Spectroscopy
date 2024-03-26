@@ -17,7 +17,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     USE freq_data
 
     IMPLICIT NONE
-    INCLUDE 'fftw3.f'
+    INCLUDE '../Shared/fftw3.f'
 
     INTEGER :: i, p, nt
     INTEGER*8 :: plan
