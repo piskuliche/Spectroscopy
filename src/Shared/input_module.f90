@@ -97,4 +97,4 @@ CONTAINS
 
     END SUBROUTINE Read_Input
 
-END MODULE mapping
+END MODULE input_module
