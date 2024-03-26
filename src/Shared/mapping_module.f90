@@ -8,6 +8,7 @@ CONTAINS
     SUBROUTINE Read_Empirical_Map
 
     USE map_data
+    USE constants
 
 
     IMPLICIT NONE
