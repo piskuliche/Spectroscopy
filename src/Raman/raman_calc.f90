@@ -4,7 +4,7 @@ PROGRAM Raman_Calc
     USE time_data
     USE freq_data
     USE hist_data
-    USE mapping
+    USE input_module
     
     IMPLICIT NONe
     INTEGER, PARAMETER :: nperchunk = 1000

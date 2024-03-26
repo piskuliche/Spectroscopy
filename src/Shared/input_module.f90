@@ -1,4 +1,4 @@
-MODULE mapping
+MODULE input_module
     IMPLICIT NONE
 
 CONTAINS
