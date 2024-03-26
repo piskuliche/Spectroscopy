@@ -58,7 +58,7 @@
         tcfH_rp_tot = dcmplx(0.0d0,0.0d0); tcfH_np_tot = dcmplx(0.0d0,0.0d0)
      endif
      read_time = 0.0d0; tcf_time = 0.0d0
-     w01avg = 0.0d0; w01sqavg = 0.0d0; w12avg = 0.0d0; w12sqavg = 0.0d0     
+     w01_avg = 0.0d0; w01_sq_avg = 0.0d0; w12_avg = 0.0d0; w12_sq_avg = 0.0d0     
 
      ! Loop over the OH groups
      call cpu_time(tstart)
@@ -72,7 +72,7 @@
         if(ioh > noh) exit
         call read_field(ioh, w01(iper,:), w12(iper,:), mu01(iper,:), mu12(iper,:), eOH(iper,:,:))
       END DO 
-      WRITE(*,*) "t", w01(1,1), w01avg
+      WRITE(*,*) "t", w01(1,1), w01_avg
 
 !$omp parallel do private(ioh,ta,tb,tcf_rp,tcf_np) &
 !$omp shared(w01,w12,mu01,mu12,eOH) &
@@ -111,8 +111,8 @@
      call flush(6)
 
      tcf_rp_tot = tcf_rp_tot/dcmplx(dble(noh),0d0); tcf_np_tot = tcf_np_tot/dcmplx(dble(noh),0d0)
-     w01avg = w01avg/dble(noh*ntimes); w01sqavg = w01sqavg/dble(noh*ntimes)
-     w12avg = w12avg/dble(noh*ntimes); w12sqavg = w12sqavg/dble(noh*ntimes)
+     w01_avg = w01_avg/dble(noh*ntimes); w01_sq_avg = w01_sq_avg/dble(noh*ntimes)
+     w12_avg = w12_avg/dble(noh*ntimes); w12_sq_avg = w12_sq_avg/dble(noh*ntimes)
      dw01avg = dw01avg/dble(noh*ntimes); dw01sqavg = dw01sqavg/dble(noh*ntimes)
      dw12avg = dw12avg/dble(noh*ntimes); dw12sqavg = dw12sqavg/dble(noh*ntimes)
      d2w01avg = d2w01avg/dble(noh*ntimes); d2w01sqavg = d2w01sqavg/dble(noh*ntimes)
