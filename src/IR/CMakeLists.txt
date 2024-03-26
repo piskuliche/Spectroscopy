@@ -2,6 +2,6 @@ add_executable(calc_ir_spectrum ir_calc.f90 read_field.f90 read_input.f90 spec_c
 
 target_link_libraries(calc_ir_spectrum
     shared_module
-    ${FFTW_LIBRARIES} 
+    fftw3
     ${HDF5_LIBRARIES}
 )
