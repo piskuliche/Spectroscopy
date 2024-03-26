@@ -34,6 +34,14 @@
 
   end module freq_data
 
+  module hist_data
+
+    implicit none
+    logical :: flag_hist
+    integer :: nhist
+    double precision :: dw, wmin, wmax
+
+  end module hist_data
 
   module constants
 
