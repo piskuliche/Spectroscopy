@@ -11,6 +11,7 @@ set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/modules)
 
 include(GNUInstallDirs)
 include_directories(${HDF5_INCLUDE_DIR})
+include_Directories(${FFTW_Include_Dir})
 
 message(STATUS ${CMAKE_BINARY_DIR})
 
