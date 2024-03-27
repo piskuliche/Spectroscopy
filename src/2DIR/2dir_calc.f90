@@ -1,4 +1,4 @@
-PROGRAM 2DIR
+PROGRAM 2DIR_CALC
 
 USE map_data
 USE time_data
@@ -46,7 +46,7 @@ DO iTW = 1, nTw
     WRITE(6,*) 'Calculating for Tw = ', Tw(iTW)*fsperau, ' fs'
     CALL flush(6)
     ! Zero the Arrays
-    tcf_rp_tot = DCMPLX(0.0d0, 0.0d0; tcf_np_tot = DCMPLX(0.0d0, 0.0d0)
+    tcf_rp_tot = DCMPLX(0.0d0, 0.0d0); tcf_np_tot = DCMPLX(0.0d0, 0.0d0)
     ! Set the reading time to zero
     read_time = 0.0d0; tcf_time = 0.0d0
     ! Set the average frequencies to zero
