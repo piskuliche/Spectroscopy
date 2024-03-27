@@ -56,6 +56,7 @@ DO iTW = 1, nTw
     CALL CPU_TIME(tstart)
 
     DO chunk=1, nchunks
+        WRITE(6,*) 'Calculating for chunk = ', chunk, ' of ', nchunks
         ! ***** READ THE FIELD *****
         w01 = 0.0; w12 = 0.0; mu01 = 0.0; mu12 = 0.0; eOH = 0.0
         DO iper=1, nperchunk
