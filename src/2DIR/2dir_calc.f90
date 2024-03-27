@@ -16,7 +16,7 @@ INTEGER :: iTw
 DOUBLE PRECISION :: tstart, tend, read_time, tcf_time, ta, tb
 
 DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01, mu01, w12, mu12
-DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: eOH
+DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: eOH
 
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_rp, tcf_rp_tot
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_np, tcf_np_tot
@@ -30,7 +30,7 @@ CALL read_input
 ALLOCATE(w01(nperchunk, ntimes)); ALLOCATE(mu01(nperchunk, ntimes))
 ALLOCATE(w12(nperchunk, ntimes)); ALLOCATE(mu12(nperchunk, ntimes))
 
-ALLOCATE(eOH(nperchunk, ntimes))
+ALLOCATE(eOH(nperchunk, ntimes, 3))
 
 ALLOCATE(tcf_rp(0:ncorr, 0:ncorr)); ALLOCATE(tcf_rp_tot(0:ncorr, 0:ncorr))
 ALLOCATE(tcf_np(0:ncorr, 0:ncorr)); ALLOCATE(tcf_np_tot(0:ncorr, 0:ncorr))
