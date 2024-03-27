@@ -62,7 +62,7 @@ DO iTW = 1, nTw
         DO iper=1, nperchunk
             ioh = (chunk-1)*nperchunk + iper
             IF(ioh > noh) EXIT
-            CALL read_field(ioh, iTw, w01(iper,:), w12(iper,:), mu01(iper,:),  mu12(iper,:), eOH(iper,:,:))
+            CALL read_field(ioh, w01(iper,:), w12(iper,:), mu01(iper,:),  mu12(iper,:), eOH(iper,:,:))
         ENDDO
 
         ! ***** CALCULATE THE TCFs *****
