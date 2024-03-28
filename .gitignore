@@ -10,3 +10,4 @@ top_level.txt
 *.egg*
 settings.json
 bin/calc*
+deprecated/
