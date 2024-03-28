@@ -40,7 +40,7 @@
     implicit none
     logical :: flag_hist
     integer :: nhist
-    double precision :: dw, wmin, wmax
+    double precision :: dw
 
   end module hist_data
 
