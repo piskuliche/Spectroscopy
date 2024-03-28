@@ -33,7 +33,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ! I. Multiply the total TCF by the vib relaxation factor
     DO i=0, ncorr
         ti = float(i)*dt
-        tcf_tot(i) = tcf_tot(i)*DCMPLX(DEXP(-0.5d0*ti/T1),0d0)
+        tcf_tot(i) = tcf_tot(i)*DCMPLX(DEXP(-0.5d0*ti/T1rel),0d0)
     ENDDO 
 
     ! II. Write out the total tcf
