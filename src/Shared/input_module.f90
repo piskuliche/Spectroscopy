@@ -80,6 +80,8 @@ CONTAINS
         READ(10,*) w1min, w1max, w3min, w3max ! Ranges for printing the spectra
         READ(10,*)
         READ(10,*) z_c ! center of slab. 
+        READ(10,*) 
+        READ(10,*) (Tw(j), j = 1, nTw)  ! Waiting time list (fs)
 
         CLOSE(10)
         ! Grab the Empriical Mapping Parameters
