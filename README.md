@@ -8,13 +8,14 @@ The 2DIR part of the code doesn't take advantage of the significant overlap betw
 
 This package can be installed with cmake. The general approach for such a build is the following.
 
+```
 mkdir build
-
 cd build
-
-cmake ..
-
+cmake -DCMAKE_INSTALL_PREFIX=../bin/
 make
+```
+
+
 
 
 ## Usage 

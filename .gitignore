@@ -9,4 +9,4 @@ SOURCES.txt
 top_level.txt
 *.egg*
 settings.json
-bin/
+bin/calc*
