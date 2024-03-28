@@ -25,7 +25,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ! I. Multiply the toal TCF by the vibrational relaxation factor.
     DO i = 0, ncorr
         ti = float(i)*dt
-        tcf_tot(i) = tcf_tot(i)*dcmplx(dexp(-0.5d0*ti/T1),0d0)
+        tcf_tot(i) = tcf_tot(i)*dcmplx(dexp(-0.5d0*ti/T1rel),0d0)
     END DO
 
     ! II. Write out the total TCF

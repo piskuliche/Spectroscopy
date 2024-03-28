@@ -33,7 +33,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ! I. Multiply the total TCF by the vib relaxation factor
     DO i=0, ncorr
         ti = float(i)*dt
-        tcf_tot(i) = tcf_tot(i)*DCMPLX(DEXP(-0.5d0*ti/T1),0d0)
+        tcf_tot(i) = tcf_tot(i)*DCMPLX(DEXP(-0.5d0*ti/T1rel),0d0)
     ENDDO 
 
     ! II. Write out the total tcf
@@ -66,7 +66,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ! IV. Write out the spectrum
     DO i=1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1)/dfloat(nt)
-        IF (w_spec .ge. wmin .and. w_spec .le. wmax) THEN
+        IF (w_spec .ge. w1min .and. w_spec .le. w1max) THEN
             WRITE(22,*) w_spec*cmiperau, DREAL(sfg_spec(i)), -DIMAG(sfg_spec(i))
         ENDIF
     ENDDO

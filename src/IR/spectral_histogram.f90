@@ -18,7 +18,7 @@ SUBROUTINE Hist_Calc(w01, mu, w01_dist, spec_dist)
     count = 0d0
     DO k=1, ntimes
         mu_sq = DOT_PRODUCT(mu(k,:), mu(k,:))
-        iw = NINT ( (w01(k) - wmin)/dw )
+        iw = NINT ( (w01(k) - w1min)/dw )
 
         IF (iw >= 0 .and. iw <= nhist) THEN
             count = count + 1d0
@@ -51,8 +51,8 @@ SUBROUTINE Hist_Print(wd_tot, sd_tot)
     sd_tot = sd_tot/REAL(noh)
 
     DO k=0, nhist
-        WRITE(23,*) (wmin + REAL(k)*dw)*cmiperau, wd_tot(k)
-        WRITE(24,*) (wmin + REAL(k)*dw)*cmiperau, sd_tot(k)
+        WRITE(23,*) (w1min + REAL(k)*dw)*cmiperau, wd_tot(k)
+        WRITE(24,*) (w1min + REAL(k)*dw)*cmiperau, sd_tot(k)
     END DO
     CLOSE(23)
     CLOSE(24)

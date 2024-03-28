@@ -36,7 +36,8 @@ CONTAINS
     c3 = c3/cmiperau; c4 = c4/cmiperau; c5 = c5/cmiperau
 
     ! Convert vib. relax time to atomic units
-    T1rel = T1rel/fsperau
+    T1rel = T1/fsperau
+    
 
     ! Convert x01 paramters to atomic units
     d0 = d0/angperau; d1 = d1*cmiperau/angperau
@@ -64,6 +65,7 @@ CONTAINS
         USE constants
 
         IMPLICIT NONE
+        INTEGER :: j
 
         OPEN(10, file='spectra.in', status='old')
 
@@ -74,9 +76,19 @@ CONTAINS
         READ(10,*) 
         READ(10,*) w_resol ! freq resolution
         READ(10,*) 
-        READ(10,*) flag_hist, nhist, wmin, wmax ! Calc freq_dist and spec dense, +params
+        READ(10,*) flag_hist, nhist
+        READ(10,*)
+        READ(10,*) w1min, w1max, w3min, w3max ! Ranges for printing the spectra
         READ(10,*)
         READ(10,*) z_c ! center of slab. 
+        READ(10,*) 
+          read(10,*) nTw          ! # of waiting times
+        IF(nTw.gt.20) THEN
+            WRITE(6,*) ' No more than 20 waiting times allowed'
+            STOP
+        ENDIF
+        READ(10,*)
+        READ(10,*) (Tw(j), j = 1, nTw)  ! Waiting time list (fs)
 
         CLOSE(10)
         ! Grab the Empriical Mapping Parameters
@@ -85,15 +97,18 @@ CONTAINS
         ! Covert time step to atomic units
         dt = dt/fsperau
 
+        ! Convert T1 by dt
+        T1bydt = T1rel/dt
+
         ! Convert freq. resolution to a.u.
         w_resol = w_resol/cmiperau
 
         ! Convert histogram parameters to a.u.
-        wmin = wmin/cmiperau
-        wmax = wmax/cmiperau
-        dw = (wmax - wmin)/real(nhist)
-        
+        w1min = w1min/cmiperau; w1max = w1max/cmiperau
+        w3min = w3min/cmiperau; w3max = w3max/cmiperau
 
+        dw = (w1max - w1min)/real(nhist)
+    
 
     END SUBROUTINE Read_Input
 
