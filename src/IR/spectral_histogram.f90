@@ -18,7 +18,7 @@ SUBROUTINE Hist_Calc(w01, mu, w01_dist, spec_dist)
     count = 0d0
     DO k=1, ntimes
         mu_sq = DOT_PRODUCT(mu(k,:), mu(k,:))
-        iw = NINT ( (w01(k) - w1_min)/dw )
+        iw = NINT ( (w01(k) - w1min)/dw )
 
         IF (iw >= 0 .and. iw <= nhist) THEN
             count = count + 1d0
