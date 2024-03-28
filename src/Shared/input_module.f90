@@ -65,6 +65,7 @@ CONTAINS
         USE constants
 
         IMPLICIT NONE
+        INTEGER :: j
 
         OPEN(10, file='spectra.in', status='old')
 
