@@ -4,6 +4,7 @@ USE map_data
 USE time_data
 USE freq_data
 USE constants
+USE input_module
 
 IMPLICIT NONE
 
