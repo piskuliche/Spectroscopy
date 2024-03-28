@@ -4,7 +4,6 @@
 
   use time_data
   use map_data
-  use fluc_data
   use constants
 
   implicit none
@@ -41,7 +40,7 @@
   read(10,*)
   read(10,*) w1min, w1max, w3min, w3max      ! Ranges in which spectrum will be printed (cm^-1) 
   read(10,*)
-  read(10,*) flag_fluc    ! Calculate the derivative using fluc theory?
+  !read(10,*) flag_fluc    ! Calculate the derivative using fluc theory?
 
   ! Convert time step to atomic units
   dt = dt/fsperau

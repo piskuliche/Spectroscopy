@@ -20,7 +20,7 @@
     double precision :: d2, d3       ! x12 map parameters
     double precision :: a0, a1       ! alpha' map parameters
     double precision :: c15          ! ratio Raman para/perp
-    double precision :: T1 ! XXX CHECK XXX
+    double precision :: T1 ! Unconverted T1
     double precision :: T1rel, T1bydt   ! vib. relax. time, vib relax time in units of timesteps
     double precision :: z_c          ! center of slab
     

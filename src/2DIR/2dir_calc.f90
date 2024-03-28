@@ -3,7 +3,6 @@ PROGRAM IR2D_CALC
 USE map_data
 USE time_data
 USE freq_data
-USE fluc_data
 USE constants
 
 IMPLICIT NONE
