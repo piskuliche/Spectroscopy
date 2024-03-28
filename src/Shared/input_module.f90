@@ -36,7 +36,7 @@ CONTAINS
     c3 = c3/cmiperau; c4 = c4/cmiperau; c5 = c5/cmiperau
 
     ! Convert vib. relax time to atomic units
-    T1rel = T1rel/fsperau
+    T1rel = T1/fsperau
     
 
     ! Convert x01 paramters to atomic units
