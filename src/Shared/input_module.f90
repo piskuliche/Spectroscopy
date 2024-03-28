@@ -82,6 +82,12 @@ CONTAINS
         READ(10,*)
         READ(10,*) z_c ! center of slab. 
         READ(10,*) 
+          read(10,*) nTw          ! # of waiting times
+        IF(nTw.gt.20) THEN
+            WRITE(6,*) ' No more than 20 waiting times allowed'
+            STOP
+        ENDIF
+        READ(10,*)
         READ(10,*) (Tw(j), j = 1, nTw)  ! Waiting time list (fs)
 
         CLOSE(10)
