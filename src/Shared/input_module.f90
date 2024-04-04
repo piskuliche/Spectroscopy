@@ -103,6 +103,9 @@ CONTAINS
         ! Convert freq. resolution to a.u.
         w_resol = w_resol/cmiperau
 
+        ! Convert Tw to atomic units
+        Tw = Tw/fsperau
+
         ! Convert histogram parameters to a.u.
         w1min = w1min/cmiperau; w1max = w1max/cmiperau
         w3min = w3min/cmiperau; w3max = w3max/cmiperau
