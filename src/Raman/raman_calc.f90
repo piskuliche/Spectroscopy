@@ -37,7 +37,6 @@ PROGRAM Raman_Calc
     DO chunk=1, nchunks
         w01 = 0.0; mu = 0.0; eOH = 0.0
         DO iper=1, nperchunk
-            WRITE(*,*) iper
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
             CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:), a_para(iper,:,:), a_perp(iper,:,:))

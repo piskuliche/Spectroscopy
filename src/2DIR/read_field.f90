@@ -91,8 +91,6 @@ SUBROUTINE read_field(ioh, w01, w12, mu01, mu12, eOH)
 
         eoh(k,:) = eoh_tmp(k,:)
     END DO
-    WRITE(6,*) "**************"
-    WRITE(6,*) 'w01_avg tmp= ', w01_avg
 
 
 END SUBROUTINE read_field
