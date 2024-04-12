@@ -81,8 +81,8 @@ SUBROUTINE spec_calc(iTw, tcf_rp_tot, tcf_np_tot)
       DO j = 1, nt3/2 
          w_spec3 = fact3*DBLE(j-1)
          IF(w_spec1.ge.w1min.and.w_spec1.le.w1max.and.w_spec3.ge.w3min.and.w_spec3.le.w3max) THEN
-            WRITE(22,'(2F16.6,2F18.6)') w_spec1*cmiperau, w_spec3*cmiperau, dimag(spec_rp(k_rp,j) + spec_np(k,j))
-            WRITE(23,'(2F16.6,2F18.6)') w_spec1*cmiperau, w_spec3*cmiperau, dreal(spec_rp(k_rp,j) + spec_np(k,j))
+            WRITE(22,'(2F20.10,2F22.10)') w_spec1*cmiperau, w_spec3*cmiperau, dimag(spec_rp(k_rp,j) + spec_np(k,j))
+            WRITE(23,'(2F20.10,2F22.10)') w_spec1*cmiperau, w_spec3*cmiperau, dreal(spec_rp(k_rp,j) + spec_np(k,j))
          ENDIF
       ENDDO
    ENDDO
