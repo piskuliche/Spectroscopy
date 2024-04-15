@@ -1,0 +1,16 @@
+#w10 map (a b c)
+3740.54 -5031.45 -61489.36
+#w21 map (a b c)
+3582.92 -5354.98 -84421.17
+#dmu map (a b c)
+0.12 12.30 0.00
+#x10 map (a b)
+0.1021 -9.08e-06
+#x21 map (a b)
+0.1422 -1.26e-05
+#pol map (a b)
+1.34 4.25
+#ratio parallel to perpendicular
+5.6
+#Vibrational Lifetime (fs)
+700
