@@ -60,6 +60,9 @@ PROGRAM FFCF_CALC
 
     save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
 
+    write(*,*) 'Average w01 = ', save_w01_avg
+    w01_avg = 0.0
+
     DO chunk=1, nchunks
         w01 = 0.0
         DO iper=1, nperchunk
