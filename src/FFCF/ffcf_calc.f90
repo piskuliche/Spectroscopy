@@ -48,14 +48,17 @@ PROGRAM FFCF_CALC
     WRITE(*,*) "Test"
     ! Loop over all the chunks
     DO chunk=1, nchunks
+        WRITE(*,*) "Chunk: ", chunk
         w01 = 0.0
         DO iper=1, nperchunk
+            WRITE(*,*) "iper: ", iper
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
             CALL Read_Field(ioh, w01(iper,:))
         ENDDO
 
         DO ioh=(chunk-1)*nperchunk+1, MIN(chunk*nperchunk, noh)
+            WRITE(*,*) "ioh: ", ioh
             iper = ioh - (chunk-1)*nperchunk
             CALL FFCF_TCF_CALC(w01(iper,:))
             ffcf_tot = ffcf_tot + ffcf
