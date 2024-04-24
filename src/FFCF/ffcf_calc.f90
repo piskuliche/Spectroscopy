@@ -31,7 +31,8 @@ PROGRAM FFCF_CALC
     DOUBLE PRECISION :: ti
 
     ! ///////////////////////////////////////////////////////////////////
-
+    
+    WRITE(*,*) 'Calculating FFCF for the given parameters'
     ! Read Input Parameters
     CALL Read_Input
 
@@ -44,6 +45,7 @@ PROGRAM FFCF_CALC
 
     nchunks = CEILING(REAL(noh)/nperchunk)
 
+    WRITE(*,*) "Test"
     ! Loop over all the chunks
     DO chunk=1, nchunks
         w01 = 0.0
@@ -59,6 +61,8 @@ PROGRAM FFCF_CALC
             ffcf_tot = ffcf_tot + ffcf
         ENDDO
     ENDDO
+
+    WRITE(*,*) "Test"
 
     ! Normalize the FFCF
     ffcf_tot = ffcf_tot/DCMPLX(DFLOAT(noh),0d0)
