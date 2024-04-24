@@ -16,7 +16,7 @@ SUBROUTINE read_field(ioh, w01)
 
     INTEGER, INTENT(IN) :: ioh
     DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: w01
-    DOUBLE PRECISION, DIMENSION(ntimes,3), INTENT(OUT) :: eoh, mu
+    !DOUBLE PRECISION, DIMENSION(ntimes,3), INTENT(OUT) :: eoh, mu
 
     INTEGER :: j, k
     REAL, DIMENSION(ntimes) :: etmp, z0_tmp
@@ -51,17 +51,6 @@ SUBROUTINE read_field(ioh, w01)
     CALL h5dopen_f(file_id, dataset_name, dataset_id, ERROR_FLAG)
     ! Read the dataset
     CALL h5dread_f(dataset_id, H5T_NATIVE_REAL, etmp, dot_dims, ERROR_FLAG)
-    ! Close the dataset
-    CALL h5dclose_f(dataset_id, ERROR_FLAG)
-
-    ! Read the value of the unit vector eoh_tmp ***
-    ! Set dataset name
-    WRITE(dataset_name, '(A, I0)') 'eoh_', ioh
-
-    ! Open the existing dataset
-    CALL h5dopen_f(file_id, dataset_name, dataset_id, ERROR_FLAG)
-    ! Read the dataset
-    CALL h5dread_f(dataset_id, H5T_NATIVE_REAL, eoh_tmp, eoh_dims, ERROR_FLAG)
     ! Close the dataset
     CALL h5dclose_f(dataset_id, ERROR_FLAG)
 
