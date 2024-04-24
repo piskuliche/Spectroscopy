@@ -25,7 +25,7 @@ PROGRAM FFCF_CALC
 
     ! Variables for Data Storage
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
-    DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: ffcf, ffcf_tot
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: ffcf, ffcf_tot
 
     ! Other Variables
     DOUBLE PRECISION :: ti
