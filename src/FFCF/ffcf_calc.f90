@@ -60,7 +60,7 @@ PROGRAM FFCF_CALC
         DO ioh=(chunk-1)*nperchunk+1, MIN(chunk*nperchunk, noh)
             WRITE(*,*) "ioh: ", ioh
             iper = ioh - (chunk-1)*nperchunk
-            CALL FFCF_TCF_CALC(w01(iper,:))
+            CALL FFCF_TCF_CALC(w01(iper,:), ffcf)
             ffcf_tot = ffcf_tot + ffcf
         ENDDO
     ENDDO
