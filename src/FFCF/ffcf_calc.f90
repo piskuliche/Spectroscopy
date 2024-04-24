@@ -69,7 +69,7 @@ PROGRAM FFCF_CALC
     WRITE(*,*) "Test"
 
     ! Normalize the FFCF
-    ffcf_tot = ffcf_tot/DCMPLX(DFLOAT(noh),0d0)
+    ffcf_tot = ffcf_tot/DFLOAT(noh)
     w01_avg = w01_avg/DFLOAT(noh*ntimes)
 
     ! Write the FFCF to a file
