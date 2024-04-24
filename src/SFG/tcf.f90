@@ -4,15 +4,18 @@ SUBROUTINE Calc_TCF(w, mu, a_ij, z0, tcf)
 
     IMPLICIT NONE
 
-    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: w
-    DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: mu
-    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: a_ij
-    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: z0
-    DOUBLE COMPLEX,   DIMENSION(0:ncorr),    INTENT(OUT) :: tcf
+    ! Arguments
+    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: w     ! The frequency
+    DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: mu    ! The dipole moment
+    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: a_ij  ! The polarizability
+    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: z0    ! The z position
+    DOUBLE COMPLEX,   DIMENSION(0:ncorr),   INTENT(OUT) :: tcf  ! the Time Correlation Function
 
+    ! Loop Counters
     INTEGER :: ilag
     INTEGER :: k, m
 
+    ! Local Variables
     DOUBLE PRECISION :: count, dp, phase
     DOUBLE PRECISION :: a_ij0
 
