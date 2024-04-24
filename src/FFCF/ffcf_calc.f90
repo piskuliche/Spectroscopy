@@ -26,6 +26,7 @@ PROGRAM FFCF_CALC
     ! Variables for Data Storage
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: ffcf, ffcf_tot
+    DOUBLE PRECISION :: save_w01_avg
 
     ! Other Variables
     DOUBLE PRECISION :: ti
@@ -45,32 +46,36 @@ PROGRAM FFCF_CALC
 
     nchunks = CEILING(REAL(noh)/nperchunk)
 
-    WRITE(*,*) "Test"
     ! Loop over all the chunks
     DO chunk=1, nchunks
-        WRITE(*,*) "Chunk: ", chunk
         w01 = 0.0
         DO iper=1, nperchunk
-            WRITE(*,*) "iper: ", iper
+            ioh = (chunk-1)*nperchunk + iper
+            IF (ioh > noh) EXIT
+            CALL Read_Field(ioh, w01(iper,:))
+        ENDDO
+    ENDDO
+
+    ! Get the average of the w01 frequency
+
+    save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
+
+    DO chunk=1, nchunks
+        w01 = 0.0
+        DO iper=1, nperchunk
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
             CALL Read_Field(ioh, w01(iper,:))
         ENDDO
 
         DO ioh=(chunk-1)*nperchunk+1, MIN(chunk*nperchunk, noh)
-            WRITE(*,*) "ioh: ", ioh
             iper = ioh - (chunk-1)*nperchunk
-            WRITE(*,*) "iper: ", iper
-            CALL FFCF_TCF_CALC(w01(iper,:), ffcf(:))
+            CALL FFCF_TCF_CALC(w01(iper,:)-save_w01_avg, ffcf(:))
             ffcf_tot = ffcf_tot + ffcf(:)
         ENDDO
     ENDDO
 
-    WRITE(*,*) "Test"
-
-    ! Normalize the FFCF
     ffcf_tot = ffcf_tot/DFLOAT(noh)
-    w01_avg = w01_avg/DFLOAT(noh*ntimes)
 
     ! Write the FFCF to a file
     OPEN(21, file='ffcf.dat')
