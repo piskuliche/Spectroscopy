@@ -1,4 +1,4 @@
-SUBROUTINE read_field(ioh, w01, mu, eOH)
+SUBROUTINE read_field(ioh, w01)
 ! This subroutine reads the field files and calculates various calculated quantities
 !   including the ss, sp, and pp components of the polarizability. 
 ! 
