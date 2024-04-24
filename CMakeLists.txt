@@ -5,7 +5,7 @@ find_package(HDF5 REQUIRED COMPONENTS Fortran)
 
 message(STATUS ${HDF5_Fortran_INCLUDE_DIRS})
 
-set(CMAKE_Fortran_FLAGS "-O3")
+set(CMAKE_Fortran_FLAGS "-O3 -fbounds-check")
 
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/modules)
 
