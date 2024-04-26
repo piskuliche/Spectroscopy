@@ -76,7 +76,7 @@ PROGRAM FFCF_CALC
                 ioh = (chunk-1)*nperchunk + iper
                 IF (ioh > noh) EXIT
                 CALL Read_Field_File(ioh, efield(iper,:), eOH(iper,:,:), z0(iper,:))
-                CALL Get_Frequencies(efield(iper,:), eOH(iper,:,:), w01(iper,:), w12(iper,:))
+                CALL Get_Frequencies(efield(:), eOH(iper,:,:), w01(iper,:), w12(iper,:))
             ENDDO
         ENDDO
         save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
@@ -92,7 +92,7 @@ PROGRAM FFCF_CALC
             IF (ioh > noh) EXIT
             !CALL Read_Field(ioh, w01(iper,:))
             CALL Read_Field_File(ioh, efield(iper,:), eOH(iper,:,:), z0(iper,:))
-            CALL Get_Frequencies(efield(iper,:), eOH(iper,:,:), w01(iper,:), w12(iper,:))
+            CALL Get_Frequencies(efield(:), eOH(iper,:,:), w01(iper,:), w12(iper,:))
         ENDDO
 
         DO ioh=(chunk-1)*nperchunk+1, MIN(chunk*nperchunk, noh)
