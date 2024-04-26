@@ -91,76 +91,134 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
         
 END SUBROUTINE Read_Field_File
 
-SUBROUTINE Get_Frequencies(efield, w01, w12)
+
+
+SUBROUTINE Get_w01(efield, w01)
     USE freq_data
     USE time_data
     USE map_data
     IMPLICIT NONE
     DOUBLE PRECISION, DIMENSION(ntimes), INTENT(IN) :: efield
-    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: w01, w12
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: w01
 
     INTEGER :: k
     DO k=1, ntimes
         w01(k) = c0 + c1*efield(k) + c2*efield(k)**2
         w01_avg = w01_avg + w01(k)
         w01_sq_avg = w01_sq_avg + w01(k)**2
+    ENDDO
+END SUBROUTINE Get_w01
 
+SUBROUTINE Get_w12(efield, w12)
+    USE freq_data
+    USE time_data
+    USE map_data
+    IMPLICIT NONE
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(IN) :: efield
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: w12
+
+    INTEGER :: k
+
+    DO k=1, ntimes
         ! ** 21 Transition Frequencies ***
         w12(k) = c3 + c4*efield(k) + c5*efield(k)**2     
         w12_avg = w12_avg + w12(k)
         w12_sq_avg = w12_sq_avg + w12(k)**2
     ENDDO
-END SUBROUTINE Get_Frequencies
+END SUBROUTINE Get_w12
 
-SUBROUTINE Get_Transition_Dipole_Prime(efield, w01, w12, mu01prime, mu12prime)
+SUBROUTINE Get_mu01_Prime(efield, w01, mu01prime)
     USE freq_data
     USE time_data
     USE map_data
     IMPLICIT NONE
-    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(IN) :: efield, w01, w12
-    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: mu01prime, mu12prime
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(IN) :: efield, w01
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: mu01prime
 
     ! Loop Variables
     INTEGER :: k
 
     ! Temporary Variables
-    DOUBLE PRECISION :: x01tmp, x12tmp
+    DOUBLE PRECISION :: x01tmp
     DOUBLE PRECISION :: muprime
 
     DO k=1, ntimes
         ! *** Position Matrix Elements ***
         x01tmp = d0 + d1*w01(k)
-        x12tmp = d2 + d3*w12(k)
 
         ! *** Transition Dipole Matrix Elements ***
         muprime = b0 + b1*efield(k) + b2*efield(k)**2
         mu01prime(k) = muprime*x01tmp
-        mu12prime(k) = muprime*x12tmp
     ENDDO
-END SUBROUTINE Get_Transition_Dipole_Prime
+END SUBROUTINE Get_mu01_Prime
 
-
-SUBROUTINE Get_Transition_Dipole(efield, w01, w12, eOH, mu01, mu12)
+SUBROUTINE Get_mu12_Prime(efield, w12, mu12prime)
     USE freq_data
     USE time_data
     USE map_data
     IMPLICIT NONE
-    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: efield, w01, w12
-    DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: eOH
-    DOUBLE PRECISION, DIMENSION(ntimes, 3), INTENT(OUT) :: mu01, mu12
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(IN) :: efield, w12
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: mu12prime
 
-    DOUBLE PRECISION, DIMENSION(ntimes) :: mu01prime, mu12prime
+    ! Loop Variables
+    INTEGER :: k
+
+    ! Temporary Variables
+    DOUBLE PRECISION :: x12tmp
+    DOUBLE PRECISION :: muprime
+
+    DO k=1, ntimes
+        ! *** Position Matrix Elements ***
+        x12tmp = d2 + d3*w12(k)
+
+        ! *** Transition Dipole Matrix Elements ***
+        muprime = b0 + b1*efield(k) + b2*efield(k)**2
+        mu12prime(k) = muprime*x12tmp
+    ENDDO
+END SUBROUTINE Get_mu12_Prime
+
+
+SUBROUTINE Get_01_Dipole(efield, w01, eOH, mu01)
+    USE freq_data
+    USE time_data
+    USE map_data
+    IMPLICIT NONE
+    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: efield, w01
+    DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: eOH
+    DOUBLE PRECISION, DIMENSION(ntimes, 3), INTENT(OUT) :: mu01
+
+    DOUBLE PRECISION, DIMENSION(ntimes) :: mu01prime
 
     ! Loop Variables
     INTEGER :: k
 
     mu01 = 0.0; mu12 = 0.0
-    CALL Get_Transition_Dipole_Prime(efield, w01, w12, mu01prime, mu12prime)
+    CALL Get_mu01_Prime(efield, w01, mu01prime)
     DO k=1, ntimes
         mu01(k,:) = mu01prime(k)*eOH(k,:)
+    ENDDO
+END SUBROUTINE Get_01_Dipole
+
+SUBROUTINE Get_12_Dipole(efield, w12, eOH, mu12)
+    USE freq_data
+    USE time_data
+    USE map_data
+    IMPLICIT NONE
+    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: efield,  w12
+    DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: eOH
+    DOUBLE PRECISION, DIMENSION(ntimes, 3), INTENT(OUT) ::  mu12
+
+    DOUBLE PRECISION, DIMENSION(ntimes) :: mu12prime
+
+    ! Loop Variables
+    INTEGER :: k
+
+    mu01 = 0.0; mu12 = 0.0
+    CALL Get_mu12_Prime(efield, w12, mu12prime)
+    DO k=1, ntimes
         mu12(k,:) = mu12prime(k)*eOH(k,:)
     ENDDO
-END SUBROUTINE Get_Transition_Dipole
+END SUBROUTINE Get_12_Dipole
 
 SUBROUTINE Get_Transition_Pol_Para_Perp(efield, w01, w12, eOH, a_para, a_perp)
     USE freq_data

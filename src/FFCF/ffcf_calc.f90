@@ -29,7 +29,7 @@ PROGRAM FFCF_CALC
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:)   :: z0
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: eOH
 
-    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01, w12
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: ffcf, ffcf_tot
     DOUBLE PRECISION :: save_w01_avg
 
@@ -57,7 +57,7 @@ PROGRAM FFCF_CALC
     ENDIF 
 
     ! Allocate Memory
-    ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(w12(nperchunk,ntimes))
+    ALLOCATE(w01(nperchunk,ntimes))
     ALLOCATE(efield(ntimes)); ALLOCATE(eOH(nperchunk,ntimes,3))
     ALLOCATE(z0(nperchunk,ntimes))
     ALLOCATE(ffcf(0:ncorr)); ALLOCATE(ffcf_tot(0:ncorr))
@@ -71,12 +71,12 @@ PROGRAM FFCF_CALC
     IF (.NOT. cli_freq) THEN
         ! Loop over all the chunks
         DO chunk=1, nchunks
-            w01 = 0.0; w12 = 0.0
+            w01 = 0.0
             DO iper=1, nperchunk
                 ioh = (chunk-1)*nperchunk + iper
                 IF (ioh > noh) EXIT
                 CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
-                CALL Get_Frequencies(efield(:),  w01(iper,:), w12(iper,:))
+                CALL Get_w01(efield(:),  w01(iper,:))
             ENDDO
         ENDDO
         save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
@@ -90,7 +90,6 @@ PROGRAM FFCF_CALC
         DO iper=1, nperchunk
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
-            !CALL Read_Field(ioh, w01(iper,:))
             CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
             CALL Get_Frequencies(efield(:),  w01(iper,:), w12(iper,:))
         ENDDO

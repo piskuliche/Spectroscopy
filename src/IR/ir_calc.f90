@@ -22,7 +22,7 @@ PROGRAM IR_CALC
     INTEGER :: chunk, iper, ioh, nchunks
 
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
-    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu, eOH
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu01, eOH
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: w01_dist, spec_dist, wd_tot, sd_tot
 
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
@@ -38,8 +38,11 @@ PROGRAM IR_CALC
 
     CALL Apply_CLI_Args
 
-    ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
+    ALLOCATE(w01(nperchunk,ntimes))
+    ALLOCATE(mu01(nperchunk,ntimes,3))
     ALLOCATE(eOH(nperchunk,ntimes,3))
+    ALLOCATE(z0(nperchunk,ntimes))
+    ALLOCATE(efield(ntimes))
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
 
@@ -58,21 +61,23 @@ PROGRAM IR_CALC
 ! *********************************************************************
 
     DO chunk=1, nchunks
-        w01 = 0.0; mu = 0.0; eOH = 0.0
+        w01 = 0.0; w12 = 0.0; mu01 = 0.0; mu12 = 0.0; eOH = 0.0
         DO iper=1, nperchunk
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
-            CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:))
+            CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
+            CALL Get_w01(efield(:),  w01(iper,:))
+            CALL Get_01_Dipole(efield(:), w01(iper,:),  eOH(iper,:,:), mu01(iper,:,:))
         END DO
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
                 iper = ioh - (chunk-1)*nperchunk
                 ! Calculate the Spectral Density and Histogram
-                CALL Hist_Calc(w01(iper,:), mu(iper,:,:), w01_dist(:), spec_dist(:))
+                CALL Hist_Calc(w01(iper,:), mu01(iper,:,:), w01_dist(:), spec_dist(:))
                 wd_tot = wd_tot + w01_dist
                 sd_tot = sd_tot + spec_dist
                 ! Calculate the TCFS
-                CALL Calc_TCF(w01(iper,:), mu(iper,:,:), tcf(:))
+                CALL Calc_TCF(w01(iper,:), mu01(iper,:,:), tcf(:))
                 tcf_tot = tcf_tot + tcf
         ENDDO !
     END DO
@@ -94,6 +99,6 @@ PROGRAM IR_CALC
 ! *********************************************************************
 
     DEALLOCATE(w01)
-    DEALLOCATE(mu)
+    DEALLOCATE(mu01)
 
 END PROGRAM IR_CALC
