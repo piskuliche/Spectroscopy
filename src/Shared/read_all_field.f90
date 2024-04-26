@@ -270,7 +270,7 @@ SUBROUTINE Get_Transtion_Pol_Polarizations(efield, w01, w12, eOH, a_ss, a_sp, a_
     DO k=1, ntimes
         x01tmp = d0 + d1*w01(k)
 
-        CALL Get_Transition_Pol_Para_Perp(efield, w01, w12, eOH, a_para, a_perp)
+        CALL Get_Transition_Pol_Para_Perp(efield, w01, eOH, a_para, a_perp)
         axx = a_para(k,1); ayy = a_para(k,2); azz = a_para(k,3)
         axy = a_perp(k,1); ayz = a_perp(k,2); azx = a_perp(k,3)
 
