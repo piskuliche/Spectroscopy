@@ -53,3 +53,11 @@
     
   end module constants
 
+  MODULE cli_data
+    IMPLICIT NONE
+    INTEGER :: ncorr_cli, nskip_cli
+    CHARACTER(len=100) :: input_file_cli, map_file_cli, tag_output_cli
+    REAL :: avfreq_cli, zmin_cli, zmax_cli
+    LOGICAL :: flag_z_range
+  END MODULE cli_data
+

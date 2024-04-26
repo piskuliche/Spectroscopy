@@ -13,7 +13,7 @@ PROGRAM FFCF_CALC
     USE constants
     USE freq_data
     USE input_module
-
+    USE CLI
     IMPLICIT NONE
 
     ! Parameters
@@ -35,6 +35,8 @@ PROGRAM FFCF_CALC
     ! ///////////////////////////////////////////////////////////////////
     
     file_exists = .False.
+
+    CALL Read_CLI_Arguments
 
     WRITE(*,*) 'Calculating FFCF for the given parameters'
     ! Read Input Parameters
