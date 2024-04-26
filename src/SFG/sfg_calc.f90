@@ -23,6 +23,7 @@ PROGRAM SFG_CALC
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu, eOH
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
 
+    CALL Read_CLI_Arguments
 
 ! *********************************************************************
 ! I.  Read The Input File, and set the data for the calculations.

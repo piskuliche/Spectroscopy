@@ -21,6 +21,8 @@ DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: eOH
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_rp, tcf_rp_tot
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_np, tcf_np_tot
 
+CALL Read_CLI_Arguments
+
 ! *********************************************************************
 ! I.  Read The Input File, and set the data for the calculations.
 !     Also allocate the relevant variables.

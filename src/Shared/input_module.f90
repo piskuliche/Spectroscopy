@@ -9,11 +9,12 @@ CONTAINS
 
     USE map_data
     USE constants
+    USE cli_data
 
 
     IMPLICIT NONE
 
-    OPEN(10, file='empirical_map.in')
+    OPEN(10, file=map_file_cli, status='old')
     READ(10,*) 
     READ(10,*) c0, c1, c2 ! w10 = c0 + c1*E + c2*E^2
     READ(10,*)
@@ -63,11 +64,12 @@ CONTAINS
         USE map_data
         USE hist_data
         USE constants
+        USE cli_data
 
         IMPLICIT NONE
         INTEGER :: j
 
-        OPEN(10, file='spectra.in', status='old')
+        OPEN(10, file=input_file_cli, status='old')
 
         READ(10,*)
         READ(10,*) noh, ndigits ! # OH groups, # of digits in field file extensions

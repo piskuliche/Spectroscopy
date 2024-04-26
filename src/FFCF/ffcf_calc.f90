@@ -13,6 +13,7 @@ PROGRAM FFCF_CALC
     USE constants
     USE freq_data
     USE input_module
+    USE cli_data
     USE CLI
     IMPLICIT NONE
 
@@ -30,7 +31,7 @@ PROGRAM FFCF_CALC
 
     ! Other Variables
     DOUBLE PRECISION :: ti
-    LOGICAL :: file_exists
+    LOGICAL :: cli_freq
 
     ! ///////////////////////////////////////////////////////////////////
     
@@ -42,15 +43,17 @@ PROGRAM FFCF_CALC
     ! Read Input Parameters
     CALL Read_Input
 
-    INQUIRE(FILE='ffcf.in', EXIST=file_exists)
-    IF (file_exists) THEN
-        OPEN(9, file='ffcf.in', status='old', action='read')
-        READ(9,*) 
-        READ(9,*) ncorr
-        READ(9,*)
-        READ(9,*) save_w01_avg
-        CLOSE(9)
-    ENDIF
+    ! Check if frequency was read from the command line
+    IF (avfreq_cli == -1) THEN
+        cli_freq = .FALSE.
+        IF (flag_z_range) THEN
+            WRITE(*,*) 'Must provide frequency when using z-range'
+            STOP
+        ENDIF
+    ELSE
+        cli_freq = .TRUE.
+        save_w01_avg = avfreq_cli
+    ENDIF 
 
     ! Allocate Memory
     ALLOCATE(w01(nperchunk,ntimes))
@@ -62,7 +65,7 @@ PROGRAM FFCF_CALC
     nchunks = CEILING(REAL(noh)/nperchunk)
     
 
-    IF (.NOT. file_exists) THEN
+    IF (.NOT. cli_freq) THEN
         ! Loop over all the chunks
         DO chunk=1, nchunks
             w01 = 0.0

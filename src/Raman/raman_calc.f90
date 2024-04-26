@@ -13,6 +13,9 @@ PROGRAM Raman_Calc
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu, eOH, a_para, a_perp
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, vv_tcf_tot, vh_tcf_tot
+
+    CALL Read_CLI_Arguments
+
 ! *********************************************************************
 ! I.  Read The Input File, and set the data for the calculations.
 !     Also ALLOCATE the relevant variables.

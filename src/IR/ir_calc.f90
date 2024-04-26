@@ -26,6 +26,8 @@ PROGRAM IR_CALC
 
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
 
+    CALL Read_CLI_Arguments
+    
 ! *********************************************************************
 ! I.  Read The Input File, and set the data for the calculations.
 !     Also allocate the relevant variables.
