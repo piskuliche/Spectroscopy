@@ -27,32 +27,32 @@ MODULE CLI
 
         DO i = 1, num_args
             CALL GET_COMMAND_ARGUMENT(i, arg)
-            SELECT CASE
-                CASE (arg == "-h" .OR. arg == "--help")
+            SELECT CASE (arg)
+                CASE ("-h")
                     CALL Print_Help
-                CASE (arg == "-ncorr")
+                CASE ("-ncorr")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) ncorr_cli 
-                CASE (arg == "-nskip")
+                CASE ("-nskip")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) nskip_cli
-                CASE (arg == "-in")
+                CASE ("-in")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) input_file_cli
-                CASE (arg == "-map")
+                CASE ("-map")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) map_file_cli
-                CASE (arg == "-tag")
+                CASE ("-tag")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) tag_output_cli
-                CASE (arg == "-avfreq")
+                CASE ("-avfreq")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) avfreq_cli
-                CASE (arg == "-zmin")
+                CASE ("-zmin")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) zmin_cli
                     flag_z_range = .TRUE.
-                CASE (arg == "-zmax")
+                CASE ("-zmax")
                     CALL GET_COMMAND_ARGUMENT(i+1, arg)
                     READ(arg, *) zmax_cli
                     flag_z_range = .TRUE.
