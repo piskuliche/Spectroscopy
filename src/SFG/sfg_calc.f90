@@ -58,7 +58,6 @@ PROGRAM SFG_CALC
 
         w01 = 0.0; mu01 = 0.0; eOH = 0.0; efield = 0.0
         DO iper=1, nperchunk
-            WRITE(*,*) iper
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
             CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
