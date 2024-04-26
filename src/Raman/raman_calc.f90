@@ -52,14 +52,10 @@ PROGRAM Raman_Calc
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
             CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
-            WRITE(*,*) 'READ'
             CALL Get_w01(efield(:),  w01(iper,:))
-            WRITE(*,*) 'READ1'
             CALL Get_01_Dipole(efield(:), w01(iper,:),  eOH(iper,:,:), mu01(iper,:,:))
-            WRITE(*,*) 'READ2'
             CALL Get_Transition_Pol_Para_Perp(efield(:), w01(iper,:), eOH(iper,:,:), &
                                     & a_para(iper,:,:), a_perp(iper,:,:))
-            WRITE(*,*) 'READ3'
         END DO
 
         WRITE(*,*) w01(1,1), mu01(1,1,1)
