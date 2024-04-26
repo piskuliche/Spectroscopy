@@ -38,6 +38,16 @@ PROGRAM FFCF_CALC
     ! Read Input Parameters
     CALL Read_Input
 
+    INQUIRE(FILE='ffcf.in', EXIST=file_exists)
+    IF (file_exists) THEN
+        OPEN(9, file='ffcf.in', staus='old', action='read')
+        READ(9,*) 
+        READ(9,*) ncorr
+        READ(9,*)
+        READ(9,*) save_w01_avg
+        CLOSE(9)
+    ENDIF
+
     ! Allocate Memory
     ALLOCATE(w01(nperchunk,ntimes))
     ALLOCATE(ffcf(0:ncorr)); ALLOCATE(ffcf_tot(0:ncorr))
@@ -46,13 +56,8 @@ PROGRAM FFCF_CALC
     ffcf = 0.0d0; ffcf_tot = 0.0d0
 
     nchunks = CEILING(REAL(noh)/nperchunk)
-    INQUIRE(FILE='ffcf.in', EXIST=file_exists)
-    IF (file_exists) THEN
-        OPEN(9, file='ffcf.in', staus='old', action='read')
-        READ(9,*) 
-        READ(9,*) save_w01_avg
-        CLOSE(9)
-    ELSE
+
+    IF (.NOT. file_exists) THEN
         ! Loop over all the chunks
         DO chunk=1, nchunks
             w01 = 0.0
