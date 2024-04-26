@@ -22,7 +22,8 @@ PROGRAM SFG_CALC
 
     DOUBLE PRECISION :: ta, tb, tstart, tend, read_time, tcf_time
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01, z0, a_ss, a_sp, a_pp
-    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu, eOH
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu01, eOH
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: efield
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
 
     CALL Read_CLI_Arguments
@@ -35,9 +36,11 @@ PROGRAM SFG_CALC
 
     CALL Apply_CLI_Args
 
-    ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
+    ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu01(nperchunk,ntimes,3))
     ALLOCATE(eOH(nperchunk,ntimes,3))
     ALLOCATE(z0(nperchunk,ntimes))
+    ALLOCATE(efield(ntimes))
+    
     ALLOCATE(a_ss(nperchunk, ntimes))
     ALLOCATE(a_sp(nperchunk, ntimes))
     ALLOCATE(a_pp(nperchunk, ntimes))
@@ -53,19 +56,22 @@ PROGRAM SFG_CALC
 ! *********************************************************************
     DO chunk=1, nchunks
 
-        w01 = 0.0; mu = 0.0; eOH = 0.0
+        w01 = 0.0; mu01 = 0.0; eOH = 0.0; efield = 0.0
         DO iper=1, nperchunk
             WRITE(*,*) iper
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
-            CALL Read_Field(ioh, w01(iper,:), mu(iper,:,:), eOH(iper,:,:), &
-                         a_ss(iper,:), a_sp(iper,:), a_pp(iper,:), z0(iper,:))
+            CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
+            CALL Get_w01(efield(:),  w01(iper,:))
+            CALL Get_01_Dipole(efield(:), w01(iper,:),  eOH(iper,:,:), mu01(iper,:,:))
+            CALL Get_Transtion_Pol_Polarizations(efield(:), w01(iper,:), eOH(iper,:,:),&
+                                                a_ss(iper,:), a_sp(iper,:), a_pp(iper,:))
         END DO 
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
             iper = ioh - (chunk-1)*nperchunk
             ! Some sort of histogramming?
-            CALL Calc_TCF(w01(iper,:), mu(iper,:,:), a_ss(iper,:), z0(iper,:), tcf(:))
+            CALL Calc_TCF(w01(iper,:), mu01(iper,:,:), a_ss(iper,:), z0(iper,:), tcf(:))
             tcf_tot = tcf_tot + tcf
 
         ENDDO ! io
@@ -88,7 +94,7 @@ PROGRAM SFG_CALC
 ! *********************************************************************
 
     DEALLOCATE(w01)
-    DEALLOCATE(mu)
+    DEALLOCATE(mu01)
     DEALLOCATE(z0)
     DEALLOCATE(a_ss); DEALLOCATE(a_sp); DEALLOCATE(a_pp)
 
