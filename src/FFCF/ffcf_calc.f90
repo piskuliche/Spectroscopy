@@ -91,7 +91,7 @@ PROGRAM FFCF_CALC
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
             CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
-            CALL Get_Frequencies(efield(:),  w01(iper,:), w12(iper,:))
+            CALL Get_w01(efield(:),  w01(iper,:))
         ENDDO
 
         DO ioh=(chunk-1)*nperchunk+1, MIN(chunk*nperchunk, noh)
