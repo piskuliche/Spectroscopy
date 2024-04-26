@@ -192,7 +192,7 @@ SUBROUTINE Get_01_Dipole(efield, w01, eOH, mu01)
     ! Loop Variables
     INTEGER :: k
 
-    mu01 = 0.0; mu12 = 0.0
+    mu01 = 0.0
     CALL Get_mu01_Prime(efield, w01, mu01prime)
     DO k=1, ntimes
         mu01(k,:) = mu01prime(k)*eOH(k,:)
@@ -213,7 +213,7 @@ SUBROUTINE Get_12_Dipole(efield, w12, eOH, mu12)
     ! Loop Variables
     INTEGER :: k
 
-    mu01 = 0.0; mu12 = 0.0
+    mu12 = 0.0
     CALL Get_mu12_Prime(efield, w12, mu12prime)
     DO k=1, ntimes
         mu12(k,:) = mu12prime(k)*eOH(k,:)
