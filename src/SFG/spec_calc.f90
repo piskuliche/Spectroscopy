@@ -13,6 +13,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     USE freq_data
     USE hist_data
     USE constants
+    USE cli_data
 
     IMPLICIT NONE
     INCLUDE '../Shared/fftw3.f'
@@ -37,7 +38,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ENDDO 
 
     ! II. Write out the total tcf
-    OPEN(21, file='sfg_tcf.dat')
+    OPEN(21, file=trim(tag_output_cli)//'sfg_tcf.dat')
     DO i=0, ncorr
         WRITE(21,*) float(i)*dt*fsperau, REAL(tcf_tot(i)), AIMAG(tcf_tot(i))
     ENDDO
@@ -62,7 +63,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     
     CALL dfftw_execute(plan)
     
-    OPEN(22,file='sfg_spectrum.dat')
+    OPEN(22,file=trim(tag_output_cli)//'sfg_spectrum.dat')
     ! IV. Write out the spectrum
     DO i=1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1)/dfloat(nt)

@@ -14,6 +14,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     USE constants
     USE map_data
     USE freq_data
+    USE cli_data
 
     IMPLICIT NONE
     INCLUDE '../Shared/fftw3.f'
@@ -77,7 +78,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     ! ... Write out the VV Raman Spectrum
     ! Raman Spectra is split in the middle because the average frequency
     ! has been subtracted from the phase.
-    OPEN(23, file='vv_spectrum.dat')
+    OPEN(23, file=trim(tag_output_cli)//'vv_spectrum.dat')
     DO i=nt/2 + 1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt) + w01_avg
         WRITE(23,*) w_spec*cmiperau, DREAL(vv_spec(i))
@@ -105,7 +106,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     ! ... Write out the VH Raman Spectrum
     ! Raman Spectra is split in the middle because the average frequency
     ! has been subtracted from the phase.
-    OPEN(24, file='vh_spectrum.dat')
+    OPEN(24, file=trim(tag_output_cli)//'vh_spectrum.dat')
     DO i=nt/2 + 1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt) + w01_avg
         WRITE(24,*) w_spec*cmiperau, DREAL(vh_spec(i))
@@ -120,7 +121,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     CALL dfftw_destroy_plan(plan)
 
     ! IV. Depolarized Spectrum
-    OPEN(25, file='depol_spectrum.dat')
+    OPEN(25, file=trim(tag_output_cli)//'depol_spectrum.dat')
     DO i=nt/2 + 1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt) + w01_avg
         WRITE(25,*) w_spec*cmiperau, DREAL(10d0*vh_spec(i))
@@ -132,7 +133,7 @@ SUBROUTINE Spec_Calc(vv_tcf_tot, vh_tcf_tot)
     CLOSE(25)
 
     ! V. Isotropic Spectrum
-    OPEN(26, file='iso_spectrum.dat')
+    OPEN(26, file=trim(tag_output_cli)//'iso_spectrum.dat')
     DO i=nt/2 + 1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt) + w01_avg
         WRITE(26,*) w_spec*cmiperau, DREAL(vv_spec(i) - 4d0/3d0*vh_spec(i))

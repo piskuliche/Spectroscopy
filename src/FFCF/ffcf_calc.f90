@@ -104,7 +104,7 @@ PROGRAM FFCF_CALC
     ffcf_tot = ffcf_tot/DFLOAT(noh)
 
     ! Write the FFCF to a file
-    OPEN(21, file='ffcf.dat')
+    OPEN(21, file=trim(tag_output_cli)//'ffcf.dat')
     DO i=0, ncorr
         ti = float(i)*dt*fsperau
         WRITE(21,*) ti, ffcf_tot(i)

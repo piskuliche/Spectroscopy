@@ -5,6 +5,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     USE hist_data
     USE freq_data
     USE constants
+    USE cli_data
 
     IMPLICIT NONE
     INCLUDE '../Shared/fftw3.f'
@@ -29,7 +30,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     END DO
 
     ! II. Write out the total TCF
-    OPEN(21, file='ir_tcf.dat')
+    OPEN(21, file=trim(tag_output_cli)//'ir_tcf.dat')
     DO i = 0, ncorr
         ti = float(i)*dt*fsperau
         WRITE(21,*) ti, REAL(tcf_tot(i)), AIMAG(tcf_tot(i))
@@ -58,7 +59,7 @@ SUBROUTINE Spec_Calc(tcf_tot)
     ! IV. Write out the IR spectra
     ! IR Spectra is split in the middle because the average frequency
     ! has been subtracted from the phase.
-    OPEN(22, file='ir_spectrum.dat')
+    OPEN(22, file=trim(tag_output_cli)//'ir_spectrum.dat')
     DO i=nt/2 + 1, nt
         w_spec = (2d0*pi/dt)*dfloat(i-1-nt)/dfloat(nt)
         WRITE(22,*) w_spec*cmiperau, DREAL(ir_spectra(i))
