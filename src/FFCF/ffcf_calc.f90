@@ -35,14 +35,14 @@ PROGRAM FFCF_CALC
     ! ///////////////////////////////////////////////////////////////////
     
     file_exists = .False.
-    
+
     WRITE(*,*) 'Calculating FFCF for the given parameters'
     ! Read Input Parameters
     CALL Read_Input
 
     INQUIRE(FILE='ffcf.in', EXIST=file_exists)
     IF (file_exists) THEN
-        OPEN(9, file='ffcf.in', staus='old', action='read')
+        OPEN(9, file='ffcf.in', status='old', action='read')
         READ(9,*) 
         READ(9,*) ncorr
         READ(9,*)
