@@ -34,6 +34,8 @@ PROGRAM FFCF_CALC
 
     ! ///////////////////////////////////////////////////////////////////
     
+    file_exists = .False.
+    
     WRITE(*,*) 'Calculating FFCF for the given parameters'
     ! Read Input Parameters
     CALL Read_Input
@@ -56,6 +58,7 @@ PROGRAM FFCF_CALC
     ffcf = 0.0d0; ffcf_tot = 0.0d0
 
     nchunks = CEILING(REAL(noh)/nperchunk)
+    
 
     IF (.NOT. file_exists) THEN
         ! Loop over all the chunks
