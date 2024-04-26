@@ -30,6 +30,7 @@ PROGRAM FFCF_CALC
 
     ! Other Variables
     DOUBLE PRECISION :: ti
+    LOGICAL :: file_exists
 
     ! ///////////////////////////////////////////////////////////////////
     
@@ -45,20 +46,24 @@ PROGRAM FFCF_CALC
     ffcf = 0.0d0; ffcf_tot = 0.0d0
 
     nchunks = CEILING(REAL(noh)/nperchunk)
-
-    ! Loop over all the chunks
-    DO chunk=1, nchunks
-        w01 = 0.0
-        DO iper=1, nperchunk
-            ioh = (chunk-1)*nperchunk + iper
-            IF (ioh > noh) EXIT
-            CALL Read_Field(ioh, w01(iper,:))
+    INQUIRE(FILE='ffcf.in', EXIST=file_exists)
+    IF (file_exists) THEN
+        OPEN(9, file='ffcf.in', staus='old', action='read')
+        READ(9,*) 
+        READ(9,*) save_w01_avg
+        CLOSE(9)
+    ELSE
+        ! Loop over all the chunks
+        DO chunk=1, nchunks
+            w01 = 0.0
+            DO iper=1, nperchunk
+                ioh = (chunk-1)*nperchunk + iper
+                IF (ioh > noh) EXIT
+                CALL Read_Field(ioh, w01(iper,:))
+            ENDDO
         ENDDO
-    ENDDO
-
-    ! Get the average of the w01 frequency
-
-    save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
+        save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
+    ENDIF
 
     write(*,*) 'Average w01 = ', save_w01_avg
     w01_avg = 0.0
