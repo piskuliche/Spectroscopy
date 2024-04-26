@@ -82,6 +82,7 @@ MODULE CLI
     END SUBROUTINE
 
     SUBROUTINE Print_Help
+    ! Prints help message
         WRITE(*,*) "Usage: ./program [options]"
         WRITE(*,*) "Options:"
         WRITE(*,*) "  -h, --help: Print this help message"
@@ -90,16 +91,36 @@ MODULE CLI
         WRITE(*,*) "  -in: Input file"
         WRITE(*,*) "  -map: Map file"
         WRITE(*,*) "  -tag: Tag output"
+        WRITE(*,*) "  -avfreq: Average frequency [cm^-1]"
+        WRITE(*,*) "  -zmin: Minimum redshift"
+        WRITE(*,*) "  -zmax: Maximum redshift"
         STOP
     END SUBROUTINE
 
     SUBROUTINE Apply_CLI_Args
+    ! Apply command line arguments to the global variables
+    ! This subroutine should be called after Read_CLI_Arguments
+    ! to apply the values to the global variables
+    ! To override input file variables, use AFTER Read_Input.
         USE cli_data
+        USE constants
         USE time_data
         IMPLICIT NONE
 
-        ncorr = ncorr_cli
-        nskip = nskip_cli
+        ! Correlation time
+        IF (ncorr_cli /= -1) THEN
+            ncorr = ncorr_cli
+        ENDIF
+
+        ! Time Origin Skips
+        IF (nskip_cli /= -1) THEN
+            nskip = nskip_cli
+        ENDIF
+
+        ! Average Frequency
+        IF (avfreq_cli /= -1) THEN
+            avfreq_cli = avfreq_cli/cmiperau
+        ENDIF
         
     END SUBROUTINE
 
