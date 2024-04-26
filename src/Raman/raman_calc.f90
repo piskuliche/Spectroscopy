@@ -33,7 +33,7 @@ PROGRAM Raman_Calc
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu01(nperchunk,ntimes,3))
     ALLOCATE(eOH(nperchunk,ntimes,3))
-    ALLOCATE(z0(nperchunk,3)); ALLOCATE(efield(ntimes))
+    ALLOCATE(z0(nperchunk,ntimes)); ALLOCATE(efield(ntimes))
 
     ALLOCATE(a_para(nperchunk, ntimes, 3)); ALLOCATE(a_perp(nperchunk, ntimes, 3))
 
