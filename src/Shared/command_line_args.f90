@@ -61,9 +61,9 @@ MODULE CLI
 
         WRITE(*,*) "ncorr_cli = ", ncorr_cli
         WRITE(*,*) "nskip_cli = ", nskip_cli
-        WRITE(*,*) "input_file_cli = ", input_file_cli
-        WRITE(*,*) "map_file_cli = ", map_file_cli
-        WRITE(*,*) "tag_output_cli = ", tag_output_cli
+        WRITE(*,*) "input_file_cli = ", TRIM(input_file_cli)
+        WRITE(*,*) "map_file_cli = ", TRIM(map_file_cli)
+        WRITE(*,*) "tag_output_cli = ", TRIM(tag_output_cli)
         WRITE(*,*) "avfreq_cli = ", avfreq_cli
         WRITE(*,*) "flag_z_range = ", flag_z_range
         WRITE(*,*) "zmin_cli = ", zmin_cli
