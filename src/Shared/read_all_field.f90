@@ -101,12 +101,12 @@ SUBROUTINE Get_Frequencies(efield, w01, w12)
 
     INTEGER :: k
     DO k=1, ntimes
-        w01(k) = c0 + c1*etmp(k) + c2*etmp(k)**2
+        w01(k) = c0 + c1*efield(k) + c2*efield(k)**2
         w01_avg = w01_avg + w01(k)
         w01_sq_avg = w01_sq_avg + w01(k)**2
 
         ! ** 21 Transition Frequencies ***
-        w12(k) = c3 + c4*etmp(k) + c5*etmp(k)**2     
+        w12(k) = c3 + c4*efield(k) + c5*efield(k)**2     
         w12_avg = w12_avg + w12(k)
         w12_sq_avg = w12_sq_avg + w12(k)**2
     ENDDO
@@ -180,7 +180,7 @@ SUBROUTINE Get_Transition_Pol_Para_Perp(efield, w01, w12, eOH, a_para, a_perp)
     DO k=1, ntimes
         x01tmp = d0 + d1*w01(k)
 
-        alpha = x01tmp*(a0 + a1*etmp(k))
+        alpha = x01tmp*(a0 + a1*efield(k))
 
         apara = 3d0/(1d0 + 2d0/c15) * alpha
         aperp = 3d0/(2d0 + c15) * alpha
