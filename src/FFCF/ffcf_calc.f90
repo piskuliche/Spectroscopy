@@ -35,7 +35,7 @@ PROGRAM FFCF_CALC
 
     ! ///////////////////////////////////////////////////////////////////
     
-    file_exists = .False.
+    cli_freq = .False.
 
     CALL Read_CLI_Arguments
 
