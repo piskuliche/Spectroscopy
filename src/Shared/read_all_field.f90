@@ -220,13 +220,13 @@ SUBROUTINE Get_12_Dipole(efield, w12, eOH, mu12)
     ENDDO
 END SUBROUTINE Get_12_Dipole
 
-SUBROUTINE Get_Transition_Pol_Para_Perp(efield, w01, w12, eOH, a_para, a_perp)
+SUBROUTINE Get_Transition_Pol_Para_Perp(efield, w01, eOH, a_para, a_perp)
     USE freq_data
     USE time_data
     USE map_data
     IMPLICIT NONE
     DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: efield
-    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: w01, w12
+    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: w01
     DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: eOH
     DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(OUT) :: a_para, a_perp
     ! Loop Variables
