@@ -14,7 +14,8 @@ PROGRAM IR_CALC
     USE freq_data
     USE hist_data
     USE input_module
-
+    USE cli_data
+    USE CLI
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: nperchunk = 1000
@@ -34,7 +35,7 @@ PROGRAM IR_CALC
 ! *********************************************************************
 
     CALL Read_Input
-    
+
     CALL Apply_CLI_Args
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))

@@ -12,6 +12,8 @@ PROGRAM SFG_CALC
     USE freq_data
     USE hist_data
     USE input_module
+    USE cli_data
+    USE CLI
 
     IMPLICIT NONE
 

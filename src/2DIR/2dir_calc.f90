@@ -5,7 +5,8 @@ USE time_data
 USE freq_data
 USE constants
 USE input_module
-
+USE cli_data
+USE CLI
 IMPLICIT NONE
 
 INTEGER, PARAMETER :: nperchunk = 1000

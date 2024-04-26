@@ -5,7 +5,8 @@ PROGRAM Raman_Calc
     USE freq_data
     USE hist_data
     USE input_module
-    
+    USE cli_data
+    USE CLI
     IMPLICIT NONe
     INTEGER, PARAMETER :: nperchunk = 1000
     INTEGER :: chunk, iper, ioh, nchunks
@@ -25,7 +26,7 @@ PROGRAM Raman_Calc
 
     CALL Apply_CLI_Args
 
-    
+
     nchunks = ceiling(real(noh)/real(nperchunk))
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
