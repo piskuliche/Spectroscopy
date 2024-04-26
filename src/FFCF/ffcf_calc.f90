@@ -75,7 +75,7 @@ PROGRAM FFCF_CALC
             DO iper=1, nperchunk
                 ioh = (chunk-1)*nperchunk + iper
                 IF (ioh > noh) EXIT
-                CALL Read_Field_File(ioh, efield(iper,:), eOH(iper,:,:), z0(iper,:))
+                CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
                 CALL Get_Frequencies(efield(:),  w01(iper,:), w12(iper,:))
             ENDDO
         ENDDO
@@ -91,7 +91,7 @@ PROGRAM FFCF_CALC
             ioh = (chunk-1)*nperchunk + iper
             IF (ioh > noh) EXIT
             !CALL Read_Field(ioh, w01(iper,:))
-            CALL Read_Field_File(ioh, efield(iper,:), eOH(iper,:,:), z0(iper,:))
+            CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
             CALL Get_Frequencies(efield(:),  w01(iper,:), w12(iper,:))
         ENDDO
 
