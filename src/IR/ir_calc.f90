@@ -27,13 +27,16 @@ PROGRAM IR_CALC
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
 
     CALL Read_CLI_Arguments
-    
+
 ! *********************************************************************
 ! I.  Read The Input File, and set the data for the calculations.
 !     Also allocate the relevant variables.
 ! *********************************************************************
 
     CALL Read_Input
+    
+    CALL Apply_CLI_Args
+
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
     ALLOCATE(eOH(nperchunk,ntimes,3))
 

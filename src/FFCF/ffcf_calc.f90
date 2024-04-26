@@ -43,14 +43,11 @@ PROGRAM FFCF_CALC
     ! Read Input Parameters
     CALL Read_Input
 
+    ! Apply the CLI Arg Overrides
+    CALL Apply_CLI_Args
+
     ! Check if frequency was read from the command line
-    IF (avfreq_cli == -1) THEN
-        cli_freq = .FALSE.
-        IF (flag_z_range) THEN
-            WRITE(*,*) 'Must provide frequency when using z-range'
-            STOP
-        ENDIF
-    ELSE
+    IF (avfreq_cli /= -1) THEN
         cli_freq = .TRUE.
         save_w01_avg = avfreq_cli
     ENDIF 

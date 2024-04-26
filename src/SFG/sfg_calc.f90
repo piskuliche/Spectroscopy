@@ -31,6 +31,8 @@ PROGRAM SFG_CALC
 ! *********************************************************************
     CALL Read_Input
 
+    CALL Apply_CLI_Args
+
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))
     ALLOCATE(eOH(nperchunk,ntimes,3))
     ALLOCATE(z0(nperchunk,ntimes))

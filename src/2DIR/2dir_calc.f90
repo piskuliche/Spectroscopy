@@ -29,6 +29,8 @@ CALL Read_CLI_Arguments
 ! *********************************************************************
 CALL read_input
 
+CALL Apply_CLI_Args
+
 ALLOCATE(w01(nperchunk, ntimes)); ALLOCATE(mu01(nperchunk, ntimes))
 ALLOCATE(w12(nperchunk, ntimes)); ALLOCATE(mu12(nperchunk, ntimes))
 

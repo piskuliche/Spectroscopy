@@ -22,6 +22,10 @@ PROGRAM Raman_Calc
 ! *********************************************************************
 
     CALL Read_Input
+
+    CALL Apply_CLI_Args
+
+    
     nchunks = ceiling(real(noh)/real(nperchunk))
 
     ALLOCATE(w01(nperchunk,ntimes)); ALLOCATE(mu(nperchunk,ntimes,3))

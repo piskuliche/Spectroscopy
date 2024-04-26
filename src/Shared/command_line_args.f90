@@ -69,6 +69,13 @@ MODULE CLI
         WRITE(*,*) "zmin_cli = ", zmin_cli
         WRITE(*,*) "zmax_cli = ", zmax_cli
 
+        IF (avfreq_cli == -1) THEN
+            IF (flag_z_range) THEN
+                WRITE(*,*) 'Must provide frequency when using z-range'
+                STOP
+            ENDIF
+        ENDIF
+
     END SUBROUTINE
 
     SUBROUTINE Print_Help
@@ -81,6 +88,16 @@ MODULE CLI
         WRITE(*,*) "  -map: Map file"
         WRITE(*,*) "  -tag: Tag output"
         STOP
+    END SUBROUTINE
+
+    SUBROUTINE Apply_CLI_Args
+        USE cli_data
+        USE time_data
+        IMPLICIT NONE
+
+        ncorr = ncorr_cli
+        nskip = nskip_cli
+        
     END SUBROUTINE
 
 END MODULE CLI
