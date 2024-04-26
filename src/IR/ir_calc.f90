@@ -63,7 +63,7 @@ PROGRAM IR_CALC
 ! *********************************************************************
 
     DO chunk=1, nchunks
-        w01 = 0.0; w12 = 0.0; mu01 = 0.0; mu12 = 0.0; eOH = 0.0
+        w01 = 0.0; mu01 = 0.0; eOH = 0.0
         DO iper=1, nperchunk
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
