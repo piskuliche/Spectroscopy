@@ -118,7 +118,7 @@ SUBROUTINE Get_Transition_Dipole_Prime(efield, w01, w12, mu01prime, mu12prime)
     USE map_data
     IMPLICIT NONE
     DOUBLE PRECISION, DIMENSION(ntimes), INTENT(IN) :: efield, w01, w12
-    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: mu01, mu12
+    DOUBLE PRECISION, DIMENSION(ntimes), INTENT(OUT) :: mu01prime, mu12prime
 
     ! Loop Variables
     INTEGER :: k
@@ -134,8 +134,8 @@ SUBROUTINE Get_Transition_Dipole_Prime(efield, w01, w12, mu01prime, mu12prime)
 
         ! *** Transition Dipole Matrix Elements ***
         muprime = b0 + b1*efield(k) + b2*efield(k)**2
-        mu01(k) = muprime*x01tmp
-        mu12(k) = muprime*x12tmp
+        mu01prime(k) = muprime*x01tmp
+        mu12prime(k) = muprime*x12tmp
     ENDDO
 END SUBROUTINE Get_Transition_Dipole_Prime
 
@@ -174,12 +174,11 @@ SUBROUTINE Get_Transition_Pol_Para_Perp(efield, w01, w12, eOH, a_para, a_perp)
     ! Loop Variables
     INTEGER :: k
     ! Temporary Variables
-    DOUBLE PRECISION :: x01tmp, x12tmp
+    DOUBLE PRECISION :: x01tmp
     DOUBLE PRECISION :: alpha, apara, aperp
 
     DO k=1, ntimes
         x01tmp = d0 + d1*w01(k)
-        x12tmp = d2 + d3*w12(k)
 
         alpha = x01tmp*(a0 + a1*etmp(k))
 
@@ -205,22 +204,21 @@ SUBROUTINE Get_Transtion_Pol_Polarizations(efield, w01, w12, eOH, a_ss, a_sp, a_
 
     INTEGER :: k
 
-    DOUBLE PRECISION :: x01tmp, x12tmp
+    DOUBLE PRECISION :: x01tmp
     DOUBLE PRECISION :: axx, ayy, azz, axy, ayz, azx
     DOUBLE PRECISION, DIMENSION(ntimes,3) :: a_para, a_perp
 
     a_ss = 0.0; a_sp = 0.0; a_pp = 0.0
     DO k=1, ntimes
         x01tmp = d0 + d1*w01(k)
-        x12tmp = d2 + d3*w12(k)
 
         CALL Get_Transition_Pol_Para_Perp(efield, w01, w12, eOH, a_para, a_perp)
         axx = a_para(k,1); ayy = a_para(k,2); azz = a_para(k,3)
         axy = a_perp(k,1); ayz = a_perp(k,2); azx = a_perp(k,3)
 
         ! Final polarizabilities
-        a_ss(k) = xtmp*(axx + 2.0d0*axy + ayy)
-        a_sp(k) = xtmp*(azx + ayz)
-        a_pp(k) = xtmp*(azz)
+        a_ss(k) = x01tmp*(axx + 2.0d0*axy + ayy)
+        a_sp(k) = x01tmp*(azx + ayz)
+        a_pp(k) = x01tmp*(azz)
     ENDDO 
 END SUBROUTINE Get_Transtion_Pol_Polarizations
