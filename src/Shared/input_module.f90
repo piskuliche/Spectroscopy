@@ -117,4 +117,6 @@ CONTAINS
 
     END SUBROUTINE Read_Input
 
+    INCLUDE "read_all_field.f90"
+
 END MODULE input_module
