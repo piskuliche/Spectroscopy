@@ -137,7 +137,7 @@ SUBROUTINE Get_Transition_Dipole_Prime(efield, w01, w12, mu01prime, mu12prime)
         mu01(k) = muprime*x01tmp
         mu12(k) = muprime*x12tmp
     ENDDO
-END SUBROUTINE Get_Transition_Dipole
+END SUBROUTINE Get_Transition_Dipole_Prime
 
 
 SUBROUTINE Get_Transition_Dipole(efield, w01, w12, eOH, mu01, mu12)
@@ -191,7 +191,7 @@ SUBROUTINE Get_Transition_Pol_Para_Perp(efield, w01, w12, eOH, a_para, a_perp)
         a_perp(k,2) = (aperp-apara)*eOH(k,2)*eOH(k,3)
         a_perp(k,3) = (aperp-apara)*eOH(k,3)*eOH(k,1)
     ENDDO
-END SUBROUTINE
+END SUBROUTINE Get_Transition_Pol_Para_Perp
 
 SUBROUTINE Get_Transtion_Pol_Polarizations(efield, w01, w12, eOH, a_ss, a_sp, a_pp)
     USE map_data
@@ -223,4 +223,4 @@ SUBROUTINE Get_Transtion_Pol_Polarizations(efield, w01, w12, eOH, a_ss, a_sp, a_
         a_sp(k) = xtmp*(azx + ayz)
         a_pp(k) = xtmp*(azz)
     ENDDO 
-END SUBROUTINE
+END SUBROUTINE Get_Transtion_Pol_Polarizations
