@@ -19,6 +19,7 @@ DOUBLE PRECISION :: tstart, tend, read_time, tcf_time, ta, tb
 DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01, mu01, w12, mu12
 DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: eOH
 DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: efield
+DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: z0
 
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_rp, tcf_rp_tot
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_np, tcf_np_tot
@@ -35,6 +36,7 @@ CALL Apply_CLI_Args
 
 ALLOCATE(w01(nperchunk, ntimes)); ALLOCATE(mu01(nperchunk, ntimes))
 ALLOCATE(w12(nperchunk, ntimes)); ALLOCATE(mu12(nperchunk, ntimes))
+ALLOCATE(z0(nperchunk, ntimes))
 
 ALLOCATE(eOH(nperchunk, ntimes, 3))
 
