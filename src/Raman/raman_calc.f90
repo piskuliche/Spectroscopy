@@ -86,6 +86,7 @@ PROGRAM Raman_Calc
 ! IV. Cleanup Calculation
 ! *********************************************************************
 
+DEALLOCATE(z0, efield)
 DEALLOCATE(w01, mu01, eOH,  a_para, a_perp, tcf, vv_tcf_tot, vh_tcf_tot)
 
 END PROGRAM Raman_Calc

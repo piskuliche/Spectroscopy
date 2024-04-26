@@ -100,6 +100,7 @@ PROGRAM IR_CALC
 ! IV. Cleanup Calculation
 ! *********************************************************************
 
+    DEALLOCATE(z0, efield)
     DEALLOCATE(w01)
     DEALLOCATE(mu01)
 
