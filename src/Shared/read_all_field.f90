@@ -250,13 +250,13 @@ SUBROUTINE Get_Transition_Pol_Para_Perp(efield, w01, eOH, a_para, a_perp)
     ENDDO
 END SUBROUTINE Get_Transition_Pol_Para_Perp
 
-SUBROUTINE Get_Transtion_Pol_Polarizations(efield, w01, w12, eOH, a_ss, a_sp, a_pp)
+SUBROUTINE Get_Transtion_Pol_Polarizations(efield, w01, eOH, a_ss, a_sp, a_pp)
     USE map_data
     USE freq_data
     USE time_data
     IMPLICIT NONE
 
-    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: efield, w01, w12
+    DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(IN) :: efield, w01
     DOUBLE PRECISION, DIMENSION(ntimes,3),  INTENT(IN) :: eOH
     DOUBLE PRECISION, DIMENSION(ntimes),    INTENT(OUT):: a_ss, a_sp, a_pp
 

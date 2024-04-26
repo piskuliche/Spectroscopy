@@ -65,7 +65,7 @@ PROGRAM SFG_CALC
             CALL Get_w01(efield(:),  w01(iper,:))
             CALL Get_01_Dipole(efield(:), w01(iper,:),  eOH(iper,:,:), mu01(iper,:,:))
             CALL Get_Transtion_Pol_Polarizations(efield(:), w01(iper,:), eOH(iper,:,:),&
-                                                a_ss(iper,:), a_sp(iper,:), a_pp(iper,:))
+                                            &    a_ss(iper,:), a_sp(iper,:), a_pp(iper,:))
         END DO 
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
