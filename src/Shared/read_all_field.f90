@@ -89,7 +89,7 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
         efield(k) = etmp(k)
     ENDDO
         
-END SUBROUTINE Read_Field
+END SUBROUTINE Read_Field_File
 
 SUBROUTINE Get_Frequencies(efield, w01, w12)
     USE freq_data
