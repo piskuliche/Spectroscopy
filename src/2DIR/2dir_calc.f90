@@ -18,6 +18,7 @@ DOUBLE PRECISION :: tstart, tend, read_time, tcf_time, ta, tb
 
 DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01, mu01, w12, mu12
 DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: eOH
+DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: efield
 
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_rp, tcf_rp_tot
 DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:,:) :: tcf_np, tcf_np_tot
@@ -36,6 +37,8 @@ ALLOCATE(w01(nperchunk, ntimes)); ALLOCATE(mu01(nperchunk, ntimes))
 ALLOCATE(w12(nperchunk, ntimes)); ALLOCATE(mu12(nperchunk, ntimes))
 
 ALLOCATE(eOH(nperchunk, ntimes, 3))
+
+ALLOCATE(efield(ntimes))
 
 ALLOCATE(tcf_rp(0:ncorr, 0:ncorr)); ALLOCATE(tcf_rp_tot(0:ncorr, 0:ncorr))
 ALLOCATE(tcf_np(0:ncorr, 0:ncorr)); ALLOCATE(tcf_np_tot(0:ncorr, 0:ncorr))
@@ -67,7 +70,11 @@ DO iTW = 1, nTw
         DO iper=1, nperchunk
             ioh = (chunk-1)*nperchunk + iper
             IF(ioh > noh) EXIT
-            CALL read_field(ioh, w01(iper,:), w12(iper,:), mu01(iper,:),  mu12(iper,:), eOH(iper,:,:))
+            CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
+            CALL Get_w01(efield(:),  w01(iper,:))
+            CALL Get_mu01_Prime(efield(:), w01(iper,:), mu01(iper,:))
+            CALL Get_w12(efield(:),  w12(iper,:))
+            CALL Get_mu12_Prime(efield(:), w12(iper,:), mu12(iper,:))
         ENDDO
 
         ! ***** CALCULATE THE TCFs *****
