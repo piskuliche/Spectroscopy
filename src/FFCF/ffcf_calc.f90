@@ -54,7 +54,13 @@ PROGRAM FFCF_CALC
     IF (avfreq_cli /= -1) THEN
         cli_freq = .TRUE.
         save_w01_avg = avfreq_cli
-    ENDIF 
+    ELSE
+        IF (flag_z_range) THEN
+            WRITE(*,*) 'Must provide frequency when using z-range'
+            STOP
+        ENDIF
+    ENDIF
+
 
     ! Allocate Memory
     ALLOCATE(w01(nperchunk,ntimes))

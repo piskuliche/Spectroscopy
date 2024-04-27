@@ -72,12 +72,6 @@ MODULE CLI
         WRITE(*,*) "zmax_cli = ", zmax_cli
         WRITE(*,*) "-----------------------"
 
-        IF (avfreq_cli == -1) THEN
-            IF (flag_z_range) THEN
-                WRITE(*,*) 'Must provide frequency when using z-range'
-                STOP
-            ENDIF
-        ENDIF
 
     END SUBROUTINE
 
