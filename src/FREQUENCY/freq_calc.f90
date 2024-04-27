@@ -55,6 +55,8 @@ PROGRAM FFCF_CALC
     ALLOCATE(z0(nperchunk,ntimes))
 
     nchunks = CEILING(REAL(noh)/nperchunk)
+    w01_sum = 0.0
+    count_w01 = 0
 
     ! Loop over all the chunks
     DO chunk=1, nchunks
@@ -67,7 +69,7 @@ PROGRAM FFCF_CALC
 
             IF (flag_z_range) THEN
                 DO i=1, ntimes
-                    IF (ABS(z0(iper,i)) > zmin_cli .AND. ABS(z0(iper,i))) THEN
+                    IF (ABS(z0(iper,i)) > zmin_cli .AND. ABS(z0(iper,i)) < zmax_cli) THEN
                         w01_sum = w01_sum + w01(iper,i)
                         count_w01 = count_w01 + 1
                     ENDIF
