@@ -32,7 +32,7 @@ PROGRAM FFCF_CALC
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
 
     ! Other Variables
-    DOUBLE PRECISION :: ti
+    DOUBLE PRECISION :: save_w01_avg
 
     ! ///////////////////////////////////////////////////////////////////
 
