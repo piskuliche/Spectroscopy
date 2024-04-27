@@ -32,7 +32,8 @@ PROGRAM FFCF_CALC
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01
 
     ! Other Variables
-    DOUBLE PRECISION :: save_w01_avg
+    DOUBLE PRECISION    :: save_w01_avg, w01_sum
+    INTEGER             :: count_w01
 
     ! ///////////////////////////////////////////////////////////////////
 
@@ -63,10 +64,18 @@ PROGRAM FFCF_CALC
             IF (ioh > noh) EXIT
             CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
             CALL Get_w01(efield(:),  w01(iper,:))
+
+            IF (flag_z_range) THEN
+                DO i=1, ntimes
+                    IF (ABS(z0(iper,i)) > zmin_cli .AND. ABS(z0(iper,i))) THEN
+                        w01_sum = w01_sum + w01(iper,i)
+                        count_w01 = count_w01 + 1
+                    ENDIF
+                ENDDO
+            ENDIF
         ENDDO
     ENDDO
-    save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
-
+    save_w01_avg = w01_sum / REAL(count_w01) * cmiperau
     write(*,*) 'Average w01 = ', save_w01_avg
     
 

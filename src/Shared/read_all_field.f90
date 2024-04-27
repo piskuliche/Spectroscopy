@@ -91,8 +91,6 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
         
 END SUBROUTINE Read_Field_File
 
-
-
 SUBROUTINE Get_w01(efield, w01)
     USE freq_data
     USE time_data
