@@ -39,7 +39,7 @@ PROGRAM FFCF_CALC
 
     CALL Read_CLI_Arguments
 
-    WRITE(*,*) 'Calculating FFCF for the given parameters'
+    WRITE(*,*) 'Calculating Frequency'
     ! Read Input Parameters
     CALL Read_Input
 
