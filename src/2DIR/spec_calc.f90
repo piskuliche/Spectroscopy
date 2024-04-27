@@ -70,7 +70,7 @@ SUBROUTINE spec_calc(iTw, tcf_rp_tot, tcf_np_tot)
    CALL dfftw_execute(plan_np)
       
    ! Write out the calculated spectrum
-   OPEN(22,file=trim(tag_output_cli)//'_2dir_imag_'//trim(cTw)//'.dat')
+   OPEN(22,file=trim(tag_output_cli)//'2dir_imag_'//trim(cTw)//'.dat')
    OPEN(23,file=trim(tag_output_cli)//'2dir_real_'//trim(cTw)//'.dat')
       
 !!! N/A    ! When the average frequency is subtracted from the phase the spectrum must be split in the middle
