@@ -87,7 +87,7 @@ PROGRAM FFCF_CALC
         ENDDO
         save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
     ENDIF
-
+    write(*,*) avfreq_cli
     write(*,*) 'Average w01 = ', save_w01_avg*cmiperau
     OPEN(21, file=trim(tag_output_cli)//'w01_avg.dat')
     WRITE(21,*) save_w01_avg*cmiperau
