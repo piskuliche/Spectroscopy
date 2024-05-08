@@ -89,6 +89,10 @@ PROGRAM FFCF_CALC
     ENDIF
 
     write(*,*) 'Average w01 = ', save_w01_avg
+    OPEN(21, file=trim(tag_output_cli)//'w01_avg.dat')
+    WRITE(21,*) save_w01_avg
+    CLOSE(21)
+    
     w01_avg = 0.0
 
     DO chunk=1, nchunks
