@@ -53,7 +53,7 @@ PROGRAM FFCF_CALC
     ! Check if frequency was read from the command line
     IF (avfreq_cli /= -1) THEN
         cli_freq = .TRUE.
-        save_w01_avg = avfreq_cli
+        save_w01_avg = avfreq_cli/cmiperau
     ELSE
         IF (flag_z_range) THEN
             WRITE(*,*) 'Must provide frequency when using z-range'
@@ -88,11 +88,11 @@ PROGRAM FFCF_CALC
         save_w01_avg = w01_avg/DFLOAT(noh*ntimes)
     ENDIF
 
-    write(*,*) 'Average w01 = ', save_w01_avg
+    write(*,*) 'Average w01 = ', save_w01_avg*cmiperau
     OPEN(21, file=trim(tag_output_cli)//'w01_avg.dat')
-    WRITE(21,*) save_w01_avg
+    WRITE(21,*) save_w01_avg*cmiperau
     CLOSE(21)
-    
+
     w01_avg = 0.0
 
     DO chunk=1, nchunks
