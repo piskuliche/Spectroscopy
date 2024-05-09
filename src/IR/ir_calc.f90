@@ -73,7 +73,7 @@ PROGRAM IR_CALC
             WRITE(*,*) w01(iper,1)
             CALL Get_01_Dipole(efield(:), w01(iper,:),  eOH(iper,:,:), mu01(iper,:,:))
             WRITE(*,*) mu01(iper,1,1)
-            EXIT
+            STOP
         END DO
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
