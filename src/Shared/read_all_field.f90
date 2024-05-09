@@ -82,11 +82,12 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
     CALL h5close_f(ERROR_FLAG)
 
 ! II. Calculate the field parameters ******************************************
-
     DO k=1,ntimes
         z0(k) = z0_tmp(k) - z_c
         eOH(k,:) = eoh_tmp(k,:)
         efield(k) = etmp(k)
+        WRITE(*,*) efield(k), eOH(k,:), z0(k)
+        IF ( k > 4 ) STOP
     ENDDO
         
 END SUBROUTINE Read_Field_File
