@@ -87,9 +87,8 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
         eOH(k,:) = eoh_tmp(:,k)
         efield(k) = etmp(k)
     ENDDO
-    WRITE(*,*) eoh_tmp(1,1), eoh_tmp(1,2), eoh_tmp(1,3)
-    WRITE(*,*) SHAPE(eoh_tmp)
-    WRITE(*,*) eoh_tmp(2,1), eoh_tmp(2,2), eoh_tmp(2,3)
+    WRITE(*,*) eOH(1,:)
+    WRITE(*,*) eOH(2,:)
     STOP
 END SUBROUTINE Read_Field_File
 
