@@ -86,10 +86,10 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
         z0(k) = z0_tmp(k) - z_c
         eOH(k,:) = eoh_tmp(k,:)
         efield(k) = etmp(k)
-        WRITE(*,*) eoh_tmp(k,:)
-        WRITE(*,*) efield(k), eOH(k,:), z0(k)
-        IF ( k > 4 ) STOP
     ENDDO
+    WRITE(*,*) eoh_tmp(1,1), eoh_tmp(1,2), eoh_tmp(1,3)
+    WRITE(*,*) SHAPE(eoh_tmp)
+    WRITE(*,*) eoh_tmp(2,1), eoh_tmp(2,2), eoh_tmp(2,3)
         
 END SUBROUTINE Read_Field_File
 
