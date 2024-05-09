@@ -68,8 +68,12 @@ PROGRAM IR_CALC
             ioh = (chunk-1)*nperchunk + iper
             if (ioh > noh) EXIT
             CALL Read_Field_File(ioh, efield(:), eOH(iper,:,:), z0(iper,:))
+            WRITE(*,*) efield(1), eOH(iper,1,:), z0(iper,1)
             CALL Get_w01(efield(:),  w01(iper,:))
+            WRITE(*,*) w01(iper,1)
             CALL Get_01_Dipole(efield(:), w01(iper,:),  eOH(iper,:,:), mu01(iper,:,:))
+            WRITE(*,*) mu01(iper,1,1)
+            EXIT
         END DO
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
