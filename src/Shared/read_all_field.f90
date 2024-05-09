@@ -22,7 +22,7 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
 
     INTEGER :: k
     REAL, DIMENSION(ntimes) :: etmp, z0_tmp
-    REAL, DIMENSION(ntimes, 3) :: eoh_tmp
+    REAL, DIMENSION(3, ntimes) :: eoh_tmp
 
     ! HDF5 Variables
     CHARACTER(len=8), PARAMETER :: filename = 'field.h5'
@@ -84,7 +84,7 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
 ! II. Calculate the field parameters ******************************************
     DO k=1,ntimes
         z0(k) = z0_tmp(k) - z_c
-        eOH(k,:) = eoh_tmp(k,:)
+        eOH(k,:) = eoh_tmp(:,k)
         efield(k) = etmp(k)
     ENDDO
     WRITE(*,*) eoh_tmp(1,1), eoh_tmp(1,2), eoh_tmp(1,3)
