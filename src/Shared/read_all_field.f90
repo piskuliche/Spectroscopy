@@ -35,7 +35,7 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
     CHARACTER(len=20) :: dataset_name
 
     dot_dims = (/ntimes/)
-    eoh_dims = (/3, ntimes/)
+    eoh_dims = (/ntimes, 3/)
 
 
 !I. Read the field file *******************************************************
