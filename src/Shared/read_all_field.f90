@@ -35,7 +35,7 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
     CHARACTER(len=20) :: dataset_name
 
     dot_dims = (/ntimes/)
-    eoh_dims = (/ntimes, 3/)
+    eoh_dims = (/3, ntimes/)
 
 
 !I. Read the field file *******************************************************
@@ -86,6 +86,7 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
         z0(k) = z0_tmp(k) - z_c
         eOH(k,:) = eoh_tmp(k,:)
         efield(k) = etmp(k)
+        WRITE(*,*) eoh_tmp(k,:)
         WRITE(*,*) efield(k), eOH(k,:), z0(k)
         IF ( k > 4 ) STOP
     ENDDO
