@@ -87,9 +87,6 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
         eOH(k,:) = eoh_tmp(:,k)
         efield(k) = etmp(k)
     ENDDO
-    WRITE(*,*) eOH(1,:)
-    WRITE(*,*) eOH(2,:)
-    STOP
 END SUBROUTINE Read_Field_File
 
 SUBROUTINE Get_w01(efield, w01)
