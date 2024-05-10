@@ -37,6 +37,7 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
     dot_dims = (/ntimes/)
     eoh_dims = (/3, ntimes/)
 
+    ERROR_FLAG=0
 
 !I. Read the field file *******************************************************
     ! Open the hdf5 library
@@ -44,6 +45,13 @@ SUBROUTINE Read_Field_File(ioh, efield, eOH, z0)
     ! Open the hdf5 file
     CALL h5fopen_f(filename, H5F_ACC_RDONLY_F, file_id, ERROR_FLAG)
     ! Read the value of the dot product ***
+    
+    IF (ERROR_FLAG /= 0) THEN
+        PRINT *, "Error opening field file: ", TRIM(filename)
+        ! Handle the error, e.g., by exiting
+        STOP
+    END IF
+
     ! Set dataset name
     WRITE(dataset_name, '(A, I0)') 'dot_', ioh
 
