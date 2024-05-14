@@ -51,6 +51,7 @@ PROGRAM SFG_CALC
 
     nchunks = ceiling(real(noh)/real(nperchunk))
 
+    w01_avg = 0.0; w01_sq_avg = 0.0; tcf_tot = DCMPLX(0.0d0, 0.0d0)
 ! *********************************************************************
 !   II. Calculate TCFS
 ! *********************************************************************
