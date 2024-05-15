@@ -38,14 +38,15 @@ SUBROUTINE Hist_Print(wd_tot, sd_tot)
     USE time_data
     USE hist_data
     USE constants
+    USE cli_data
 
     IMPLICIT NONE
 
     INTEGER :: k
     DOUBLE PRECISION, DIMENSION(0:nhist) :: wd_tot, sd_tot
 
-    OPEN(23, FILE='freq_dist.dat')
-    OPEN(24, FILE='spec_dens.dat')
+    OPEN(23, FILE=trim(tag_output_cli)//'freq_dist.dat')
+    OPEN(24, FILE=trim(tag_output_cli)//'spec_dens.dat')
 
     wd_tot = wd_tot/REAL(noh)
     sd_tot = sd_tot/REAL(noh)
