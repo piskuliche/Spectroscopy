@@ -91,28 +91,28 @@ DO iTW = 1, nTw
             CALL CPU_TIME(tb)
             tcf_time = tcf_time + tb - ta
         ENDDO
-
-        ! ***** Calculate Averages *****
-        tcf_rp_tot = tcf_rp_tot/DCMPLX(DBLE(noh),0d0)
-        tcf_np_tot = tcf_np_tot/DCMPLX(DBLE(noh),0d0)
-
-        w01_avg = w01_avg/DBLE(noh*ntimes); w01_sq_avg = w01_sq_avg/DBLE(noh*ntimes)
-        w12_avg = w12_avg/DBLE(noh*ntimes); w12_sq_avg = w12_sq_avg/DBLE(noh*ntimes)
-
-        CALL CPU_TIME(ta)
-
-        ! ***** Calculate the Spectra *****
-        CALL spec_calc(iTw, tcf_rp_tot, tcf_np_tot)
-
-        CALL CPU_TIME(tb)
-
-        CALL CPU_TIME(tend)
-        write(6,'(A,F12.2,A)') ' Waiting time = ',Tw(iTw)*fsperau,' fs'
-        write(6,'(A,F12.2,A,F10.2,A)') ' Read  cpu time = ',read_time,' s, ',read_time/60d0,' min'
-        write(6,'(A,F12.2,A,F10.2,A)') ' TCF   cpu time = ',tcf_time,' s, ',tcf_time/60d0,' min'
-        write(6,'(A,F12.2,A,F10.2,A)') ' FFT   cpu time = ',tb-ta,' s, ',(tb-ta)/60d0,' min'
-        write(6,'(A,F12.2,A,F10.2,A)') ' Total cpu time = ',tend-tstart,' s, ',(tend-tstart)/60d0,' min'
     ENDDO
+
+    ! ***** Calculate Averages *****
+    tcf_rp_tot = tcf_rp_tot/DCMPLX(DBLE(noh),0d0)
+    tcf_np_tot = tcf_np_tot/DCMPLX(DBLE(noh),0d0)
+
+    w01_avg = w01_avg/DBLE(noh*ntimes); w01_sq_avg = w01_sq_avg/DBLE(noh*ntimes)
+    w12_avg = w12_avg/DBLE(noh*ntimes); w12_sq_avg = w12_sq_avg/DBLE(noh*ntimes)
+
+    CALL CPU_TIME(ta)
+
+    ! ***** Calculate the Spectra *****
+    CALL spec_calc(iTw, tcf_rp_tot, tcf_np_tot)
+
+    CALL CPU_TIME(tb)
+
+    CALL CPU_TIME(tend)
+    write(6,'(A,F12.2,A)') ' Waiting time = ',Tw(iTw)*fsperau,' fs'
+    write(6,'(A,F12.2,A,F10.2,A)') ' Read  cpu time = ',read_time,' s, ',read_time/60d0,' min'
+    write(6,'(A,F12.2,A,F10.2,A)') ' TCF   cpu time = ',tcf_time,' s, ',tcf_time/60d0,' min'
+    write(6,'(A,F12.2,A,F10.2,A)') ' FFT   cpu time = ',tb-ta,' s, ',(tb-ta)/60d0,' min'
+    write(6,'(A,F12.2,A,F10.2,A)') ' Total cpu time = ',tend-tstart,' s, ',(tend-tstart)/60d0,' min'
 ENDDO
 
 DEALLOCATE(w01); DEALLOCATE(mu01)
