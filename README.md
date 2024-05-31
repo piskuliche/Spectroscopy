@@ -1,7 +1,7 @@
 # Computational Spectroscopy
-Copyright 2024, Zeke A. Piskulich (Boston University)
+Copyright 2024, Zeke A. Piskulich and Qiang Cui (Boston University).
 
-Software is adapted verison of programs copyright 2023 Ashley Borkowski, Ward Thompson (University of Kansas)
+Software is adapted from programs originally developed Copyright 2023 Ashley Borkowski, Ward Thompson (University of Kansas).
 
 ## Introduction
 
@@ -10,9 +10,12 @@ This code is a computational spectroscopic toolkit for calculating spectroscopic
 Thus far, the currently implemented spectroscopies are as follows:
 
 * One Dimensional Infrared Spectroscopy
+   * Dipole Spectral Density
+   * Frequency Distribution
 * Two Dimentional Infrared Spectroscopy
 * One Dimensional Raman Spectroscopy
 * One Dimensional Sum-Frequency Generation Spectroscopy
+* Frequency Frequency Time Correlation Function
 
 This code works through the vibrational frequency mapping approach developed by Corcelli, Skinner, and others, and uses this approach to calculate spectroscopic observables from classical molecular dynamics simulations.
 
@@ -23,7 +26,6 @@ For a detailed description of the theory underlying this approach, please see th
 ## Limitations
 
 For currently identified limitations, please see the issue tracker.
-
 
 ## Requirements
 
@@ -47,4 +49,39 @@ make install
 
 ## Usage 
 
+## Command Line Arguments
+
+Command line arguments for the present software act effectively to override the inputs recieved from the input files for specific use cases (for instance, if you mostly want the spectra you calculate to use set parameters, but for the FFCF want longer TCFs).
+
+The CLI argument options that are available are the following:
+
+    -h, help
+        -> Displays a useful help message.
+    -ncorr [value]
+        -> overrides ncorr value from input file
+    -nskip [value]
+        -> overrides nskip value from input file
+    -in [filename]
+        -> Reads filename as input file 
+           rather than spectra.in
+    -map [filename]
+        -> Reads filename as empirical map file
+           rather than empirical_map.in
+    -tag [tagname]
+        -> This CLI labels output files with tagname
+           so sfg_tcf.dat would become 
+           new_sfg_tcf.dat with the command -tag new_
+    -avfreq [freq]
+        -> Used for the FFCF calculation to     
+           override the average frequency in
+           in scenarios where many trajectories
+           are being used in parallel.
+    -zmin [value] (Not Yet Used)
+        -> Set the minimum z position for molecules 
+           to be included in the calculation. Based 
+           on the Oxygen atom
+    -zmax [value] (Not Yet Used)
+        -> Set the maximum z position for molecules 
+           to be included in the calculation. Based 
+           on the Oxygen atom
 
