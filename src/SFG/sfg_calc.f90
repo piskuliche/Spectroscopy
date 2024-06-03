@@ -97,8 +97,8 @@ PROGRAM SFG_CALC
                 multi_a_ss(:,i) = a_ss(iper,:)*pol_signs(:)
             END DO
             CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), multi_a_ss(:,:), spec_dist(:))
-            CALL Freq_Dist_2D(w01(iper,:), z0(iper,:), mu01(iper,:,:), multi_a_ss(:,:), w01_dist_2d(:))
-            CALL Spec_Dist_2D(w01(iper,:), z0(iper,:), mu01(iper,:,:), multi_a_ss(:,:), spec_dens_2d(:))
+            CALL Freq_Dist_2D(w01(iper,:), z0(iper,:),  w01_dist_2d(:,:))
+            CALL Spec_Dist_2D(w01(iper,:), z0(iper,:), mu01(iper,:,:), multi_a_ss(:,:), spec_dens_2d(:,:))
             sd_tot = sd_tot + spec_dist
             fd_2d_tot = fd_2d_tot + w01_dist_2d
             sd_2d_tot = sd_2d_tot + spec_dens_2d
