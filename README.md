@@ -49,7 +49,48 @@ make install
 
 ## Usage 
 
-## Command Line Arguments
+### Input File Format
+
+```
+#noh
+1710 
+# ntimes, timestep, ncorr, nskip
+2500 4.0d0 250 250
+#wfreq
+4.0
+# flag_hist, nhist
+.false. 100
+#w1min w1max w2min w2max
+3000.0 3800.0 3000.0 3800.0
+#zmin, zmax, zhist
+-35 35 50
+#zcenter
+  34.78215
+# NTw
+5
+#Tw(1), Tw(2)...Tw(NTw)
+0.0 200.0 400.0 600.0 800.0
+```
+
+Here, the meaning of the input arguments are described:
+
+* noh: number of ohs (typically 2x number of waters)
+* ntimes: number of times to calculate
+* timestep: timestep of configurations in calculation
+* ncorr: correlation length (in steps)
+* nskip: steps to skip between origins
+* wfreq: resolution of frequencies
+* flag_hist: Should it do histogramming? (deprecated)
+* nhist: number of histogram bins
+* w1_min, w1max : frequency range for spectrum
+* w3_min, w3_max : frequency range for 2d spectrum (second axis)
+* zmin, zmax: min and max z distance for 2d spectral density
+* zhist: number of z dimension histogram bins
+* zcenter: center of box (for sfg)
+* Ntw: number of waiting times
+* Tw(1)...: waiting times in fs (list)
+
+### Command Line Arguments
 
 Command line arguments for the present software act effectively to override the inputs recieved from the input files for specific use cases (for instance, if you mostly want the spectra you calculate to use set parameters, but for the FFCF want longer TCFs).
 
