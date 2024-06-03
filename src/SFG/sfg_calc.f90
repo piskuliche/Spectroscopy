@@ -29,6 +29,7 @@ PROGRAM SFG_CALC
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: multi_a_ss
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: spec_dist, sd_tot
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: pol_signs
 
     CALL Read_CLI_Arguments
 
@@ -50,6 +51,7 @@ PROGRAM SFG_CALC
     ALLOCATE(a_pp(nperchunk, ntimes))
     ALLOCATE(multi_a_ss(ntimes,3))
     ALLOCATE(spec_dist(0:nhist)); ALLOCATE(sd_tot(0:nhist))
+    ALLOCATE(pol_signs(ntimes))
     
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
@@ -58,6 +60,7 @@ PROGRAM SFG_CALC
     a_ss = 0.0d0; a_sp=0.0d0; a_pp = 0.0d0
     tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0; tcf_time = 0.0d0
     spec_dist = 0.0d0; sd_tot = 0.0d0
+    pol_signs = 0.0d0
 
     nchunks = ceiling(real(noh)/real(nperchunk))
 
@@ -81,10 +84,11 @@ PROGRAM SFG_CALC
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
             iper = ioh - (chunk-1)*nperchunk
             ! Calculate the Spectral Density
-            multi_a_ss = 0.0d0
+            multi_a_ss = 0.0d0; pol_signs = 0.0d0
+            DO i=1, ntimes
+                pol_signs(:) = dsign(1.0d0,z0(iper,:))
             DO i=1, 3
-                multi_a_ss(:,i) = a_ss(iper,:)
-                WRITE(*,*) multi_a_ss(1,i)
+                multi_a_ss(:,i) = a_ss(iper,:)*pol_signs(:)
             END DO
             CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), multi_a_ss(:,:), spec_dist(:))
             sd_tot = sd_tot + spec_dist
@@ -117,5 +121,6 @@ PROGRAM SFG_CALC
     DEALLOCATE(a_ss); DEALLOCATE(a_sp); DEALLOCATE(a_pp)
     DEALLOCATE(multi_a_ss)
     DEALLOCATE(spec_dist); DEALLOCATE(sd_tot)
+    DEALLOCATE(pol_signs)
 
 END PROGRAM SFG_CALC
