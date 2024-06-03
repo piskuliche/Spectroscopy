@@ -30,6 +30,7 @@ PROGRAM SFG_CALC
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: multi_a_ss
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: spec_dist, sd_tot
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: pol_signs
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: spec_dens_2d, sd_2d_tot, w01_dist_2d, fd_2d_tot
 
     CALL Read_CLI_Arguments
 
@@ -52,6 +53,7 @@ PROGRAM SFG_CALC
     ALLOCATE(multi_a_ss(ntimes,3))
     ALLOCATE(spec_dist(0:nhist)); ALLOCATE(sd_tot(0:nhist))
     ALLOCATE(pol_signs(ntimes))
+    ALLOCATE(spec_dens_2d(0:nhist,0:zhist)); ALLOCATE(w01_dist_2d(0:nhist,0:zhist))
     
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
@@ -60,6 +62,8 @@ PROGRAM SFG_CALC
     a_ss = 0.0d0; a_sp=0.0d0; a_pp = 0.0d0
     tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0; tcf_time = 0.0d0
     spec_dist = 0.0d0; sd_tot = 0.0d0
+    spec_dens_2d = 0.0d0; w01_dist_2d=0.0d0
+    sd_2d_tot = 0.0d0; fd_2d_tot = 0.0d0
     pol_signs = 0.0d0
 
     nchunks = ceiling(real(noh)/real(nperchunk))
@@ -88,12 +92,16 @@ PROGRAM SFG_CALC
             DO i=1, ntimes
                 pol_signs(:) = dsign(1.0d0,z0(iper,:))
             ENDDO
-            
+
             DO i=1, 3
                 multi_a_ss(:,i) = a_ss(iper,:)*pol_signs(:)
             END DO
             CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), multi_a_ss(:,:), spec_dist(:))
+            CALL Freq_Dist_2D(w01(iper,:), z0(iper,:), mu01(iper,:,:), multi_a_ss(:,:), w01_dist_2d(:))
+            CALL Spec_Dist_2D(w01(iper,:), z0(iper,:), mu01(iper,:,:), multi_a_ss(:,:), spec_dens_2d(:))
             sd_tot = sd_tot + spec_dist
+            fd_2d_tot = fd_2d_tot + w01_dist_2d
+            sd_2d_tot = sd_2d_tot + spec_dens_2d
             ! Some sort of histogramming?
             CALL Calc_TCF(w01(iper,:), mu01(iper,:,:), a_ss(iper,:), z0(iper,:), tcf(:))
             tcf_tot = tcf_tot + tcf
@@ -111,6 +119,8 @@ PROGRAM SFG_CALC
 ! III. Calculate the SFG Spectra
 ! *********************************************************************
     CALL Spectral_Print_1D(sd_tot, 'sfg_ss_spec_dist.dat')
+    CALL Spectral_Print_2D(sd_2d_tot, 'sfg_ss_spec_dist_2d.dat')
+    CALL Spectral_Print_2D(fd_2d_tot, 'sfg_freq_dist_2d.dat')
     CALL Spec_Calc(tcf_tot)
 
 ! *********************************************************************
@@ -124,5 +134,8 @@ PROGRAM SFG_CALC
     DEALLOCATE(multi_a_ss)
     DEALLOCATE(spec_dist); DEALLOCATE(sd_tot)
     DEALLOCATE(pol_signs)
+    DEALLOCATE(spec_dens_2d); DEALLOCATE(sd_2d_tot); 
+    DEALLOCATE(w01_dist_2d); DEALLOCATE(fd_2d_tot)
+
 
 END PROGRAM SFG_CALC
