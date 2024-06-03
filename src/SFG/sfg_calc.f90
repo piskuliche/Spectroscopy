@@ -20,6 +20,7 @@ PROGRAM SFG_CALC
 
     INTEGER, PARAMETER :: nperchunk = 1000
     INTEGER :: ioh, chunk, nchunks, iper
+    INTEGER :: i
 
     DOUBLE PRECISION :: ta, tb, tstart, tend, read_time, tcf_time
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: w01, z0, a_ss, a_sp, a_pp
