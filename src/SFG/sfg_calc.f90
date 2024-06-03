@@ -86,7 +86,7 @@ PROGRAM SFG_CALC
                 multi_a_ss(:,i) = a_ss(iper,:)
                 WRITE(*,*) multi_a_ss(1,i)
             END DO
-            CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), multi_a_ss(iper,:), spec_dist(:))
+            CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), multi_a_ss(:,:), spec_dist(:))
             sd_tot = sd_tot + spec_dist
             ! Some sort of histogramming?
             CALL Calc_TCF(w01(iper,:), mu01(iper,:,:), a_ss(iper,:), z0(iper,:), tcf(:))
