@@ -87,6 +87,8 @@ PROGRAM SFG_CALC
             multi_a_ss = 0.0d0; pol_signs = 0.0d0
             DO i=1, ntimes
                 pol_signs(:) = dsign(1.0d0,z0(iper,:))
+            ENDDO
+            
             DO i=1, 3
                 multi_a_ss(:,i) = a_ss(iper,:)*pol_signs(:)
             END DO
