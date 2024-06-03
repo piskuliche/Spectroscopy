@@ -7,6 +7,7 @@
     integer :: nTw ! Used for 2D IR Only
     double precision, dimension(20) :: Tw ! Used for 2D IR Only
     double precision :: w1min, w1max, w3min, w3max ! Used for 2D IR Only
+    double precision :: zmin, zmax
 
   end module time_data
 
@@ -39,8 +40,8 @@
 
     implicit none
     logical :: flag_hist
-    integer :: nhist
-    double precision :: dw
+    integer :: nhist, zhist
+    double precision :: dw, dz
 
   end module hist_data
 
