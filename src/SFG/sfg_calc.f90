@@ -55,6 +55,7 @@ PROGRAM SFG_CALC
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
 
     multi_a_ss = 0.0d0
+    a_ss = 0.0d0; a_sp=0.0d0; a_pp = 0.0d0
     tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0; tcf_time = 0.0d0
     spec_dist = 0.0d0; sd_tot = 0.0d0
 
