@@ -100,7 +100,7 @@ MODULE output_module
 
         INTEGER :: k
         DOUBLE PRECISION, DIMENSION(0:nhist) :: spectral_feature
-        CHARACTER(LEN=100) :: output_file_name
+        CHARACTER(LEN=*), INTENT(IN) :: output_file_name
 
         OPEN(24, FILE=trim(tag_output_cli)//trim(output_file_name))
 
