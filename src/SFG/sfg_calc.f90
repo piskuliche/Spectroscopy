@@ -14,6 +14,7 @@ PROGRAM SFG_CALC
     USE input_module
     USE cli_data
     USE CLI
+    USE output_module
 
     IMPLICIT NONE
 
@@ -25,6 +26,8 @@ PROGRAM SFG_CALC
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: mu01, eOH
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: efield
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, tcf_tot
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: multi_a_ss
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: spec_dist, sd_tot
 
     CALL Read_CLI_Arguments
 
@@ -44,10 +47,15 @@ PROGRAM SFG_CALC
     ALLOCATE(a_ss(nperchunk, ntimes))
     ALLOCATE(a_sp(nperchunk, ntimes))
     ALLOCATE(a_pp(nperchunk, ntimes))
+    ALLOCATE(multi_a_ss(ntimes,3))
+    ALLOCATE(spec_dist(0:nhist)); ALLOCATE(sd_tot(0:nhist))
+    
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
 
+    multi_a_ss = 0.0d0
     tcf_tot = dcmplx(0.0d0, 0.0d0); read_time=0.0d0; tcf_time = 0.0d0
+    spec_dist = 0.0d0; sd_tot = 0.0d0
 
     nchunks = ceiling(real(noh)/real(nperchunk))
 
@@ -70,6 +78,13 @@ PROGRAM SFG_CALC
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
             iper = ioh - (chunk-1)*nperchunk
+            ! Calculate the Spectral Density
+            multi_a_ss = 0.0d0
+            DO i=1, 3
+                multi_a_ss(:,i) = a_ss(iper,:)
+            END DO
+            CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), multi_a_ss(iper,:), spec_dist(:))
+            sd_tot = sd_tot + spec_dist
             ! Some sort of histogramming?
             CALL Calc_TCF(w01(iper,:), mu01(iper,:,:), a_ss(iper,:), z0(iper,:), tcf(:))
             tcf_tot = tcf_tot + tcf
@@ -86,7 +101,7 @@ PROGRAM SFG_CALC
 ! *********************************************************************
 ! III. Calculate the SFG Spectra
 ! *********************************************************************
-
+    CALL Spectral_Print_1D(sd_tot, 'sfg_ss_spec_dist.dat')
     CALL Spec_Calc(tcf_tot)
 
 ! *********************************************************************
@@ -97,5 +112,7 @@ PROGRAM SFG_CALC
     DEALLOCATE(mu01)
     DEALLOCATE(z0)
     DEALLOCATE(a_ss); DEALLOCATE(a_sp); DEALLOCATE(a_pp)
+    DEALLOCATE(multi_a_ss)
+    DEALLOCATE(spec_dist); DEALLOCATE(sd_tot)
 
 END PROGRAM SFG_CALC
