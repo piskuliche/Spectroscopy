@@ -54,6 +54,7 @@ PROGRAM SFG_CALC
     ALLOCATE(spec_dist(0:nhist)); ALLOCATE(sd_tot(0:nhist))
     ALLOCATE(pol_signs(ntimes))
     ALLOCATE(spec_dens_2d(0:nhist,0:zhist)); ALLOCATE(w01_dist_2d(0:nhist,0:zhist))
+    ALLOCATE(sd_2d_tot(0:nhist,0:zhist)); ALLOCATE(fd_2d_tot(0:nhist,0:zhist))
     
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(tcf_tot(0:ncorr))
