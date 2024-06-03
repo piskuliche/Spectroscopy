@@ -72,7 +72,7 @@ CONTAINS
         OPEN(10, file=input_file_cli, status='old')
 
         READ(10,*)
-        READ(10,*) noh, ndigits ! # OH groups, # of digits in field file extensions
+        READ(10,*) noh ! # OH groups
         READ(10,*) 
         READ(10,*) ntimes, dt, ncorr, nskip ! # number of times, timestep, # corelation times, # skip times
         READ(10,*) 
@@ -82,6 +82,8 @@ CONTAINS
         READ(10,*)
         READ(10,*) w1min, w1max, w3min, w3max ! Ranges for printing the spectra
         READ(10,*)
+        READ(10,*) zmin, zmax, zhist ! z range for 2D spectral density
+        READ(10,*) 
         READ(10,*) z_c ! center of slab. 
         READ(10,*) 
           read(10,*) nTw          ! # of waiting times
@@ -113,6 +115,8 @@ CONTAINS
         w3min = w3min/cmiperau; w3max = w3max/cmiperau
 
         dw = (w1max - w1min)/real(nhist)
+        dz = (zmax - zmin)/real(zhist)
+        
     
 
     END SUBROUTINE Read_Input
