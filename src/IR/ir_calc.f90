@@ -16,6 +16,7 @@ PROGRAM IR_CALC
     USE input_module
     USE cli_data
     USE CLI
+    USE output_module
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: nperchunk = 1000
@@ -75,7 +76,10 @@ PROGRAM IR_CALC
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
                 iper = ioh - (chunk-1)*nperchunk
                 ! Calculate the Spectral Density and Histogram
-                CALL Hist_Calc(w01(iper,:), mu01(iper,:,:), w01_dist(:), spec_dist(:))
+                !CALL Hist_Calc(w01(iper,:), mu01(iper,:,:), w01_dist(:), spec_dist(:))
+                ! Test new spec_density code
+                CALL Freq_Dist_1D(w01(iper,:), w01_dist(:))
+                CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), mu01(iper,:,:), spec_dist(:))
                 wd_tot = wd_tot + w01_dist
                 sd_tot = sd_tot + spec_dist
                 ! Calculate the TCFS
@@ -92,7 +96,9 @@ PROGRAM IR_CALC
 ! *********************************************************************
 ! III. Calculate the IR Spectra
 ! *********************************************************************
-    CALL Hist_Print(wd_tot, sd_tot)
+    !CALL Hist_Print(wd_tot, sd_tot)
+    CALL Spectral_Print_1D(wd_tot, "w01_dist.dat")
+    CALL Spectral_Print_1D(sd_tot, "musq_dist.dat")
 
     CALL Spec_Calc(tcf_tot)
 
