@@ -41,7 +41,7 @@ MODULE output_module
         END DO
 
         ! Normalize the Spectral Density
-        spec_density = spec_density/count
+        spectral_density = spectral_density/count
 
     END SUBROUTINE Spec_Dist_1D
 
