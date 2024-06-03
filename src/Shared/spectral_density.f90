@@ -63,6 +63,7 @@ MODULE output_module
 
         INTEGER :: k, iw
         DOUBLE PRECISION :: count
+        DOUBLE PRECISION, DIMENSION(ntimes) :: w01
         DOUBLE PRECISION, DIMENSION(0:nhist) :: w01_dist
 
         w01_dist = 0.0d0
