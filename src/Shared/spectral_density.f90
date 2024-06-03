@@ -27,7 +27,7 @@ MODULE output_module
         DOUBLE PRECISION, DIMENSION(0:nhist) :: spectral_density
 
         ! Zero the Arrays 
-        w01_dist = 0.0d0; spectral_density = 0.0d0
+        spectral_density = 0.0d0
         count = 0d0
         DO k=1, ntimes
 
@@ -41,7 +41,7 @@ MODULE output_module
         END DO
 
         ! Normalize the Spectral Density
-        spec_dist = spec_dist/count
+        spec_density = spec_density/count
 
     END SUBROUTINE Spec_Dist_1D
 
@@ -80,7 +80,7 @@ MODULE output_module
 
     END SUBROUTINE Freq_Dist_1D
 
-    SUBROUTINE Spectral_Print_1D(spectral, output_file_name)
+    SUBROUTINE Spectral_Print_1D(spectral_feature, output_file_name)
     ! Prints 1D spectra to a file, described by output_file_name.
     ! 
     ! Args:
@@ -104,10 +104,10 @@ MODULE output_module
 
         OPEN(24, FILE=trim(tag_output_cli)//trim(output_file_name))
 
-        sd_tot = sd_tot/REAL(noh)
+        spectral_feature = spectral_feature/REAL(noh)
 
         DO k=0, nhist
-            WRITE(24,*) (w1min + REAL(k)*dw)*cmiperau, sd_tot(k)
+            WRITE(24,*) (w1min + REAL(k)*dw)*cmiperau, spectral_feature(k)
         END DO
 
         CLOSE(24)
