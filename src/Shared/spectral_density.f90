@@ -205,7 +205,7 @@ MODULE output_module
 
         DO k=0, nhist
             DO j=0, zhist
-                WRITE(24,*) (zmin + REAL(j)*dz), (w1min + REAL(k)*dw)*cmiperau, spectral_feature(k)
+                WRITE(24,*) (zmin + REAL(j)*dz), (w1min + REAL(k)*dw)*cmiperau, spectral_feature(k,j)
             ENDDO
         END DO
 
