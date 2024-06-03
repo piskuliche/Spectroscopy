@@ -83,6 +83,7 @@ PROGRAM SFG_CALC
             multi_a_ss = 0.0d0
             DO i=1, 3
                 multi_a_ss(:,i) = a_ss(iper,:)
+                print(multi_a_ss(1,i)
             END DO
             CALL Spec_Dist_1D(w01(iper,:), mu01(iper,:,:), multi_a_ss(iper,:), spec_dist(:))
             sd_tot = sd_tot + spec_dist
