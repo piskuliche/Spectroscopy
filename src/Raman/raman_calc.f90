@@ -7,7 +7,10 @@ PROGRAM Raman_Calc
     USE input_module
     USE cli_data
     USE CLI
-    IMPLICIT NONe
+    USE output_module
+
+    IMPLICIT NONE
+
     INTEGER, PARAMETER :: nperchunk = 1000
     INTEGER :: chunk, iper, ioh, nchunks
 
@@ -16,6 +19,7 @@ PROGRAM Raman_Calc
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:) :: z0
     DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: efield
     DOUBLE COMPLEX, ALLOCATABLE, DIMENSION(:) :: tcf, vv_tcf_tot, vh_tcf_tot
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: vv_spec_dist, vh_spec_dist, vv_sd_tot, vh_sd_tot
 
     CALL Read_CLI_Arguments
 
@@ -35,10 +39,14 @@ PROGRAM Raman_Calc
     ALLOCATE(eOH(nperchunk,ntimes,3))
     ALLOCATE(z0(nperchunk,ntimes)); ALLOCATE(efield(ntimes))
 
+    ALLOCATE(vv_spec_dist(0:nhist)); ALLOCATE(vh_spec_dist(0:nhist))
+    ALLOCATE(vv_sd_tot(0:nhist)); ALLOCATE(vh_sd_tot(0:nhist))
+
     ALLOCATE(a_para(nperchunk, ntimes, 3)); ALLOCATE(a_perp(nperchunk, ntimes, 3))
 
     ALLOCATE(tcf(0:ncorr)); ALLOCATE(vv_tcf_tot(0:ncorr)); ALLOCATE(vh_tcf_tot(0:ncorr))
     vv_tcf_tot = DCMPLX(0.0,0.0); vh_tcf_tot = DCMPLX(0.0,0.0)
+    vv_spec_dist = 0.0; vh_spec_dist = 0.0
     w01_avg  = 0.0d0; w01_sq_avg = 0.0d0
 
 ! *********************************************************************
@@ -62,6 +70,11 @@ PROGRAM Raman_Calc
 
         DO ioh=(chunk-1)*nperchunk+1, min(chunk*nperchunk, noh)
                 iper = ioh - (chunk-1)*nperchunk
+                ! Raman Spectral Density
+                CALL Spec_Dist_1D(w01(iper,:), a_para(iper,:,:), a_para(iper,:,:), vv_spec_dist(:))
+                CALL Spec_Dist_1D(w01(iper,:), a_perp(iper,:,:), a_perp(iper,:,:), vh_spec_dist(:))
+                vv_sd_tot = vv_sd_tot + vv_spec_dist
+                vh_sd_tot = vh_sd_tot + vh_spec_dist
                 ! VV TCF
                 CALL Calc_TCF(w01(iper,:), a_para(iper,:,:), tcf(:))
                 vv_tcf_tot = vv_tcf_tot + tcf(:)
@@ -80,7 +93,9 @@ PROGRAM Raman_Calc
 ! *********************************************************************
 ! III. Calculate the Raman Spectra
 ! *********************************************************************
-
+    CALL Spectral_Print_1D(vv_sd_tot, 'vv_spec_dist.dat')
+    CALL Spectral_Print_1D(vh_sd_tot, 'vh_spec_dist.dat')
+    
     CALL Spec_Calc(vv_tcf_tot, vh_tcf_tot)
 
 ! *********************************************************************
@@ -89,5 +104,8 @@ PROGRAM Raman_Calc
 
 DEALLOCATE(z0, efield)
 DEALLOCATE(w01, mu01, eOH,  a_para, a_perp, tcf, vv_tcf_tot, vh_tcf_tot)
+DEALLOCATE(vv_spec_dist, vh_spec_dist)
+DEALLOCATE(vv_sd_tot, vh_sd_tot)
+
 
 END PROGRAM Raman_Calc
