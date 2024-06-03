@@ -45,6 +45,38 @@ MODULE output_module
 
     END SUBROUTINE Spec_Dist_1D
 
+    SUBROUTINE Spec_Dist_2D(w01, z0, weight1, weight2, spectral_density)
+
+        USE time_data
+        USE hist_data
+        USE constants
+
+        IMPLICIT NONE
+
+        INTEGER :: k, m, iw, im
+
+        DOUBLE PRECISION :: count, dot_spec
+        DOUBLE PRECISION, DIMENSION(ntimes,3) :: weight1, weight2
+        DOUBLE PRECISION, DIMENSION(ntimes) :: w01, z0
+        DOUBLE PRECISION, DIMENSION(0:nhist, 0:zhist) :: spectral_density
+
+
+        spectral_density = 0.0d0
+        count = 0d0
+        DO k=1, ntimes
+            dot_spec = DOT_PRODUCT(weight1(k,:), weight2(k,:))
+            iw = NINT ( (w01(k) - w1min)/dw )
+            im = NINT ( (z0(k) - zmin)/dz )
+            IF (iw >= 0 .and. iw <= nhist .and. im >= 0 .and. im <= zhist) THEN
+                count = count + 1d0
+                spectral_density(iw, im) = spectral_density(iw, im) + dot_spec
+            END IF
+        ENDDO
+
+        spectral_density = spectral_density/count
+
+    END SUBROUTINE Spec_Dist_2D
+
     SUBROUTINE Freq_Dist_1D(w01, w01_dist)
     ! Calculates the frequency distribution using values of w01
     ! 
@@ -80,6 +112,36 @@ MODULE output_module
 
     END SUBROUTINE Freq_Dist_1D
 
+    SUBROUTINE Freq_Dist_2D(w01, z0, w01_dist)
+
+        USE time_data
+        USE hist_data
+        USE constants
+
+        IMPLICIT NONE
+
+        INTEGER :: k, m, iw, im
+
+        DOUBLE PRECISION :: count
+        DOUBLE PRECISION, DIMENSION(ntimes) :: w01, z0
+        DOUBLE PRECISION, DIMENSION(0:nhist, 0:zhist) :: w01_dist
+
+
+        w01_dist = 0.0d0
+        count = 0d0
+        DO k=1, ntimes
+            iw = NINT ( (w01(k) - w1min)/dw )
+            im = NINT ( (z0(k) - zmin)/dz )
+            IF (iw >= 0 .and. iw <= nhist .and. im >= 0 .and. im <= zhist) THEN
+                count = count + 1d0
+                w01_dist(iw, im) = w01_dist(iw, im) + 1d0
+            END IF
+        ENDDO
+
+        w01_dist = w01_dist/count
+    
+    END SUBROUTINE Freq_Dist_2D
+
     SUBROUTINE Spectral_Print_1D(spectral_feature, output_file_name)
     ! Prints 1D spectra to a file, described by output_file_name.
     ! 
@@ -114,4 +176,41 @@ MODULE output_module
 
 
     END SUBROUTINE Spectral_Print_1D
+
+    SUBROUTINE Spectral_Print_2D(spectral_feature, output_file_name)
+    ! Prints 1D spectra to a file, described by output_file_name.
+    ! 
+    ! Args:
+    !   spectral: Array of spectral data
+    !   output_file_name: Name of the output file
+    !
+    ! Returns:
+    !   None
+    !
+
+        USE time_data
+        USE hist_data
+        USE constants
+        USE cli_data
+
+        IMPLICIT NONE
+
+        INTEGER :: k, j
+        DOUBLE PRECISION, DIMENSION(0:nhist, 0:zhist) :: spectral_feature
+        CHARACTER(LEN=*), INTENT(IN) :: output_file_name
+
+        OPEN(24, FILE=trim(tag_output_cli)//trim(output_file_name))
+
+        spectral_feature = spectral_feature/REAL(noh)
+
+        DO k=0, nhist
+            DO j=0, zhist
+                WRITE(24,*) (zmin + REAL(j)*dz), (w1min + REAL(k)*dw)*cmiperau, spectral_feature(k)
+            ENDDO
+        END DO
+
+        CLOSE(24)
+
+
+    END SUBROUTINE Spectral_Print_2D
 END MODULE output_module
