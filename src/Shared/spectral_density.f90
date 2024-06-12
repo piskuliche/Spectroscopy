@@ -161,7 +161,7 @@ MODULE output_module
         IMPLICIT NONE
 
         INTEGER :: k
-        DOUBLE PRECISION, DIMENSION(0:nhist) :: spectral_feature
+        DOUBLE PRECISION, DIMENSION(0:nhist), INTENT(IN) :: spectral_feature
         CHARACTER(LEN=*), INTENT(IN) :: output_file_name
 
         OPEN(24, FILE=trim(tag_output_cli)//trim(output_file_name))
@@ -196,7 +196,7 @@ MODULE output_module
         IMPLICIT NONE
 
         INTEGER :: k, j
-        DOUBLE PRECISION, DIMENSION(0:nhist, 0:zhist) :: spectral_feature
+        DOUBLE PRECISION, DIMENSION(0:nhist, 0:zhist), INTENT(IN) :: spectral_feature
         CHARACTER(LEN=*), INTENT(IN) :: output_file_name
 
         OPEN(24, FILE=trim(tag_output_cli)//trim(output_file_name))
