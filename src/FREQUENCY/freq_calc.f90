@@ -1,11 +1,14 @@
 PROGRAM FFCF_CALC
-! **********************************************************************
-! *                                                                    *    
-! *  This program calculates the FFCF for a given set of parameters.   *
-! *  The FFCF is calculated for a given set of parameters.             *
-! *                                                                    *
-! *  Copyright (C) 2024, Zeke Piskulich, All Rights Reserved           *
-! **********************************************************************
+! *********************************************************************
+! This program calculates the average frequency using the empirical mapping
+! approach developed by Skinner and co-workers. 
+! 
+! 
+! Copyright, Zeke Piskulich, 2024.
+!
+! Adapted with permission from the original code by:
+! Dr. Ashley Borkowski, Dr. Hasini Senanayake, and Prof. Ward Thompson
+! *********************************************************************
 
 
     USE map_data

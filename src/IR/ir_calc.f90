@@ -1,12 +1,13 @@
 PROGRAM IR_CALC
 ! *********************************************************************
-! This program calculates the infrared spectra using the empirical mapping
+! This program calculates the SFG spectra using the empirical mapping
 ! approach developed by Skinner and co-workers. 
 ! 
-! The equation for the IR spectra is given by:
 ! 
-! 
-! Copyright, Zeke Piskulich, 2024. All rights reserved.
+! Copyright, Zeke Piskulich, 2023.
+!
+! Adapted with permission from the original code by:
+! Dr. Ashley Borkowski, Dr. Hasini Senanayake, and Prof. Ward Thompson
 ! *********************************************************************
 
     USE map_data
