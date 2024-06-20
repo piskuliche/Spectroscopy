@@ -1,7 +1,7 @@
 # Computational Spectroscopy
 Copyright 2024, Zeke A. Piskulich and Qiang Cui (Boston University).
 
-Software is adapted from programs originally developed Copyright 2023 Ashley Borkowski, Ward Thompson (University of Kansas).
+Software is adapted from programs originally developed Copyright 2023 Dr. Ashley Borkowski, Dr. Hasini Senanayake, and Professor Ward Thompson (University of Kansas).
 
 ## Introduction
 
