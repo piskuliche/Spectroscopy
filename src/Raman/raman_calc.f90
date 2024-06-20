@@ -3,8 +3,6 @@ PROGRAM Raman_Calc
 ! This program calculates the Raman spectra using the empirical mapping
 ! approach developed by Skinner and co-workers. 
 ! 
-! 
-! Copyright, Zeke Piskulich, 2024.
 !
 ! Adapted with permission from the original code by:
 ! Dr. Ashley Borkowski, Dr. Hasini Senanayake, and Prof. Ward Thompson

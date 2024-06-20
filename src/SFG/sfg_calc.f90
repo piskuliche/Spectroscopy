@@ -3,8 +3,6 @@ PROGRAM SFG_CALC
 ! This program calculates the SFG spectra using the empirical mapping
 ! approach developed by Skinner and co-workers. 
 ! 
-! 
-! Copyright, Zeke Piskulich, 2024.
 !
 ! Adapted with permission from the original code by:
 ! Dr. Ashley Borkowski, Dr. Hasini Senanayake, and Prof. Ward Thompson
