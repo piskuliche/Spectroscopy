@@ -1,7 +1,7 @@
 # Computational Spectroscopy
 Copyright 2024, Zeke A. Piskulich and Qiang Cui (Boston University).
 
-Software is adapted from programs originally developed Copyright 2023 Dr. Ashley Borkowski, Dr. Hasini Senanayake, and Professor Ward Thompson (University of Kansas).
+Software is adapted from programs originally developed Copyright 2023, Dr. Ashley Borkowski, Dr. Hasini Senanayake, and Professor Ward Thompson (University of Kansas).
 
 ## Introduction
 
@@ -89,6 +89,14 @@ Here, the meaning of the input arguments are described:
 * zcenter: center of box (for sfg)
 * Ntw: number of waiting times
 * Tw(1)...: waiting times in fs (list)
+
+### Empirical Map Files
+
+The empirical map files for the paper associated with TIP3P maps are located in the examples directory. Two map files are included.
+
+spce_map.in is a map generated for SPC/E water.
+
+tip3p_map.in is a map generated for TIP3P water.
 
 ### Command Line Arguments
 
