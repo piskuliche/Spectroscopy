@@ -1,16 +1,18 @@
 #noh, ndigits
-24610 4
+31972 4
 # number of times, timestep, ncorr, nskip
 2500 4.0d0 250 250
 # freq resolution
 4.0
-# flag_shit, nhist
+# flag_hist, nhist
 .false. 100
 #w1min w1max w2min w2max
 3000.0 3800.0 3000.0 3800.0
-# Z Position
-1.0
-#NTw
+#zmin zmax zbin
+-50.0 50.0 100
+# Zcenter
+0.0
+# NTw
 5
 #Tw(1)...Tw(NTw)
 0.0 200.0 400.0 600.0 800.0
