@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Piskulich"
+  given-names: "Zeke"
+  orcid: "https://orcid.org/0000-0003-0304-305X"
+- family-names: "Borkowski"
+  given-names: "Ashley"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Senanyake"
+  given-names: "Hasini"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Thompson"
+  given-names: "Ward"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Cui"
+  given-names: "Qiang"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "Generalized Water Spectroscopy Code"
+version: 1.1
+doi: 
+date-released: 2024-9-30
+url: "https://github.com/piskuliche/Spectroscopy"
