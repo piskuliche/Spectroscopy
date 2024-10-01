@@ -6,18 +6,18 @@ authors:
   orcid: "https://orcid.org/0000-0003-0304-305X"
 - family-names: "Borkowski"
   given-names: "Ashley"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Senanyake"
+  orcid: "https://orcid.org/0000-0002-4962-408X"
+- family-names: "Senanayake"
   given-names: "Hasini"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
+  orcid: "https://orcid.org/0000-0003-1746-0807"
 - family-names: "Thompson"
   given-names: "Ward"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
+  orcid: "https://orcid.org/ 0000-0002-3636-6448"
 - family-names: "Cui"
   given-names: "Qiang"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
+  orcid: "https://orcid.org/ 0000-0001-6214-5211"
 title: "Generalized Water Spectroscopy Code"
 version: 1.1
-doi: 
+doi: 10.5281/zenodo.13862162
 date-released: 2024-9-30
 url: "https://github.com/piskuliche/Spectroscopy"
